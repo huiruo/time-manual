@@ -14,6 +14,10 @@ yarn add @fower/react
 "postcss-normalize": "8.0.1",
 "postcss-preset-env": "6.7.0",
 "postcss-px2rem": "^0.3.0",
+
+
+yarn add lib-flexible
+yarn add postcss-px2rem
 ```
 ## 需求
 ```
