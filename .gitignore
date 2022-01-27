@@ -19,26 +19,6 @@
 *.tar.gz
 *.rar
 
-# secret
-secret_document
-server_java/src/main/resources/application-prod.properties
-server/.env
-server/config/env-prod/application-prod.env
-
-# js
-# js
-node_modules/
-generated/
-dist
-
-
-yarn.lock
-yarn-error.log
-
-npm-debug.log
-lerna-debug.log
-
-package-lock.json
 #java
 #java
 HELP.md
@@ -69,7 +49,6 @@ target
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
@@ -86,8 +65,6 @@ hs_err_pid*
 .gradle
 .idea
 /local.properties
-.DS_Store
-/build
 /captures
 .externalNativeBuild
 .cxx
@@ -106,3 +83,34 @@ app/local.properties
 app/gradle
 app/gradlew
 app/gradlew.bat
+
+# dependencies
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# js
+# js
+node_modules/
+generated/
+dist
+
+yarn.lock
+lerna-debug.log
+package-lock.json
