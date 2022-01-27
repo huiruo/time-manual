@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "lib-flexible": "^0.3.2",
-    "postcss-px2rem": "^0.3.0"
-  }
-}
