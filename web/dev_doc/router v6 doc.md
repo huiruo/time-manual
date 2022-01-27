@@ -2,6 +2,8 @@
 
 https://reactrouter.com/docs/en/v6/getting-started/overview
 
+https://blog.csdn.net/weixin_47091394/article/details/121772779
+
 1.Switch 重命名为 Routes
 ```js
 // v5
@@ -227,4 +229,28 @@ function Profile() {
 				<Route path="/moments" element={<Moments />} />
 			</Routes>
 		{/* </HashRouter> */}
+```
+
+
+## 实现来回导航(使用go、goBack、goForward)
+实现来回导航(使用go、goBack、goForward)
+```js
+import { useHistory } from "react-router-dom";
+
+function App() {
+  const { go, goBack, goForward } = useHistory();
+
+  return (
+    <>
+      <button onClick={() => go(-2)}>
+        Go 2 pages back
+      </button>
+      <button onClick={goBack}>Go back</button>
+      <button onClick={goForward}>Go forward</button>
+      <button onClick={() => go(2)}>
+        Go 2 pages forward
+      </button>
+    </>
+  );
+}
 ```

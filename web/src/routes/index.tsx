@@ -39,7 +39,6 @@ const RoutesContainer = () => {
 
 	const generateRoute = (routes:any)=>{
 		return routes.map((route:any)=>{
-
 			if (route.children!==undefined && route.children.length) {
 				return ( 
 					<Route key={route.path} path={route.path}>
@@ -50,9 +49,7 @@ const RoutesContainer = () => {
 			}
 
 			return <Route key={route.path} path={route.path} element={route.element} />
-
 		})
-
 	}
 
 	return (
