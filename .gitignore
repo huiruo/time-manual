@@ -1,0 +1,108 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# secret
+secret_document
+server_java/src/main/resources/application-prod.properties
+server/.env
+server/config/env-prod/application-prod.env
+
+# js
+# js
+node_modules/
+generated/
+dist
+
+
+yarn.lock
+yarn-error.log
+
+npm-debug.log
+lerna-debug.log
+
+package-lock.json
+#java
+#java
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+.mvn
+target
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# android
+# android
+*.iml
+.gradle
+.idea
+/local.properties
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+### IntelliJ IDEA ###
+/server/.idea
+/server/target
+*.iml
+
+### AS ###
+app/.gradle
+app/.idea
+app/build
+app/local.properties
+app/gradle
+app/gradlew
+app/gradlew.bat
