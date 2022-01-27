@@ -7,10 +7,6 @@ function App() {
     <>
       <Routes />
     </>
-    // <div className="App">
-    //   <header className="App-header">
-    //   </header>
-    // </div>
   );
 }
 
