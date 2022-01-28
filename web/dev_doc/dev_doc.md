@@ -6,7 +6,6 @@ yarn add react-router-dom
 yarn add @types/react-router-dom
 yarn add cross-env
 yarn add axios
-yarn add @fower/react
 ```
 ### node-sass
 https://www.html.cn/create-react-app/docs/adding-a-sass-stylesheet/

@@ -5,7 +5,7 @@ const Resume =()=>{
   return (
     <div className='root-container'>
      <Header />
-     Resume  
+     <div className='container test-bg'>resume</div> 
     </div>
   );
 }

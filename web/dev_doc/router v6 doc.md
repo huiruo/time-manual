@@ -254,3 +254,14 @@ function App() {
   );
 }
 ```
+
+## 获取当前路由
+```js
+import { NavLink,useLocation } from "react-router-dom";
+import './index.scss'
+
+const Header =()=>{
+  const { pathname } = useLocation()
+  ...
+}
+```

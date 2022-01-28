@@ -6,7 +6,7 @@ const Home =()=>{
   return (
     <div className='root-container'>
       <Header />
-      <div className='container'>test</div> 
+      <div className='container test-bg'>home</div> 
     </div>
   );
 }

@@ -5,7 +5,7 @@ const Moments =()=>{
   return (
     <div className='root-container'>
       <Header />
-      Moments  
+      <div className='container test-bg'>Moments</div> 
     </div>
   );
 }
