@@ -1,11 +1,10 @@
 import React from 'react'
-import { Box } from '@fower/react'
 
 const Article =()=>{
   return (
-    <Box>
+    <div className='root-container'>
      Article1
-    </Box>
+    </div>
   );
 }
 

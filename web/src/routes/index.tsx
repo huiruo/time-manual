@@ -14,9 +14,8 @@ import {
 
 const routesConfig = [
 	{
-		path: '/article',
+		path: 'article',
 		element: <Article />,
-		exact: true,
 		children:[
 			{
 				path: 'articleTest1',
@@ -29,9 +28,12 @@ const routesConfig = [
 		]
 	},
 	{
-		path: '/resume',
+		path: 'moments',
+		element: <Moments />,
+	},
+	{
+		path: 'resume',
 		element: <Resume />,
-		exact: true,
 	}
 ]
 
@@ -56,9 +58,6 @@ const RoutesContainer = () => {
 		<HashRouter>
 			<Routes>
 				<Route path="/">
-					<Route path="moments" >
-						<Route index element={<Moments />} />
-					</Route>
 					{ generateRoute(routesConfig) }
 				</Route>
 				<Route index element={<Home />} />

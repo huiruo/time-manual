@@ -1,11 +1,12 @@
 import React from 'react'
-import { Box } from '@fower/react'
+import Header from '@/components/header'
 
 const Moments =()=>{
   return (
-    <Box>
-     Moments  
-    </Box>
+    <div className='root-container'>
+      <Header />
+      Moments  
+    </div>
   );
 }
 
