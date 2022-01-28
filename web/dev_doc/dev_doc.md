@@ -1,4 +1,3 @@
-
 ## 依赖
 ```
 npx create-react-app time-manual --template typescript
@@ -26,11 +25,44 @@ rem 单位如何转换为像素值
 100: 8.5rem <---->850px
 ```
 
+### 重命名路径
+web\config\webpack.config.js
+```js
+extensions: paths.moduleFileExtensions
+.map(ext => `.${ext}`).filter(ext => useTypeScript || !ext.includes('ts')),
+    alias: {
+    '@':path.resolve('src'),
+    '@': path.resolve(__dirname, '../src'),
+    // Support React Native Web
+    // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+    'react-native': 'react-native-web',
+    // Allows for better profiling with ReactDevTools
+    ...(isEnvProductionProfile && {
+        'react-dom$': 'react-dom/profiling',
+        'scheduler/tracing': 'scheduler/tracing-profiling',
+    }),
+    ...(modules.webpackAliases || {}),
+},
+```
+
+### tsconfig.json 
+```
+    "baseUrl": "./",
+    "paths": {
+        // "@/*": ["./src/*"],
+        or:
+        "@/*": ["src/*"],
+    },
+```
+
+
 ## 需求
 ```
 1.移动端发动态
 
 网页能显示
+```
 
-2.
+## 2022-01-28 开发
+```
 ```
