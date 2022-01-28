@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from '../pages/home/index';
+// import Home from '../pages/home/index';
 import Moments from '../pages/moments/index';
 import Article from '../pages/article/index';
 import ArticleTest1 from '../pages/article-test1/index';
@@ -60,7 +60,8 @@ const RoutesContainer = () => {
 				<Route path="/">
 					{ generateRoute(routesConfig) }
 				</Route>
-				<Route index element={<Home />} />
+				{/* <Route index element={<Home />} /> */}
+				<Route index element={<Moments />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</HashRouter>

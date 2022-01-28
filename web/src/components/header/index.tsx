@@ -10,19 +10,19 @@ const Header =()=>{
       <div className='header-content container'>
         <ul className='ul'>
 
-          <li>
+          <li className='li'>
             <NavLink to="/" className={pathname==='/'?'nav-active':''}>首页</NavLink>
           </li>
 
-          <li>
+          <li className='li'>
             <NavLink to="/article" className={pathname==='/article'?'nav-active':''}>文章</NavLink>
           </li>
 
-          <li>
+          <li className='li'>
             <NavLink to="/moments" className={pathname==='/moments'?'nav-active':''}>动态</NavLink>
           </li>
 
-          <li>
+          <li className='li'>
             <NavLink to="/resume" className={pathname==='/resume'?'nav-active':''}>我的</NavLink>
           </li>
 
