@@ -5,12 +5,10 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import dbConfig from '../config/db'
 import { getDirFilenames } from './utils/getDirFilenames';
-// import { CryptoWalletController } from './trader/crypto-wallet/crypto-wallet.controller';
-// import { CryptoWalletModule } from './trader/crypto-wallet/crypto-wallet.module';
-// import { TradingModule } from './trader/trading/trading.module';
-// import { UserModule } from './trader/user/user.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { MomentsController } from './moments/moments.controller';
+import { MomentsModule } from './moments/moments.module';
 
 @Module({
   imports: [
@@ -22,12 +20,10 @@ import { join } from 'path';
         isGlobal: true,
         ignoreEnvVars:true,
       }),
-      // TradingModule,
-      // CryptoWalletModule,
-      // UserModule,
+      MomentsModule,
       TypeOrmModule.forRoot(dbConfig),
     ],
-    controllers: [AppController],
-    providers: [AppService],
+    controllers: [AppController, MomentsController],
+    providers: [AppService]
 })
 export class AppModule {}

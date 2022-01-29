@@ -5,8 +5,7 @@ nest new time-manual
 ```
 
 ## 模块
-
-Controller 、Service、Module ,形成了一个模块
+Controller 、Service、module ,形成了一个模块
 ```
 1.Controller ：控制器，主要作用：提供api接口，负责处理路由，中转，验证等一些简洁业务
 
@@ -15,7 +14,7 @@ Controller 、Service、Module ,形成了一个模块
 3.Module：负责将Controller和Service连接起来
 ```
 
-```
+```js
 直接使用nest-cli创建:
 nest g [文件类型] [文件名] [文件目录（src目录下）]
 
@@ -30,7 +29,7 @@ nest g [文件类型] [文件名] [文件目录（src目录下）]
 	nest g module user trader
 ```
 
-```
+```js
 //1.在user.service.ts里写：
 import { Injectable } from '@nestjs/common';
 
@@ -50,13 +49,17 @@ import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-    //创建方法，后续调用
-    findOne(username:string):string{
-      if(username==='Kid'){
-          return 'I am here';
-      }
-      return 'Who U find?';
+
+  constructor(
+      @Inject(MomentsService) private readonly MomentsService: MomentsService,
+  ) {} 
+
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<Result> {
+      const data = await this.MomentsService.findOne(id);
+      return { code: 200, message: '查询成功', data };
   }
+
 }
 
 //3.把Service和Controller组装起来
@@ -73,6 +76,7 @@ export class UserModule {}
 
 第三步的作用
 就是其他Module想引入User的时候，就不能同时引入Service和Controller了，然后修改下app.module.ts
+
 4.修改下app.module.ts
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
