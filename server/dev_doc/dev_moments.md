@@ -1,5 +1,3 @@
-
-
 # databases
 ```
 time-manual
@@ -27,6 +25,9 @@ CREATE TABLE `moments`  (
 
 ```
 MySQL提供四种TEXT类型：TINYTEXT，TEXT，MEDIUMTEXT和LONGTEXT。
+
+参考：
+https://www.yiibai.com/mysql/text.html
 
 TINYTEXT - 1个字节(255个字符)
 需要少于255个字符的列应该使用TINYTEXT类型，长度不一致，不需要排序，例如：博文摘录，文章摘要等。
