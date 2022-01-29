@@ -7,7 +7,7 @@ const Moments =()=>{
       <Header />
       <div className='container test-bg'>
         <div className='title'>这是标题</div>
-        <div className='row'>
+        <div className='content'>
 
           <div className='main-content col-sm-12'>
             主要内容
