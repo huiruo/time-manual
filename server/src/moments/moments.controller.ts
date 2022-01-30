@@ -10,8 +10,8 @@ export class MomentsController {
 
   @Get(':id')
   // http://localhost:3800/moments/22
+  // http://localhost:3800/moments/122
   async findOne(@Param('id') id: string): Promise<Result> {
-      // const data = await this.MomentsService.findOneTest(id);
       const data = await this.MomentsService.findOneById(id);
       return { code: 200, message: '查询成功', data };
   }

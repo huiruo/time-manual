@@ -1,28 +1,25 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('user')
-export class User {
-    /**
-     * 自增主键
-     */
+@Entity('moments')
+export class Moments {
     @PrimaryGeneratedColumn({
         comment: '自增ID'
     })
     id: number;
 
-    /**
-     * 账户
-     */
     @Column({
-        comment: '账户'
+        comment: '内容'
     })
-    account: string;
+    content: string;
 
-    /**
-     * 密码
-     */
     @Column({
-        comment: '密码'
+        comment: '链接'
     })
-    password: string;
+    share_url: string;
+
+    @CreateDateColumn({
+        type: 'timestamp',
+        name: 'time',
+    })
+    update_time: Date;
 }
