@@ -11,6 +11,10 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+// import PrivateRoute from './private-route'
+import Header from '@/components/header'
+// import Header from '@/layout/header'
+import Layout from '@/layout/index'
 
 const routesConfig = [
 	{
@@ -38,7 +42,6 @@ const routesConfig = [
 ]
 
 const RoutesContainer = () => {
-
 	const generateRoute = (routes:any)=>{
 		return routes.map((route:any)=>{
 			if (route.children!==undefined && route.children.length) {
@@ -56,14 +59,16 @@ const RoutesContainer = () => {
 
 	return (
 		<HashRouter>
-			<Routes>
-				<Route path="/">
-					{ generateRoute(routesConfig) }
-				</Route>
-				{/* <Route index element={<Home />} /> */}
-				<Route index element={<Moments />} />
-				<Route path="*" element={<NotFound />} />
-			</Routes>
+			<Layout header={<Header />}>
+				<Routes>
+					<Route path="/">
+						{ generateRoute(routesConfig) }
+					</Route>
+					{/* <Route index element={<Home />} /> */}
+					<Route index element={<Moments />} />
+					<Route path="*" element={<NotFound />} />
+				</Routes>
+			</Layout>
 		</HashRouter>
 	)
 };
