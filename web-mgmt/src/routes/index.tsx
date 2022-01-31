@@ -1,9 +1,10 @@
 import React from 'react';
 // import Home from '../pages/home/index';
+// import ArticleTest1 from '../pages/article-test1/index';
+// import ArticleTest2 from '../pages/article-test2/index';
+// import PrivateRoute from './private-route'
 import Moments from '../pages/moments/index';
 import Article from '../pages/article/index';
-import ArticleTest1 from '../pages/article-test1/index';
-import ArticleTest2 from '../pages/article-test2/index';
 import Resume from '../pages/resume/index';
 import NotFound from '../pages/not-found/index';
 import {
@@ -11,7 +12,6 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-// import PrivateRoute from './private-route'
 import Header from '@/components/header'
 import Layout from '@/layout/index'
 

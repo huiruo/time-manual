@@ -67,7 +67,7 @@ const NavMenu: FC<navMenu> = ({routesConfig}) => {
 
   return(
 			<Menu 
-        style={{marginTop:'4rem'}}
+        style={{marginTop:'3.6rem'}}
         theme="dark"
         selectedKeys={selectedKeys}
         mode="inline"

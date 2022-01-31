@@ -3,7 +3,7 @@ import { Layout, Breadcrumb } from 'antd';
 import NavMenu from '@/layout/navMenu'
 import './index.scss'
 
-const { Content, Footer, Sider } = Layout;
+const { Footer, Sider } = Layout;
 
 interface layoutContainerType{
   children:React.ReactElement,
@@ -29,31 +29,33 @@ const LayoutContainer = (props:layoutContainerType) => {
         </div>
 
         <div className='layout-sider'>
-          <Sider width={'20.8rem'} className='layout-sider-content' collapsible collapsed={collapsed} onCollapse={onCollapse}>
+          <Sider
+           width={'20.8rem'}
+           collapsedWidth="4.8rem"
+           className='layout-sider-content'
+           collapsible
+           collapsed={collapsed}
+           onCollapse={onCollapse}
+          >
             <NavMenu routesConfig={routesConfig}/>
           </Sider>
         </div>
 
-        <div className='layout-content'>
-          <Layout style={{ padding: '0 24px 24px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
+        <div className='layout-main-container'>
+
+          <Layout className='breadcrumb-content'>
+            <Breadcrumb style={{ margin: '.6rem 0' }}>
+              <Breadcrumb.Item>Home</Breadcrumb.Item>
+              <Breadcrumb.Item>List</Breadcrumb.Item>
+              <Breadcrumb.Item>App</Breadcrumb.Item>
             </Breadcrumb>
           </Layout>
-          <Content
-            style={{
-              padding: 10,
-              margin: 0,
-              minHeight: 280,
-              width:'100%',
-              background:'grey'
-            }}
-          >
+
+          <div className='layout-main-content'>
             {children}
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>xxx ©2021</Footer>
+          </div>
+
+          <Footer className='foot-centent'>xxx ©2021</Footer>
         </div>
       </Layout>
     </Layout>

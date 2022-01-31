@@ -25,9 +25,22 @@
 	height:100%;
 }
 
-.layout-content{
+.layout-main-container{
+	display: flex;
+	flex-direction: column;
 	width:100%;
 	height:100%;
-	height:100vh;
-	margin-top:4rem;
+	min-height: 100vh;
+	padding-top:4rem;
+	// background:rgb(18, 126, 18);
+	.breadcrumb-content{
+		flex: none
+	}
+	.layout-main-content{
+		// background: greenyellow;
+		flex: 1 1 auto;
+	}
+	.foot-centent{
+		text-align: center;
+	}
 }
