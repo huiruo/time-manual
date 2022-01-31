@@ -1,3 +1,11 @@
+
+.fixed-top{
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+}
+
 .nav-active {
   color: #efe80d!important;
 }

@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { Layout, Breadcrumb } from 'antd';
 import NavMenu from '@/layout/navMenu'
+import './index.scss'
 
 const { Content, Footer, Sider } = Layout;
 
-const LayoutContainer = (props:any) => {
+interface layoutContainerType{
+  children:React.ReactElement,
+  header:React.ReactElement,
+  routesConfig:any
+}
+
+const LayoutContainer = (props:layoutContainerType) => {
 
   const [collapsed, setCollapsed] = useState<boolean>(false);
 
-  const { children,header } = props
-
-  console.log('layout----props---->-======', props)
+  const { children,header,routesConfig } = props
 
   const onCollapse = (collapsed:boolean) => {
-    console.log('collapsed:', collapsed);
     setCollapsed(collapsed);
   };
 
@@ -21,11 +25,16 @@ const LayoutContainer = (props:any) => {
     <Layout style={{ minHeight: '100vh' }}>
       {header}
       <Layout>
-        <Sider width={200} collapsible collapsed={collapsed} onCollapse={onCollapse}>
-          <NavMenu />
-        </Sider>
+        <div className={collapsed?'layout-blank-hidden':'layout-blank'}>
+        </div>
 
-        <div style={{width:'100%',height:'auto'}}>
+        <div className='layout-sider'>
+          <Sider width={'20.8rem'} className='layout-sider-content' collapsible collapsed={collapsed} onCollapse={onCollapse}>
+            <NavMenu routesConfig={routesConfig}/>
+          </Sider>
+        </div>
+
+        <div className='layout-content'>
           <Layout style={{ padding: '0 24px 24px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
@@ -38,6 +47,7 @@ const LayoutContainer = (props:any) => {
               padding: 10,
               margin: 0,
               minHeight: 280,
+              width:'100%',
               background:'grey'
             }}
           >

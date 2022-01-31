@@ -13,31 +13,40 @@ import {
 } from "react-router-dom";
 // import PrivateRoute from './private-route'
 import Header from '@/components/header'
-// import Header from '@/layout/header'
 import Layout from '@/layout/index'
 
 const routesConfig = [
 	{
 		path: 'article',
+		title:'文章管理',
 		element: <Article />,
+		icon:'FileMarkdownOutlined',
 		children:[
-			{
-				path: 'articleTest1',
-				element: <ArticleTest1 />,
-			},
-			{
-				path: 'articleTest2',
-				element: <ArticleTest2 />,
-			},
+			// {
+			// 	path: 'articleTest1',
+			// 	url: 'article/articleTest1',
+			// 	title:'测试子集1',
+			// 	element: <ArticleTest1 />,
+			// },
+			// {
+			// 	path: 'articleTest2',
+			// 	url: 'article/articleTest2',
+			// 	title:'测试子集2',
+			// 	element: <ArticleTest2 />,
+			// },
 		]
 	},
 	{
 		path: 'moments',
+		title:'动态管理',
 		element: <Moments />,
+		icon:'ClockCircleOutlined'
 	},
 	{
 		path: 'resume',
+		title:'个人管理',
 		element: <Resume />,
+		icon:'UserOutlined'
 	}
 ]
 
@@ -59,7 +68,7 @@ const RoutesContainer = () => {
 
 	return (
 		<HashRouter>
-			<Layout header={<Header />}>
+			<Layout routesConfig={routesConfig} header={<Header />}>
 				<Routes>
 					<Route path="/">
 						{ generateRoute(routesConfig) }

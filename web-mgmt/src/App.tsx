@@ -7,13 +7,7 @@ import Header from '@/components/header'
 
 function App() {
   return (
-    <>
-      {/* <Header /> */}
-      {/* <Layout> */}
-        {/* <Header /> */}
-        <Routes />
-      {/* </Layout> */}
-    </>
+    <Routes />
   );
 }
 
