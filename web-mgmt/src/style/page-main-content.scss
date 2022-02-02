@@ -1,0 +1,28 @@
+
+.test-bg{
+  background: #ede7f6;
+}
+
+.page-container{
+  background: #f0f2f5;
+}
+
+.page-title{
+  padding: 1.2rem 2.4rem 1.6rem 2.4rem; 
+  background: white;
+  .heading-title{
+    // margin-right: 12px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,.85);
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 2.6rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.page-children-content{
+  margin: 24px 24px 0;
+}

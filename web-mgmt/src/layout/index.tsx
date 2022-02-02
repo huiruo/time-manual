@@ -44,7 +44,7 @@ const LayoutContainer = (props:layoutContainerType) => {
         <div className='layout-main-container'>
 
           <Layout className='breadcrumb-content'>
-            <Breadcrumb style={{ margin: '.6rem 0' }}>
+            <Breadcrumb>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>List</Breadcrumb.Item>
               <Breadcrumb.Item>App</Breadcrumb.Item>

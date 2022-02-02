@@ -1,21 +1,40 @@
 import React from 'react'
-import { Button } from 'antd';
+import { Input,Button } from 'antd';
+import UploadComponent from './upload-component';
+import './index.scss'
+
+const { TextArea } = Input;
 
 const Moments =()=>{
+
   return (
-    <div className='root-container'>
-      <div className='container test-bg'>
-        <div className='title'>这是标题</div>
-        <div className='content'>
-          <div className='main-content col-sm-12'>
-            主要内容
-            <Button type="primary">Button</Button>
-          </div>
-          <div className='right-content col-sm-12'>
-            侧边栏
-          </div>
+    <div className='root-container page-container'>
+      <div className='page-title'>
+        <span className='heading-title'>
+          动态管理
+        </span>
+      </div>
+      <div className='page-children-content test-bg'>
+        <div className='moments-item'>
+          <span>内容：</span>
+          <TextArea rows={4} placeholder='想到了什么呢？'/>
         </div>
-      </div> 
+
+        <div className='moments-item'>
+          <span>分享链接：</span>
+          <Input placeholder="要分享什么呢？" />
+        </div>
+
+        <div className='moments-item'>
+          <span>上传图片：</span>
+          <UploadComponent />
+        </div>
+
+        <div className='moments-item'>
+          <Button className='submit-btn' type="primary">发 射</Button>
+          <Button>取 消</Button>
+        </div>
+      </div>
     </div>
   );
 }
