@@ -1,4 +1,4 @@
-import { Column, Entity, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('moments')
 export class Moments {
@@ -17,9 +17,22 @@ export class Moments {
     })
     share_url: string;
 
-    @CreateDateColumn({
-        type: 'timestamp',
-        name: 'time',
+    @Column({
+        comment: '图片'
+    })
+    img_url: string;
+
+	@UpdateDateColumn({
+		type: 'timestamp',
+        name: 'update_time',
+        comment: "更新时间"
     })
     update_time: Date;
+
+    @CreateDateColumn({
+        type: 'timestamp',
+        name: 'created_time',
+        comment: '创建时间',
+    })
+    created_time: Date;
 }
