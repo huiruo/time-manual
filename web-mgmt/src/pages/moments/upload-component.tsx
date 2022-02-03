@@ -148,8 +148,6 @@ const UploadComponent =()=>{
     </div>
   );
 
-  console.log('fileList_render:',fileList)
-
   return (
     <div>
       {/* <Dragger {...propsUpload}> */}

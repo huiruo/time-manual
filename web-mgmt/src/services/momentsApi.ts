@@ -22,9 +22,14 @@ interface onLoginType {
 const momentsApi = {
 	onTestReq(data:any){
 		const url = `${ manualApiUrl }/moments/122`;
-		// return http.post<onLoginType>(data,url);
 		return http.get<onLoginType>(data,url);
 	},
+
+	addMoments(data:any){
+		const url = `${ manualApiUrl }/moments/add`;
+		return http.post<resType>(data,url);
+	}
+
 	/*
 	onLogin(data:any){
 		const url = `${traderApiUrl}/trader/user/login`;
