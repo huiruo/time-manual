@@ -28,8 +28,12 @@ const momentsApi = {
 	addMoments(data:any){
 		const url = `${ manualApiUrl }/moments/add`;
 		return http.post<resType>(data,url);
-	}
+	},
 
+	queryMoments(data:any){
+		const url = `${ manualApiUrl }/moments/query`;
+		return http.post<resType>(data,url);
+	},
 	/*
 	onLogin(data:any){
 		const url = `${traderApiUrl}/trader/user/login`;

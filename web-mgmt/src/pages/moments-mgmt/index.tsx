@@ -1,0 +1,88 @@
+import React, { useEffect, useState } from 'react'
+import { message,Table } from 'antd';
+import momentsApi from "@/services/momentsApi"
+import './index.scss'
+
+const columns = [
+  {
+    title: 'id',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
+    title: '内容',
+    dataIndex: 'content',
+    key: 'content',
+  },
+  {
+    title: '分享链接',
+    dataIndex: 'share_url',
+    key: 'share_url',
+  },
+  {
+    title: '图片',
+    dataIndex: 'img_url',
+    key: 'img_url',
+  },
+  {
+    title: '更新时间',
+    dataIndex: 'update_time',
+    key: 'update_time',
+  },
+  {
+    title: '创建时间',
+    dataIndex: 'created_time',
+    key: 'created_time',
+  },
+];
+
+const MomentsMgmt =()=>{
+  const [dataSource,setDataSource] = useState<any[]>([])
+  const [totalCount,setTotalCount] = useState<number>(0)
+
+  const queryUtil = async(currentPage:number,pageSize:number)=>{
+
+    const data = {
+      currentPage,
+      pageSize,
+    }
+
+    const res = await momentsApi.queryMoments(data)
+    if(res.code=== 200){
+      const {totalCount,result} = res.data
+      setDataSource(result)
+      setTotalCount(totalCount)
+    }else{
+      message.error("请求失败"+res.msg)
+    }
+  }
+
+  useEffect(()=>{
+
+    queryUtil(1,10)
+  },[])
+
+  return (
+    <div className='root-container page-container'>
+      <div className='page-title'>
+        <span className='heading-title'>
+          动态管理
+        </span>
+      </div>
+      <div className='page-children-content test-bg'>
+        <Table 
+          rowKey='id'
+          dataSource={dataSource} 
+          columns={columns} 
+          pagination={{
+            total:totalCount,
+            onChange: ((page, pageSize) => {
+              queryUtil(page, pageSize)
+          }),
+        }}/>
+      </div>
+    </div>
+  );
+}
+
+export default MomentsMgmt;

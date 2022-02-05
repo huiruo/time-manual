@@ -4,6 +4,7 @@ import React from 'react';
 // import ArticleTest2 from '../pages/article-test2/index';
 // import PrivateRoute from './private-route'
 import Moments from '../pages/moments/index';
+import MomentsMgmt from '@/pages/moments-mgmt/index';
 import Article from '../pages/article/index';
 import Resume from '../pages/resume/index';
 import NotFound from '../pages/not-found/index';
@@ -38,8 +39,14 @@ const routesConfig = [
 	},
 	{
 		path: 'moments',
-		title:'动态管理',
+		title:'发动态',
 		element: <Moments />,
+		icon:'ClockCircleOutlined'
+	},
+	{
+		path: 'moments-mgmt',
+		title:'动态管理',
+		element: <MomentsMgmt />,
 		icon:'ClockCircleOutlined'
 	},
 	{

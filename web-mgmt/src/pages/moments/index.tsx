@@ -27,45 +27,40 @@ const Moments =()=>{
   }
 
   const onSubmit = async()=>{
-
-    /*
     if(!content){
       message.warning('内容不能为空');
+      return
     }
-    */
-
+    const img_url:string[] = []
+    /*
+    // test:
     const img_url:string[] = [
         'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
         'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
         'https://avatars.githubusercontent.com/u/11364222?v=4'
     ]
-
+    const content = 'test_content'
+    const shareUrl = 'www.baidu.com'
     const img_url_json:string = '"'+JSON.stringify(img_url)+'"'
-
     console.log('JSON.stringify:',img_url_json)
+    */
 
     const data = {
-      // content:content,
-      // share_url:shareUrl,
-      content:'test_content',
-      share_url:'www.baidu.com',
-      // img_url:img_url_json
-      img_url:[
-        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        'https://avatars.githubusercontent.com/u/11364222?v=4'
-      ]
+      content:content,
+      share_url:shareUrl,
+      img_url:img_url
     }
-
     console.log('req_parm',data)
-
-    // const res = await momentsApi.onTestReq(data)
     const res = await momentsApi.addMoments(data)
-
     if(res.code=== 200){
-      console.log('请求成功',res)
+      setTimeout(()=>{
+        message.warning('发布成功');
+        setContent('')
+        setShareUrl('')
+        // setImgUrl('')
+      },600)
     }else{
-      console.log("请求失败",res)
+      message.error('发布失败:'+res.msg);
     }
   }
 
@@ -73,7 +68,7 @@ const Moments =()=>{
     <div className='root-container page-container'>
       <div className='page-title'>
         <span className='heading-title'>
-          动态管理
+          发动态
         </span>
       </div>
       <div className='page-children-content test-bg'>

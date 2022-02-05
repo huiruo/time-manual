@@ -104,9 +104,9 @@ module.exports = function (proxy, allowedHost) {
     proxy: {
       "/manualUrl": {
         // home
-        // target:"http://192.168.31.139:1788",
+        target:"http://192.168.31.77:3800",
         // HePing 
-        target:"http://192.168.10.136:3800",
+        // target:"http://192.168.10.136:3800",
         changeOrigin: true,
         pathRewrite: {
           "^/manualUrl": ""
