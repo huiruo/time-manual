@@ -18,12 +18,15 @@ export class MomentsController {
 
   @Post('add')
   async addMomonts(@Body() body:Moments){
-    const data = await this.MomentsService.addMomont(body)
-    console.log('add body:',data)
-    if(data){
-      return { code: 200, message: '查询成功',data};
-    }else{
-      return { code: 500, message: '发布动态失败',data: null };
-    }
+    const data = await this.MomentsService.addMoment(body)
+    return data;
+  }
+
+  @Post('query')
+  async queryMomonts(@Body() body){
+    const currentPage:number = body.currentPage
+    const pageSize:number = body.pageSize
+    const data = await this.MomentsService.queryMoments(currentPage,pageSize)
+    return data;
   }
 }

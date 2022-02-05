@@ -23,29 +23,75 @@ export class MomentsService {
     return userInfo;
   }
 
-  // public async addMomonts(moments:Moments):Promise<Moments>{
-  public async addMomont(moments:Moments){
+  // public async addMoment(moments:Moments):Promise<Moments>{
+  public async addMoment(moments:Moments){
 
     const { content, share_url,img_url } = moments
-
     const img_url_temp:string[] = img_url as any
     const img_url_arr_str = img_url_temp.join(',')
     /*
     const sql = `insert into moments (id,content,share_url,img_url) VALUES
     ("${uuidv4()}","${content}","${share_url}","${img_url_json}")`;
     */
+
+    // const sql = `insert into moments (id,content,share_url,img_url) VALUES
+    // ("${uuidv4()}","${content}","${share_url}","${img_url_arr_str}")`;
+
+    /*
     const sql = `insert into moments (id,content,share_url,img_url) VALUES
-    ("${uuidv4()}","${content}","${share_url}","${img_url_arr_str}")`;
-
+    ("${id}","${content}","${share_url}","${img_url_arr_str}")`;
     console.log('sql___',sql)
-    const result = await this.momentRepo.query(sql);
+    */
 
-    console.log("add return",result)
-    return null
+    const row = {
+      // id:uuidv4(),
+      content:content,
+      share_url:share_url,
+      img_url:img_url_arr_str
+    }
+
+    console.log('sql___',row)
+
+    try {
+      // const result = await this.momentRepo.query(sql);
+      const result = await this.momentRepo.save(row);
+      console.log("add return",result)
+      return { code: 200, msg: '查询成功',data:null };
+    } catch (error) {
+      console.log("sql error:",error)
+      console.log("sql error:====>",error.sqlMessage)
+      return { code: 500, msg: error.sqlMessage,data: null };
+    }
   }
 
   /*
   util method:
   */
-  private async addMonontUtil(moments:Moments) {}
+  private async addMonentUtil(moments:Moments) {}
+
+  public async queryMoments(currentPage:number,pageSize:number){
+    let totalCount:number = 0
+
+    try {
+      const sql = `SELECT COUNT(*) as totalCount FROM moments;`
+      const result = await this.momentRepo.query(sql);
+      totalCount = parseInt(result[0].totalCount)
+    } catch (error) {
+      console.log('query total error:',error)  
+    }
+
+    try {
+      const sql = `select * from moments limit ${(currentPage - 1) * pageSize},${pageSize}`
+      const result = await this.momentRepo.query(sql);
+      const data = {
+        totalCount,
+        currentPage,
+        pageSize,
+        result
+      }
+      return { code: 200, msg: '查询成功',data };
+    } catch (error) {
+      return { code: 500, msg: error.sqlMessage,data: null }; 
+    }
+  }
 }
