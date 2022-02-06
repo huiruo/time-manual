@@ -1,9 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-// import { User } from './user.entity';
 import { Moments } from './moments.entity';
-import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class MomentsService {
@@ -12,7 +10,6 @@ export class MomentsService {
     @InjectRepository(Moments) private readonly momentRepo: Repository<Moments>,
   ) { }
 
-  // public async findOneById(id: string): Promise<User> {
   public async findOneById(id: string): Promise<Moments> {
     console.log("根据ID查询单个信息:",id)
     console.log("process.env",process.env.DATABASE_USER)
@@ -23,7 +20,6 @@ export class MomentsService {
     return userInfo;
   }
 
-  // public async addMoment(moments:Moments):Promise<Moments>{
   public async addMoment(moments:Moments){
 
     const { content, share_url,img_url } = moments
@@ -44,7 +40,6 @@ export class MomentsService {
     */
 
     const row = {
-      // id:uuidv4(),
       content:content,
       share_url:share_url,
       img_url:img_url_arr_str
@@ -53,7 +48,6 @@ export class MomentsService {
     console.log('sql___',row)
 
     try {
-      // const result = await this.momentRepo.query(sql);
       const result = await this.momentRepo.save(row);
       console.log("add return",result)
       return { code: 200, msg: '查询成功',data:null };

@@ -11,7 +11,7 @@ const getManualApiUrl = () => {
             //发布到开发环境写死解决跨域
             return 'http://192.168.10.136:3800'
         default:
-            console.log('getManualApiUrl_default')
+            // console.log('getManualApiUrl_default')
             return '/manualUrl';
     }
 }

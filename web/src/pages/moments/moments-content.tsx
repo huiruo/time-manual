@@ -16,7 +16,7 @@ const MomentsContent =()=>{
     if(res.code=== 200){
       const {totalCount,result} = res.data
       setMoments(result)
-      // setTotalCount(totalCount)
+      setTotalCount(totalCount)
     }else{
       console.log("请求失败"+res.msg)
     }
@@ -25,6 +25,7 @@ const MomentsContent =()=>{
   useEffect(()=>{
     queryUtil(1,10)
   },[])
+
   return (
     <div className='moments-content'>
      App 
