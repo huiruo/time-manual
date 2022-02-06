@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { message,Table } from 'antd';
+import { Table,message,Space } from 'antd';
 import momentsApi from "@/services/momentsApi"
 import './index.scss'
 
@@ -18,11 +18,25 @@ const columns = [
     title: '分享链接',
     dataIndex: 'share_url',
     key: 'share_url',
+    render: (val:any) => (
+      <div>
+        { <div style={{maxWidth:'20rem'}}>{val}</div> }
+      </div>
+    ),
   },
   {
     title: '图片',
     dataIndex: 'img_url',
     key: 'img_url',
+    render: (val:any) => (
+      <div>
+        {!val?'无':val.split(',').map((item:any,index:number)=>{
+          return(
+            <div style={{maxWidth:'20rem'}} key={index}>{item}</div>
+          )
+        })}
+      </div>
+    ),
   },
   {
     title: '更新时间',
@@ -36,10 +50,10 @@ const columns = [
   },
 ];
 
+
 const MomentsMgmt =()=>{
   const [dataSource,setDataSource] = useState<any[]>([])
   const [totalCount,setTotalCount] = useState<number>(0)
-
   const queryUtil = async(currentPage:number,pageSize:number)=>{
 
     const data = {
@@ -69,8 +83,11 @@ const MomentsMgmt =()=>{
           动态管理
         </span>
       </div>
-      <div className='page-children-content test-bg'>
+      {/* <div className='page-children-content test-bg' style={{minWidth:'400px'}}> */}
+      {/* <div className='page-children-content test-bg'> */}
+      <div className='page-children-content'>
         <Table 
+          style={{width: '100%',overflowX: 'auto'}}
           rowKey='id'
           dataSource={dataSource} 
           columns={columns} 
