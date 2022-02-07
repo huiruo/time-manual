@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Table,message,Space } from 'antd';
 import momentsApi from "@/services/momentsApi"
+import { formatUnixTime } from '@/utils/index'
 import './index.scss'
 
 const columns = [
@@ -42,11 +43,21 @@ const columns = [
     title: '更新时间',
     dataIndex: 'update_time',
     key: 'update_time',
+    render: (val:any) => (
+      <div>
+        <div style={{maxWidth:'20rem'}}>{formatUnixTime(val)}</div>
+      </div>
+    ),
   },
   {
     title: '创建时间',
     dataIndex: 'created_time',
     key: 'created_time',
+    render: (val:any) => (
+      <div>
+        <div style={{maxWidth:'20rem'}}>{formatUnixTime(val)}</div>
+      </div>
+    ),
   },
 ];
 

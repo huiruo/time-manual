@@ -75,7 +75,7 @@ export class MomentsService {
     }
 
     try {
-      const sql = `select * from moments limit ${(currentPage - 1) * pageSize},${pageSize}`
+      const sql = `select * from moments order by created_time desc limit ${(currentPage - 1) * pageSize},${pageSize}` 
       const result = await this.momentRepo.query(sql);
       const data = {
         totalCount,
