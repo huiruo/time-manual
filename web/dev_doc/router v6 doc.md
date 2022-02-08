@@ -5,6 +5,7 @@ https://reactrouter.com/docs/en/v6/getting-started/overview
 https://blog.csdn.net/weixin_47091394/article/details/121772779
 
 1.Switch 重命名为 Routes
+
 ```js
 // v5
 <Switch>
@@ -19,7 +20,8 @@ https://blog.csdn.net/weixin_47091394/article/details/121772779
 </Routes>
 ```
 
-2.Route 的新特性变更 ,component/render被element替代
+2.Route 的新特性变更 ,component/render 被 element 替代
+
 ```js
 import Profile from './Profile';
 
@@ -37,7 +39,8 @@ import Profile from './Profile';
 <Route path=":userId" element={<Profile animate={true} />} />
 ```
 
-history的用法也将被替换成navigate
+history 的用法也将被替换成 navigate
+
 ```js
 // v5
 history.push('/home');
@@ -45,11 +48,12 @@ history.replace('/home');
 
 // v6
 navigate('/home');
-navigate('/home', {replace: true});
+navigate('/home', { replace: true });
 ```
 
 ### Module '"react-router-dom"' has no exported member 'withRouter'.
-react-router-dom v6版本中的withRouter和Switch已过时，可以退回到v5版本继续使用，或者使用useNavigate()替代withRouter，使用Routes替代Switch。
+
+react-router-dom v6 版本中的 withRouter 和 Switch 已过时，可以退回到 v5 版本继续使用，或者使用 useNavigate()替代 withRouter，使用 Routes 替代 Switch。
 例如：
 
 const navigate = useNavigate()
@@ -76,38 +80,38 @@ function App() {
   ...
 ```
 
-## Redirect也没法使用
+## Redirect 也没法使用
 
-新版的路由需要引入Navigate标签，以下是案例
+新版的路由需要引入 Navigate 标签，以下是案例
+
 ```js
-
 <Router>
-    <Routes>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/admin' element={<Admin/>}/>
-        <Route path="*" element={<Navigate to="/login" />} />
-    </Routes>
-</Router>
-这样就可以完美替代之前Redirect的重定向操作
+  <Routes>
+    <Route path='/login' element={<Login />} />
+    <Route path='/admin' element={<Admin />} />
+    <Route path='*' element={<Navigate to='/login' />} />
+  </Routes>
+</Router>;
+这样就可以完美替代之前Redirect的重定向操作;
 ```
 
 或则：
-废弃了V5中的Redirect
+废弃了 V5 中的 Redirect
+
 ```js
-  // v5 废弃了
-   const routers = [
-        { path: 'home', redirectTo: '/' }
-  ]
-  
-  // 404可以这么写
-  const routers = [
-    {
-          name: '404',
-          path: '*',
-          element: <NoMatch />
-    }
-   ]
+// v5 废弃了
+const routers = [{ path: 'home', redirectTo: '/' }];
+
+// 404可以这么写
+const routers = [
+  {
+    name: '404',
+    path: '*',
+    element: <NoMatch />,
+  },
+];
 ```
+
 ### React Router v6 exact
 
 ```js
@@ -127,12 +131,13 @@ You don't need to use an exact prop on <Route path="/"> anymore. This is because
 ```
 
 ### 嵌套路由变得更简单
+
 具体变化有以下：
-1.Route children 已更改为接受子路由。
-2.比Route exact 和 Route strict更简单的匹配规则。
+1.Route children 已更改为接受子路由。 2.比 Route exact 和 Route strict 更简单的匹配规则。
 3.Route path 路径层次更清晰。
 
 v5 中的嵌套路由必须非常明确定义，且要求在这些组件中包含许多字符串匹配逻辑.
+
 ```js
 // v5
 import {
@@ -140,15 +145,15 @@ import {
   Switch,
   Route,
   Link,
-  useRouteMatch
+  useRouteMatch,
 } from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/profile" component={Profile} />
+        <Route exact path='/' component={Home} />
+        <Route path='/profile' component={Profile} />
       </Switch>
     </BrowserRouter>
   );
@@ -156,7 +161,7 @@ function App() {
 
 function Profile() {
   let { path, url } = useRouteMatch();
-  
+
   return (
     <div>
       <nav>
@@ -177,22 +182,17 @@ function Profile() {
 ```
 
 v6 中，你可以删除字符串匹配逻辑。不需要任何 useRouteMatch()
+
 ```js
 // v6
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  Outlet
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="profile/*" element={<Profile/>} />
+        <Route path='/' element={<Home />} />
+        <Route path='profile/*' element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );
@@ -202,18 +202,17 @@ function Profile() {
   return (
     <div>
       <nav>
-        <Link to="me">My Profile</Link>
+        <Link to='me'>My Profile</Link>
       </nav>
 
       <Routes>
-        <Route path="me" element={<MyProfile />} />
-        <Route path=":id" element={<OthersProfile />} />
+        <Route path='me' element={<MyProfile />} />
+        <Route path=':id' element={<OthersProfile />} />
       </Routes>
     </div>
   );
 }
 ```
-
 
 ```js
 		// <HashRouter>
@@ -231,31 +230,29 @@ function Profile() {
 		{/* </HashRouter> */}
 ```
 
+## 实现来回导航(使用 go、goBack、goForward)
 
-## 实现来回导航(使用go、goBack、goForward)
-实现来回导航(使用go、goBack、goForward)
+实现来回导航(使用 go、goBack、goForward)
+
 ```js
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 function App() {
   const { go, goBack, goForward } = useHistory();
 
   return (
     <>
-      <button onClick={() => go(-2)}>
-        Go 2 pages back
-      </button>
+      <button onClick={() => go(-2)}>Go 2 pages back</button>
       <button onClick={goBack}>Go back</button>
       <button onClick={goForward}>Go forward</button>
-      <button onClick={() => go(2)}>
-        Go 2 pages forward
-      </button>
+      <button onClick={() => go(2)}>Go 2 pages forward</button>
     </>
   );
 }
 ```
 
 ## 获取当前路由
+
 ```js
 import { NavLink,useLocation } from "react-router-dom";
 import './index.scss'

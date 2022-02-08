@@ -1,37 +1,37 @@
-.root-container{
+.root-container {
   width: 100%;
   height: auto;
   background-color: #ebf0f7;
 }
 
-.container{
+.container {
   min-height: 80vh;
-  .main-title{
+  .main-title {
     height: auto;
     font-size: 1.8rem;
-    padding:2rem 0;
+    padding: 2rem 0;
   }
 }
 
-.content{
+.content {
   display: flex;
   flex: 1;
 }
 
 .content:after {
   display: table;
-  content: "";
+  content: '';
   clear: both;
 }
 
-.main-content{
-  flex: 2; 
+.main-content {
+  flex: 2;
   // float: left;
   // width: 66.66666667%;
 }
 
-.right-content{
-  flex:1; 
+.right-content {
+  flex: 1;
   // background: burlywood;
   // float: left;
 }
@@ -44,17 +44,17 @@
 }
 
 @media (max-width: 768px) {
-  .container{
+  .container {
     width: 100%;
     margin: 0 auto;
   }
-  .content{
+  .content {
     display: block;
   }
-  .main-content{
+  .main-content {
     width: 100%;
   }
-  .col-sm-12{
+  .col-sm-12 {
     width: 100%;
   }
 }

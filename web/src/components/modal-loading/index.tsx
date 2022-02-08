@@ -1,5 +1,5 @@
-import React from 'react'
-import './modal-loading.scss'
+import React from 'react';
+import './modal-loading.scss';
 
 const ModalLoading = () => {
   return (
@@ -13,7 +13,7 @@ const ModalLoading = () => {
         </span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ModalLoading
+export default ModalLoading;

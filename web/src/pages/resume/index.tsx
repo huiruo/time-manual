@@ -1,13 +1,13 @@
-import React from 'react'
-import Header from '@/components/header'
+import React from 'react';
+import Header from '@/components/header';
 
-const Resume =()=>{
+const Resume = () => {
   return (
     <div className='root-container'>
-     <Header />
-     <div className='container test-bg'>resume</div> 
+      <Header />
+      <div className='container test-bg'>resume</div>
     </div>
   );
-}
+};
 
 export default Resume;
