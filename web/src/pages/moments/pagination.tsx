@@ -57,14 +57,9 @@ const Pagination:React.FC<PaginationType> =(props)=>{
       const page = searchParams.get('page') as any
       if(page){
         const pageNum = parseInt(page)
-        console.log('pageNum:',pageNum)
-        if(pageNum === NaN){
-          setCurentPage(pageNum)
-          onChange(pageNum,pagesize)
-        }else{
-          setCurentPage(1)
-          onChange(1,pagesize)
-        }
+        let page_parm = isNaN(pageNum)? 1:pageNum
+        setCurentPage(page_parm)
+        onChange(page_parm,pagesize)
       }
     }else{
       setCurentPage(1)
