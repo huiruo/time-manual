@@ -1,6 +1,4 @@
-import { Console } from 'console';
 import React, { useEffect, useState } from 'react'
-import { useSearchParams } from "react-router-dom";
 
 interface PaginationProps{
   onChange?: (page: number, pageSize: number) => void;
@@ -39,6 +37,7 @@ interface PaginationData {
 
 interface PaginationType{
   total: number;
+  current?: number;
   pagesize?: number;
   onChange: (page: number, pageSize?: number) => void;
   onShowSizeChange?: (current: number, size: number) => void;
@@ -47,29 +46,17 @@ interface PaginationType{
 const Pagination:React.FC<PaginationType> =(props)=>{
   const [curentPage,setCurentPage] = useState<number>(1)
   const [totalPages,setTotalPages] = useState<number[]>([1])
-  const [searchParams,setSearchParams] = useSearchParams()
 
-  const {total,pagesize=10,onChange} = props
+  const {total,pagesize=10,onChange,current} = props
 
   useEffect(()=>{
-    const hasPage= searchParams.has('page')
-    if(hasPage){
-      const page = searchParams.get('page') as any
-      if(page){
-        const pageNum = parseInt(page)
-        let page_parm = isNaN(pageNum)? 1:pageNum
-        setCurentPage(page_parm)
-        onChange(page_parm,pagesize)
-      }
-    }else{
-      setCurentPage(1)
-      onChange(1,pagesize)
+    if(current){
+      setCurentPage(current)
     }
-  },[])
+  },[current])
 
   useEffect(()=>{
     const pages = Math.floor((total  +  pagesize  - 1) / pagesize)
-
     const totalPagesArr:number[] = []
 
     for (let index = 0; index < pages; index++) {
@@ -83,8 +70,6 @@ const Pagination:React.FC<PaginationType> =(props)=>{
     if(curentPage !==1 ){
       setCurentPage(curentPage-1)
       onChange(curentPage-1,pagesize)
-    }else{
-      console.log('到底了')
     }
   }
 
@@ -92,15 +77,16 @@ const Pagination:React.FC<PaginationType> =(props)=>{
     if(curentPage !== totalPages.length ){
       onChange(curentPage+1,pagesize)
       setCurentPage(curentPage+1)
-    }else{
-      console.log('到底了')
     }
   }
 
   const onShowSizeChange = (page:number)=>{
-    setSearchParams({page:page.toString()})
     setCurentPage(page)
     onChange(page,pagesize)
+  }
+
+  if(!total){
+    return null
   }
 
   return (
@@ -112,6 +98,7 @@ const Pagination:React.FC<PaginationType> =(props)=>{
         style={{cursor:curentPage ===1?'not-allowed':'pointer'}} type="button">
         上一页
       </button>
+
       {
         totalPages.map((item)=>{
           return(
@@ -121,6 +108,7 @@ const Pagination:React.FC<PaginationType> =(props)=>{
           )
         })
       }
+
       <button 
         onClick={onNextPage}
         disabled={curentPage === totalPages.length}

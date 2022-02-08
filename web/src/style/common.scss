@@ -1,16 +1,15 @@
 .root-container{
   width: 100%;
-  min-height: 100%;
   height: auto;
   background-color: #ebf0f7;
 }
 
 .container{
+  min-height: 80vh;
   .main-title{
     height: auto;
     font-size: 1.8rem;
     padding:2rem 0;
-    // background:#bad9f0;
   }
 }
 
