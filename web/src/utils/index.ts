@@ -27,10 +27,10 @@ export function formatUnixTime(val:any, fmt="yyyy-MM-dd hh:mm:ss") {
   options["s+"] = date.getSeconds();
   options["q+"] = Math.floor((date.getMonth() + 3) / 3);
   options["S+"] = date.getMilliseconds();
-  for (let k in options) {
+  for (const k in options) {
     const key = k as keyof DateFormatOption;//转换key格式
     if (new RegExp(`(${key})`).test(fmt)) {
-      let str = options[key] + "";
+      const str = options[key] + "";
       fmt = fmt.replace(
         RegExp.$1,
         RegExp.$1.length === 1 ? str : ('00'+ str).substr(str.length) 

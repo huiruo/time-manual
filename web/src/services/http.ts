@@ -155,7 +155,7 @@ class HttpRequest {
         Object.keys(obj)
           .sort()
           .map(key => {
-            let val = obj[key];
+            const val = obj[key];
             if (Array.isArray(val)) {
               return val
                 .sort()
