@@ -108,7 +108,7 @@ const Pagination: React.FC<PaginationType> = (props) => {
             onClick={() => onShowSizeChange(item)}
             className={
               curentPage === item
-                ? `pagination-btn pagination-active`
+                ? 'pagination-btn pagination-active'
                 : 'pagination-btn'
             }
             type='button'

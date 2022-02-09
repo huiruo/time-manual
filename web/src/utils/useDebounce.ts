@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react';
 
 /*
 use：
@@ -10,24 +10,24 @@ or:
 const handleClick = useThrottle(()=>queryUtil(),600)
 */
 const useThrottle = (fn: (args?: any) => void, delay: number, dep = []) => {
-  const { current } = useRef({ fun: fn, valid: true })
+  const { current } = useRef({ fun: fn, valid: true });
 
   useEffect(() => {
-    current.fun = fn
-  }, [fn]) // eslint-disable-line react-hooks/exhaustive-deps
+    current.fun = fn;
+  }, [fn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return useCallback((args?: any) => {
     if (!current.valid) {
-      return
+      return;
     }
 
-    current.valid = false
+    current.valid = false;
 
     window.setTimeout(() => {
-      current.fun(args)
-      current.valid = true
-    }, delay)
-  }, dep) // eslint-disable-line react-hooks/exhaustive-deps
-}
+      current.fun(args);
+      current.valid = true;
+    }, delay);
+  }, dep); // eslint-disable-line react-hooks/exhaustive-deps
+};
 
-export default useThrottle
+export default useThrottle;

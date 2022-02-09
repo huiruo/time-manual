@@ -150,7 +150,5 @@
       "react-app"
     ]
   },
-  "devDependencies": {
-    "prettier": "^2.5.1"
-  }
+  "devDependencies": {}
 }

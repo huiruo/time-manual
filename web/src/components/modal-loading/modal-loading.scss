@@ -19,7 +19,7 @@
   font-variant: tabular-nums;
   line-height: 1.5715;
   list-style: none;
-  font-feature-settings: 'tnum';
+  font-feature-settings: "tnum";
   position: absolute;
   display: none;
   color: #1890ff;
@@ -97,7 +97,7 @@
   background: #fff;
   opacity: 0;
   transition: all 0.3s;
-  content: '';
+  content: "";
   pointer-events: none;
 }
 .spin-blur {

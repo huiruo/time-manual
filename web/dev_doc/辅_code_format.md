@@ -20,6 +20,22 @@ module.exports = {
 // 这样配置完后，如果保存还是不能格式化，可能是vscode的默认formatter不是prettier。
 // 这时候可以按CTRL + SHIFT + P,输入format然后选择Format Document，
 // 点击弹出框的按钮configure,然后选择pretter.
+
+
+```
+
+## 如果想要配置 eslint 格式化
+
+```
+在VSCODE的User/setting.json文件中有如下配置
+"editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+ },
+表示保存文件这个行为触发的是eslint的规则
+再看执行命令Format Document触发的规则，我们先右键选择Format Document With...来查看默认用的是哪个格式化工具，如图所示，可以看到默认用的是Prettier，到这里就很清晰了，Prettier的配置如果和eslint的配置不一样，那么执行Format Document就肯定和执行
+
+再看执行命令Format Document触发的规则，我们先右键选择Format Document With...来查看默认用的是哪个格式化工具,Prettier的配置如果和eslint的配置不一样
+
 ```
 
 ```text
