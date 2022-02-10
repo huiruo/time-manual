@@ -69,7 +69,6 @@ const Pagination: React.FC<PaginationType> = (props) => {
     if (curentPage !== 1) {
       setCurentPage(curentPage - 1);
       onChange(curentPage - 1, pagesize);
-      const test = 'testfjeo';
     }
   };
 
