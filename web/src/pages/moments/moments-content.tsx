@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import momentsApi from '@/services/momentsApi';
+import timeManualApi from '@/services/timeManualApi';
 import { formatUnixTime } from '@/utils/index';
 import Pagination from './pagination';
 import ModalLoading from '@/components/modal-loading';
@@ -32,8 +32,9 @@ const MomentsContent = () => {
     if (!showLoading) {
       setShowLoading(true);
     }
-    const res = await momentsApi.queryMoments(data);
-    setTimeout(() => {
+    try {
+      const res = await timeManualApi.queryMoments(data);
+      // setTimeout(() => {
       if (res.code === 200) {
         const { totalCount, result } = res.data;
         setShowLoading(false);
@@ -42,7 +43,11 @@ const MomentsContent = () => {
       } else {
         console.log('请求失败' + res.msg);
       }
-    }, 1000);
+      // }, 1000);
+    } catch (error) {
+      console.log('请求错误');
+      setShowLoading(false);
+    }
   };
 
   useEffect(() => {
