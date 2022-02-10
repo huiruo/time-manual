@@ -9,6 +9,9 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MomentsController } from './moments/moments.controller';
 import { MomentsModule } from './moments/moments.module';
+import { ArticleService } from './article/article.service';
+import { ArticleController } from './article/article.controller';
+import { ArticleModule } from './article/article.module';
 
 @Module({
   imports: [
@@ -22,8 +25,9 @@ import { MomentsModule } from './moments/moments.module';
       }),
       MomentsModule,
       TypeOrmModule.forRoot(dbConfig),
+      ArticleModule,
     ],
-    controllers: [AppController, MomentsController],
-    providers: [AppService]
+    controllers: [AppController, MomentsController, ArticleController],
+    providers: [AppService, ArticleService]
 })
 export class AppModule {}
