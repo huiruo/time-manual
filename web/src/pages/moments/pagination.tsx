@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+/*
 interface PaginationProps {
   onChange?: (page: number, pageSize: number) => void;
   onShowSizeChange?: (current: number, size: number) => void;
@@ -34,6 +35,7 @@ interface PaginationData {
 
   style: React.CSSProperties;
 }
+*/
 
 interface PaginationType {
   total: number;

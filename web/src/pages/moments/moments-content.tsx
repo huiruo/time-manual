@@ -50,14 +50,12 @@ const MomentsContent = () => {
     if (hasPage) {
       const page = searchParams.get('page') as any;
       if (page) {
-        console.log('pagin useEffect 1');
         const pageNum = parseInt(page);
         const page_parm = isNaN(pageNum) ? 1 : pageNum;
         setPageCurrent(page_parm);
         queryUtil(page_parm, 10);
       }
     } else {
-      console.log('pagin useEffect 2');
       setPageCurrent(1);
       queryUtil(1, 10);
     }

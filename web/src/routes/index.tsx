@@ -55,8 +55,8 @@ const RoutesContainer = () => {
     <HashRouter>
       <Routes>
         <Route path='/'>{generateRoute(routesConfig)}</Route>
-        {/* <Route index element={<Home />} /> */}
-        <Route index element={<Moments />} />
+        <Route index element={<Article />} />
+        {/* <Route index element={<Moments />} /> */}
         <Route path='*' element={<NotFound />} />
       </Routes>
     </HashRouter>
