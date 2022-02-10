@@ -1,15 +1,16 @@
 ## 第一步：sql
 
 ```sql
-CREATE TABLE `article`  (
-  `id` bigint(60) NOT NULL,
-  `content` MEDIUMTEXT NOT NULL,
-  `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time`  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_time`  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+CREATE TABLE `article` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `content` mediumtext NOT NULL,
+  `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=COMPACT;
 ```
+
 
 ## 第二步，建立 article 模块
 ```

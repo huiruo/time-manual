@@ -1,12 +1,10 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Moments } from './moments.entity';
+import { Repository } from 'typeorm'; import { Moments } from './moments.entity';
 
 @Injectable()
 export class MomentsService {
   constructor(
-    // 使用泛型注入对应类型的存储库实例
     @InjectRepository(Moments) private readonly momentRepo: Repository<Moments>,
   ) { }
 
@@ -15,7 +13,7 @@ export class MomentsService {
     console.log("process.env",process.env.DATABASE_USER)
     const userInfo = await this.momentRepo.findOne(id);
     if (!userInfo) {
-        throw new HttpException(`指定 id=${id} 的用户不存在`, 404);
+      throw new HttpException(`指定 id=${id} 数据不存在`, 404);
     }
     return userInfo;
   }
@@ -45,15 +43,13 @@ export class MomentsService {
       img_url:img_url_arr_str
     }
 
-    console.log('sql___',row)
-
     try {
       const result = await this.momentRepo.save(row);
-      console.log("add return",result)
+      // console.log("add return",result)
       return { code: 200, msg: '查询成功',data:null };
     } catch (error) {
-      console.log("sql error:",error)
-      console.log("sql error:====>",error.sqlMessage)
+      // console.log("sql error:",error)
+      // console.log("sql error:====>",error.sqlMessage)
       return { code: 500, msg: error.sqlMessage,data: null };
     }
   }

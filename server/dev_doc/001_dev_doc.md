@@ -31,34 +31,43 @@ nest g [文件类型] [文件名] [文件目录（src目录下）]
 ```js
 //1.在user.service.ts里写：
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './user.entity';
 
 @Injectable()
-export class UserService {
-    findOne(username:string):string{
-      if(username==='huiruo'){
-          return 'I am here';
-      }
-      return 'Who U find?';
+export class ArticleService {
+  constructor(
+    @InjectRepository(User) private readonly userRepo: Repository<User>,
+  ) { }
+
+  async findOne(id:string){
+    let sql = `select * from user where id = ${id}`;
+    console.log('findOne',sql)
+    let list = await this.userRepo.query(sql);
+    console.log('list',list)
+    return list
   }
 }
 
-//2.把Service的业务逻辑引入
-import { Body, Controller, Post } from '@nestjs/common';
-import { UserService } from './user.service';
+//2.在 Controller 把Service的业务逻辑引入
+import { Controller,Inject,Param,Get } from '@nestjs/common';
+import { Result } from '../common/result.interface';
+import { ArticleService } from './article.service';
 
-@Controller('user')
-export class UserController {
-
+@Controller('article')
+export class ArticleController {
   constructor(
-      @Inject(MomentsService) private readonly MomentsService: MomentsService,
+      @Inject(ArticleService) private readonly ArticleService: ArticleService,
   ) {} 
 
+  // http://localhost:3800/article/20
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Result> {
-      const data = await this.MomentsService.findOne(id);
+      console.log('findone---->')
+      const data = await this.ArticleService.findOne(id);
       return { code: 200, message: '查询成功', data };
   }
-
 }
 
 //3.把Service和Controller组装起来
