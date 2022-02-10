@@ -8,8 +8,8 @@ import { Moments } from './moments.entity';
 @Module({
   // imports: [TypeOrmModule.forFeature([User])],
   imports: [TypeOrmModule.forFeature([Moments])],
-  controllers:[MomentsController],
-  providers:[MomentsService],
-  exports:[MomentsService]
+  controllers: [MomentsController],
+  providers: [MomentsService],
+  exports: [MomentsService],
 })
 export class MomentsModule {}

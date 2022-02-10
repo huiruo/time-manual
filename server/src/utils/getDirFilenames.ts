@@ -1,11 +1,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-
 type optionsType = {
   dirPath?: string;
   prefix?: string;
-  environment?:string
+  environment?: string;
 };
 
 /**
@@ -16,35 +15,37 @@ type optionsType = {
  * @return {string[]} 不传参数默认返回/config/env下所有文件拼接的数组
  */
 export function getDirFilenames(options?: optionsType): string[] {
-
-  const params = { environment:'dev',prefix: 'config/env-common/', ...options };
+  const params = {
+    environment: 'dev',
+    prefix: 'config/env-common/',
+    ...options,
+  };
 
   const results = [];
-  const directoryArr = [path.resolve(process.cwd(), 'config/env-common')]
+  const directoryArr = [path.resolve(process.cwd(), 'config/env-common')];
 
-  if(params.environment==='prod'){
+  if (params.environment === 'prod') {
     const directory = path.resolve(process.cwd(), 'config/env-prod');
-    directoryArr.push(directory)
-  }else{
+    directoryArr.push(directory);
+  } else {
     const directory = path.resolve(process.cwd(), 'config/env-dev');
-    directoryArr.push(directory)
+    directoryArr.push(directory);
   }
 
   try {
-
-    directoryArr.forEach((dirPathItem)=>{
+    directoryArr.forEach((dirPathItem) => {
       for (const dirContent of fs.readdirSync(dirPathItem)) {
         const dirContentPath = path.resolve(dirPathItem, dirContent);
         if (fs.statSync(dirContentPath).isFile()) {
           if (dirContent.endsWith('.env')) {
             if (params.prefix) {
               //计算前缀start
-              if(dirContent==='.env'){
+              if (dirContent === '.env') {
                 results.push(`${params.prefix}${dirContent}`);
-              }else{
-                if(params.environment==='prod'){
+              } else {
+                if (params.environment === 'prod') {
                   results.push(`config/env-prod/${dirContent}`);
-                }else{
+                } else {
                   results.push(`config/env-dev/${dirContent}`);
                 }
               }
@@ -55,10 +56,9 @@ export function getDirFilenames(options?: optionsType): string[] {
           }
         }
       }
-    })
+    });
 
     return results;
-
   } catch (error) {
     return results;
   }
