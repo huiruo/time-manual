@@ -49,7 +49,6 @@ https://github.com/remarkjs/react-markdown
 react-markdown
 
 yarn add react-markdown
-
 import ReactMarkdown from 'react-markdown'
 
 
@@ -64,7 +63,6 @@ react-syntax-highlighter
 https://github.com/react-syntax-highlighter/react-syntax-highlighter
 
 yarn add react-syntax-highlighter
-yarn add  @types/react-syntax-highlighter
 ```
 
 ```js

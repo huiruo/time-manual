@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import ReactMarkdown from 'react-markdown';
-// import SyntaxHighlighter from 'react-syntax-highlighter';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
+const markdown = `Here is some JavaScript code:
 
-const markdown = ' # console.log(\'It works!\') ';
+~~~js
+console.log('It works!')
+~~~
+`;
 const input = '# This is a header\n\nAnd this is a paragraph';
 
 const Article = () => {
 
-  const [markdownContent, setMarkdownContent] = useState(input);
+  // const [markdownContent, setMarkdownContent] = useState(input);
+  const [markdownContent, setMarkdownContent] = useState(markdown);
 
   return <div>
     <div>
@@ -23,7 +29,7 @@ const Article = () => {
             return !inline && match ? (
               <SyntaxHighlighter
                 children={String(children).replace(/\n$/, '')}
-                style={dark}
+                style={docco}
                 language={match[1]}
                 PreTag='div'
                 {...props}

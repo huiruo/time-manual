@@ -21,6 +21,7 @@
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.3.3",
+    "@types/react-syntax-highlighter": "^13.5.2",
     "axios": "^0.25.0",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
