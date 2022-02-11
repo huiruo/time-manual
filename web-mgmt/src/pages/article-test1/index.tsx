@@ -1,11 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-const Article =()=>{
+const Article = () => {
+
   return (
     <div className='root-container'>
-     Article1
+      Article1
     </div>
   );
-}
+
+};
 
 export default Article;

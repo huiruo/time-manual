@@ -2,7 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Table, message } from 'antd';
 import tmMgmtApi from '@/services/tmMgmtApi';
 import { formatUnixTime } from '@/utils/index';
-// import './index.scss';
+import './index.scss';
+
+interface articleType {
+  id: number;
+  content: string;
+  tag: string;
+  update_time: string;
+  created_time: string;
+}
 
 const columns = [
   {
@@ -16,28 +24,12 @@ const columns = [
     key: 'content',
   },
   {
-    title: '分享链接',
-    dataIndex: 'share_url',
-    key: 'share_url',
+    title: '标签',
+    dataIndex: 'tag',
+    key: 'tag',
     render: (val: any) => (
       <div>
         {<div style={{ maxWidth: '20rem' }}>{val}</div>}
-      </div>
-    ),
-  },
-  {
-    title: '图片',
-    dataIndex: 'img_url',
-    key: 'img_url',
-    render: (val: any) => (
-      <div>
-        {!val ? '无' : val.split(',').map((item: any, index: number) => {
-
-          return (
-            <div style={{ maxWidth: '20rem' }} key={index}>{item}</div>
-          );
-
-        })}
       </div>
     ),
   },
@@ -63,11 +55,11 @@ const columns = [
   },
 ];
 
+const ArticleMgmt = () => {
 
-const MomentsMgmt = () => {
-
-  const [dataSource, setDataSource] = useState<any[]>([]);
+  const [dataSource, setDataSource] = useState<articleType[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
+
   const queryUtil = async (currentPage: number, pageSize: number) => {
 
     const data = {
@@ -75,12 +67,13 @@ const MomentsMgmt = () => {
       pageSize,
     };
 
-    const res = await tmMgmtApi.queryMoments(data);
+    const res = await tmMgmtApi.queryArticles(data);
 
     if (res.code === 200) {
 
       const { totalCount, result } = res.data;
 
+      console.log('文章查询:', result);
       setDataSource(result);
       setTotalCount(totalCount);
 
@@ -102,7 +95,7 @@ const MomentsMgmt = () => {
     <div className='root-container page-container'>
       <div className='page-title'>
         <span className='heading-title'>
-          动态管理
+          文章管理
         </span>
       </div>
       <div className='page-children-content'>
@@ -125,4 +118,4 @@ const MomentsMgmt = () => {
 
 };
 
-export default MomentsMgmt;
+export default ArticleMgmt;

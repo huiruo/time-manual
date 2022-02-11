@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import './index.scss';
 
 const Header = () => {
+
   const { pathname } = useLocation();
 
   return (
@@ -45,6 +46,7 @@ const Header = () => {
       </div>
     </div>
   );
+
 };
 
 export default Header;

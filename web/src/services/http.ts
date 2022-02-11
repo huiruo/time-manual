@@ -10,11 +10,11 @@ interface customInterceptorType {
 }
 */
 
-//定义自己的实例类型
+// 定义自己的实例类型
 interface customRequest extends AxiosRequestConfig {
   // interceptor?: customInterceptorType,
   // showLoading?: boolean
-  data?: any, 
+  data?: any,
   code?: number,
   msg?: string
 }
@@ -29,8 +29,8 @@ const codeMessage = new Map([
   [401, '用户没有权限'],
   [403, '用户得到授权，但是访问是被禁止的'],
   [404, 'Not found'],
-  [408,'请求超时'],
-  [410,'请求的资源被永久删除'],
+  [408, '请求超时'],
+  [410, '请求的资源被永久删除'],
   [500, '服务器内部错误(InternalError)'],
   [502, '网关错误'],
   [503, '服务不可用，服务器暂时过载或维护'],
@@ -38,19 +38,22 @@ const codeMessage = new Map([
 ]);
 
 class HttpRequest {
+
   // private readonly baseUrl: string;
   // loading?: ILoadingInstance
   // interceptor?: customInterceptorType
   protected instance: AxiosInstance;
   // showLoading: boolean
 
-  constructor(config: customRequest) {
+  constructor (config: customRequest) {
+
     // this.baseUrl = 'http://localhost:3000'
     this.instance = axios.create(config);
     // this.showLoading = config.showLoading || DEFAULT_LOADING
 
-    //1.request拦截
+    // 1.request拦截
     this.instance.interceptors.request.use((config) => {
+
       // console.log("request拦截=====>",config)
 
       // if(this.showLoading) {
@@ -60,7 +63,7 @@ class HttpRequest {
       // })
       // console.log("正在加载中...")
       // }
-      //token拦截
+      // token拦截
       /*
           const token = localStorage.getItem('token')
           if(token) {
@@ -68,66 +71,88 @@ class HttpRequest {
           }
           */
       return config;
+
     },
     (error) => {
+
       return error;
+
     }
     );
 
-    //2.response 拦截,处理返回结果
+    // 2.response 拦截,处理返回结果
     this.instance.interceptors.response.use(res => {
-      //console.log("instance response 拦截,处理返回结果",res)
+
+      // console.log("instance response 拦截,处理返回结果",res)
       /*
             setTimeout(() => {
               this.loading?.close()
             }, 1000)
           */
       return res.data;
+
     },
     (error) => {
-      console.log('instance response错误处理1:',error.response);
-      console.log('instance response错误处理2:',error);
+
+      console.log('instance response错误处理1:', error.response);
+      console.log('instance response错误处理2:', error);
       if(!error.response){
+
         return {
-          data: null, 
+          data: null,
           code: 408,
           msg:error
         };
+
       }
       const {status}=error.response;
       const errorReq:customRequest ={
-        data: null, 
+        data: null,
         code: status,
         msg:codeMessage.get(status)
       };
+
+
       return errorReq;
+
     }
     );
+
   }
-  getInsideConfig() {
+  getInsideConfig () {
+
     const config = {
       // baseURL: this.baseUrl,
       headers: {
         'Content-Type': CONTENT_TYPE,
       }
     };
+
+
     return config;
+
   }
 
-  request<T>(params: customRequest): Promise<T> {
+  request<T> (params: customRequest): Promise<T> {
+
     let config:customRequest;
-    //字符串
+    // 字符串
+
     if(typeof params === 'string') {
       // config = arguments[1] || {}
-      //处理url
+      // 处理url
       // config.url = arguments[0]
       // if(arguments[2]) {
       //   config.showLoading = arguments[2] || {}
       // }
-    } else {  
+    } else {
+
       config = params || {};
+
     }
+
     return new Promise((resolve) => {
+
       /*
         if (config.interceptor?.requestInterceptor) {  //可以删除，没有接口拦截器
           config = config.interceptor.requestInterceptor(config)
@@ -137,6 +162,7 @@ class HttpRequest {
         }
         */
       this.instance.request<any, T>(config).then((res) => {
+
         // console.log("this.instance.request-----res:",res)
         /*
           if (config.interceptor?.resInterceptor) {  //可以删除，没有接口拦截器
@@ -145,34 +171,50 @@ class HttpRequest {
           // this.showLoading = DEFAULT_LOADING
           */
         resolve(res);
+
       });
+
     });
+
   }
 
-  toQueryString(obj:any) {
+  toQueryString (obj:any) {
+
     return obj
       ? '?' +
         Object.keys(obj)
           .sort()
           .map(key => {
+
             const val = obj[key];
+
             if (Array.isArray(val)) {
+
               return val
                 .sort()
                 .map(function (val2) {
+
                   return key + '=' + val2;
+
                 })
                 .join('&');
+
             }
+
             return key + '=' + val;
+
           })
           .join('&')
       : '';
+
   }
 
-  get<T>(options:customRequest,url:string): Promise<T>{
+  get<T> (options:customRequest, url:string): Promise<T>{
+
     if (options) {
+
       url += http.toQueryString(options);
+
     }
     const config = Object.assign(
       {},
@@ -181,10 +223,14 @@ class HttpRequest {
         options
       },
     );
+
+
     return this.request({...config, method: 'GET'});
+
   }
 
-  post<T>(options:customRequest,url:string): Promise<T>{
+  post<T> (options:customRequest, url:string): Promise<T>{
+
     const config = Object.assign(
       {},
       {
@@ -192,8 +238,12 @@ class HttpRequest {
         data: options,
       }
     );
-    return this.request({...config,method: 'POST'});
+
+
+    return this.request({...config, method: 'POST'});
+
   }
+
 }
 
 const http = new HttpRequest({

@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const Resume =()=>{
+const Resume = () => {
+
   return (
     <div className='root-container'>
       <div className='container test-bg'>
@@ -13,9 +14,10 @@ const Resume =()=>{
             侧边栏
           </div>
         </div>
-      </div> 
+      </div>
     </div>
   );
-}
+
+};
 
 export default Resume;

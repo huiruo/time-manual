@@ -1,47 +1,49 @@
 import React, { useState } from 'react';
 import { Layout, Breadcrumb } from 'antd';
-import NavMenu from '@/layout/navMenu'
-import './index.scss'
+import NavMenu from '@/layout/navMenu';
+import './index.scss';
 
 const { Footer, Sider } = Layout;
 
-interface layoutContainerType{
-  children:React.ReactElement,
-  header:React.ReactElement,
-  routesConfig:any
+interface layoutContainerType {
+  children: React.ReactElement,
+  header: React.ReactElement,
+  routesConfig: any
 }
 
-const LayoutContainer = (props:layoutContainerType) => {
+const LayoutContainer = (props: layoutContainerType) => {
 
   const [collapsed, setCollapsed] = useState<boolean>(false);
 
-  const { children,header,routesConfig } = props
+  const { children, header, routesConfig } = props;
 
-  const onCollapse = (collapsed:boolean) => {
+  const onCollapse = (collapsed: boolean) => {
+
     setCollapsed(collapsed);
+
   };
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
       {header}
       <Layout>
-        <div className={collapsed?'layout-blank-hidden':'layout-blank'}>
+        <div className={collapsed ? 'layout-blank-hidden' : 'layout-blank'}>
         </div>
 
-        <div style={{zIndex:'99',paddingTop:'3.6rem'}} className='layout-sider'>
+        <div style={{ zIndex: '99', paddingTop: '3.6rem' }} className='layout-sider'>
           <Sider
-           width={'20.8rem'}
-           collapsedWidth="4.8rem"
-           className='layout-sider-content'
-           collapsible
-           collapsed={collapsed}
-           onCollapse={onCollapse}
+            width={'20.8rem'}
+            collapsedWidth='4.8rem'
+            className='layout-sider-content'
+            collapsible
+            collapsed={collapsed}
+            onCollapse={onCollapse}
           >
-            <NavMenu routesConfig={routesConfig}/>
+            <NavMenu routesConfig={routesConfig} />
           </Sider>
         </div>
 
-        <div className='layout-main-container' style={{overflow: 'auto'}}>
+        <div className='layout-main-container' style={{ overflow: 'auto' }}>
           <Layout className='breadcrumb-content'>
             <Breadcrumb>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
@@ -58,7 +60,8 @@ const LayoutContainer = (props:layoutContainerType) => {
         </div>
       </Layout>
     </Layout>
-  )
-}
+  );
+
+};
 
 export default LayoutContainer;

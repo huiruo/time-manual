@@ -5,6 +5,7 @@ import MomentsContent from './moments-content';
 import './index.scss';
 
 const Moments = () => {
+
   return (
     <div className='root-container'>
       <Header />
@@ -21,6 +22,7 @@ const Moments = () => {
       <Footer />
     </div>
   );
+
 };
 
 export default Moments;

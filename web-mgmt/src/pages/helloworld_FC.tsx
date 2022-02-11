@@ -1,6 +1,10 @@
 import React from 'react';
 
-const App = () => {
+interface testType {
+  test: string;
+}
+
+const App: React.FC<testType> = ({ test }) => {
 
   return (
     <div>

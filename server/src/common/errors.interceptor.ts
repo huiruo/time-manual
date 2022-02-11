@@ -24,6 +24,5 @@ export class ErrorsInterceptor implements NestInterceptor {
         message: `出现了意外错误：${error.toString()}`
         });
     }));
-  );
   }
 }

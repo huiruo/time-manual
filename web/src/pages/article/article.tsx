@@ -6,6 +6,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import timeManualApi from '@/services/timeManualApi';
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import './index.scss';
 
 const markdown = `Here is some JavaScript code:
 
@@ -30,47 +31,65 @@ const Article = () => {
   const [articles, setArticles] = useState<articleType[]>([]);
 
   const queryArticleUtil = async (currentPage: number, pageSize: number) => {
+
     const data = {
       currentPage,
       pageSize,
     };
 
     try {
+
       const res = await timeManualApi.queryArticles(data);
       // setTimeout(() => {
+
       if (res.code === 200) {
+
         console.log('文章返回_res', res);
         const { totalCount, result } = res.data;
+
         setArticles(result);
         // const { totalCount, result } = res.data;
         // setShowLoading(false);
         // setMoments(result);
         // setTotalCount(totalCount);
+
       } else {
+
         console.log('请求失败' + res.msg);
+
       }
+
     } catch (error) {
+
       console.log('请求文章失败', error);
+
     }
+
   };
 
   useEffect(() => {
-    console.log('test');
+
     queryArticleUtil(1, 10);
+
   }, []);
 
   console.log('articles:', articles);
 
   return (
-    <div>
-      {articles.map((item) => {
+    <>
+      {articles.map((item, index) => {
+
         return (
-          <div key={item.id}>
+          <div key={item.id} className='article-item'>
+            <div>测试:{index + 1}</div>
             <ReactMarkdown
               children={item.content}
               components={{
                 code({ node, inline, className, children, ...props }) {
+
                   const match = /language-(\w+)/.exec(className || '');
+
+
                   return !inline && match ? (
                     <SyntaxHighlighter
                       children={String(children).replace(/\n$/, '')}
@@ -84,13 +103,17 @@ const Article = () => {
                       {children}
                     </code>
                   );
+
                 }
               }}
             />
           </div>
         );
+
       })}
-    </div>);
+    </>
+  );
+
 };
 
 export default Article;

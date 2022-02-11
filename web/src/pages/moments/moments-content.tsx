@@ -16,6 +16,7 @@ interface momentType {
 }
 
 const MomentsContent = () => {
+
   const [moments, setMoments] = useState<momentType[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [showLoading, setShowLoading] = useState<boolean>(false);
@@ -24,52 +25,78 @@ const MomentsContent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const queryUtil = async (currentPage: number, pageSize: number) => {
+
     const data = {
       currentPage,
       pageSize,
     };
 
     if (!showLoading) {
+
       setShowLoading(true);
+
     }
     try {
+
       const res = await timeManualApi.queryMoments(data);
       // setTimeout(() => {
+
       if (res.code === 200) {
+
         const { totalCount, result } = res.data;
+
         setShowLoading(false);
         setMoments(result);
         setTotalCount(totalCount);
+
       } else {
+
         console.log('请求失败' + res.msg);
+
       }
       // }, 1000);
+
     } catch (error) {
+
       console.log('请求错误');
       setShowLoading(false);
+
     }
+
   };
 
   useEffect(() => {
+
     const hasPage = searchParams.has('page');
+
     if (hasPage) {
+
       const page = searchParams.get('page') as any;
+
       if (page) {
+
         const pageNum = parseInt(page);
         const page_parm = isNaN(pageNum) ? 1 : pageNum;
+
         setPageCurrent(page_parm);
         queryUtil(page_parm, 10);
+
       }
+
     } else {
+
       setPageCurrent(1);
       queryUtil(1, 10);
+
     }
+
   }, []);
 
   return (
     <div className='moments-content'>
       <div>
         {moments.map((item) => {
+
           return (
             <div key={item.id} className='moment-card'>
               <div>{item.content}</div>
@@ -85,6 +112,7 @@ const MomentsContent = () => {
               </div>
             </div>
           );
+
         })}
       </div>
 
@@ -94,12 +122,15 @@ const MomentsContent = () => {
         total={totalCount}
         current={pageCurrent}
         onChange={(page: number, pageSize = 10) => {
+
           setSearchParams({ page: page.toString() });
           queryUtil(page, pageSize);
+
         }}
       />
     </div>
   );
+
 };
 
 export default MomentsContent;

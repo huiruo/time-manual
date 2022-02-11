@@ -46,48 +46,70 @@ interface PaginationType {
 }
 
 const Pagination: React.FC<PaginationType> = (props) => {
+
   const [curentPage, setCurentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number[]>([1]);
 
   const { total, pagesize = 10, onChange, current } = props;
 
   useEffect(() => {
+
     if (current) {
+
       setCurentPage(current);
+
     }
+
   }, [current]);
 
   useEffect(() => {
+
     const pages = Math.floor((total + pagesize - 1) / pagesize);
     const totalPagesArr: number[] = [];
+
     for (let index = 0; index < pages; index++) {
+
       totalPagesArr.push(index + 1);
+
     }
 
     setTotalPages(totalPagesArr);
+
   }, [total]);
 
   const onPrePage = () => {
+
     if (curentPage !== 1) {
+
       setCurentPage(curentPage - 1);
       onChange(curentPage - 1, pagesize);
+
     }
+
   };
 
   const onNextPage = () => {
+
     if (curentPage !== totalPages.length) {
+
       onChange(curentPage + 1, pagesize);
       setCurentPage(curentPage + 1);
+
     }
+
   };
 
   const onShowSizeChange = (page: number) => {
+
     setCurentPage(page);
     onChange(page, pagesize);
+
   };
 
   if (!total) {
+
     return null;
+
   }
 
   return (
@@ -103,6 +125,7 @@ const Pagination: React.FC<PaginationType> = (props) => {
       </button>
 
       {totalPages.map((item) => {
+
         return (
           <button
             key={item}
@@ -117,6 +140,7 @@ const Pagination: React.FC<PaginationType> = (props) => {
             {item}
           </button>
         );
+
       })}
 
       <button
@@ -132,6 +156,7 @@ const Pagination: React.FC<PaginationType> = (props) => {
       </button>
     </div>
   );
+
 };
 
 export default Pagination;

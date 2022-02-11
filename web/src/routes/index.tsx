@@ -34,21 +34,28 @@ const routesConfig = [
 ];
 
 const RoutesContainer = () => {
+
   const generateRoute = (routes: any) => {
+
     return routes.map((route: any) => {
+
       if (route.children !== undefined && route.children.length) {
+
         return (
           <Route key={route.path} path={route.path}>
             {generateRoute(route.children)}
             <Route index element={route.element} />
           </Route>
         );
+
       }
 
       return (
         <Route key={route.path} path={route.path} element={route.element} />
       );
+
     });
+
   };
 
   return (
@@ -61,6 +68,7 @@ const RoutesContainer = () => {
       </Routes>
     </HashRouter>
   );
+
 };
 
 export default RoutesContainer;

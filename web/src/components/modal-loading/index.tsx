@@ -2,6 +2,7 @@ import React from 'react';
 import './modal-loading.scss';
 
 const ModalLoading = () => {
+
   return (
     <div className='modal-loading-content'>
       <div className='spin spin-spinning'>
@@ -14,6 +15,7 @@ const ModalLoading = () => {
       </div>
     </div>
   );
+
 };
 
 export default ModalLoading;

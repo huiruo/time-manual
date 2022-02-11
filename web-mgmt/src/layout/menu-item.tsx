@@ -1,12 +1,13 @@
 import React from 'react';
 
-const MenuItem = ()=>{
+const MenuItem = () => {
 
-  return(
+  return (
     <>
       MenuItem
     </>
-  )
-}
+  );
+
+};
 
 export default MenuItem;

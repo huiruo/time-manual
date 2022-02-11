@@ -6,23 +6,24 @@ import React from 'react';
 import Moments from '../pages/moments/index';
 import MomentsMgmt from '@/pages/moments-mgmt/index';
 import Article from '../pages/article/index';
+import ArticleMgmt from '@/pages/article-mgmt/index';
 import Resume from '../pages/resume/index';
 import NotFound from '../pages/not-found/index';
 import {
 	HashRouter,
-  Routes,
-  Route
-} from "react-router-dom";
-import Header from '@/components/header'
-import Layout from '@/layout/index'
+	Routes,
+	Route
+} from 'react-router-dom';
+import Header from '@/components/header';
+import Layout from '@/layout/index';
 
 const routesConfig = [
 	{
 		path: 'article',
-		title:'文章管理',
+		title: '发文章',
 		element: <Article />,
-		icon:'FileMarkdownOutlined',
-		children:[
+		icon: 'FileMarkdownOutlined',
+		children: [
 			// {
 			// 	path: 'articleTest1',
 			// 	url: 'article/articleTest1',
@@ -38,55 +39,69 @@ const routesConfig = [
 		]
 	},
 	{
+		path: 'article-mgmt',
+		title: '文章管理',
+		element: <ArticleMgmt />,
+		icon: 'ClockCircleOutlined'
+	},
+	{
 		path: 'moments',
-		title:'发动态',
+		title: '发动态',
 		element: <Moments />,
-		icon:'ClockCircleOutlined'
+		icon: 'ClockCircleOutlined'
 	},
 	{
 		path: 'moments-mgmt',
-		title:'动态管理',
+		title: '动态管理',
 		element: <MomentsMgmt />,
-		icon:'ClockCircleOutlined'
+		icon: 'ClockCircleOutlined'
 	},
 	{
 		path: 'resume',
-		title:'个人管理',
+		title: '个人管理',
 		element: <Resume />,
-		icon:'UserOutlined'
+		icon: 'UserOutlined'
 	}
-]
+];
 
 const RoutesContainer = () => {
-	const generateRoute = (routes:any)=>{
-		return routes.map((route:any)=>{
-			if (route.children!==undefined && route.children.length) {
-				return ( 
+
+	const generateRoute = (routes: any) => {
+
+		return routes.map((route: any) => {
+
+			if (route.children !== undefined && route.children.length) {
+
+				return (
 					<Route key={route.path} path={route.path}>
 						{generateRoute(route.children)}
 						<Route index element={route.element} />
 					</Route>
-				)
+				);
+
 			}
 
-			return <Route key={route.path} path={route.path} element={route.element} />
-		})
-	}
+			return <Route key={route.path} path={route.path} element={route.element} />;
+
+		});
+
+	};
 
 	return (
 		<HashRouter>
 			<Layout routesConfig={routesConfig} header={<Header />}>
 				<Routes>
-					<Route path="/">
-						{ generateRoute(routesConfig) }
+					<Route path='/'>
+						{generateRoute(routesConfig)}
 					</Route>
 					{/* <Route index element={<Home />} /> */}
 					<Route index element={<Moments />} />
-					<Route path="*" element={<NotFound />} />
+					<Route path='*' element={<NotFound />} />
 				</Routes>
 			</Layout>
 		</HashRouter>
-	)
+	);
+
 };
 
 export default RoutesContainer;
