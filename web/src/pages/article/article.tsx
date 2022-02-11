@@ -15,10 +15,19 @@ console.log('It works!')
 `;
 const input = '# This is a header\n\nAnd this is a paragraph';
 
+interface articleType {
+  id: number;
+  content: string;
+  tag: string;
+  update_time: string;
+  created_time: string;
+}
+
 const Article = () => {
 
   // const [markdownContent, setMarkdownContent] = useState(input);
   const [markdownContent, setMarkdownContent] = useState(markdown);
+  const [articles, setArticles] = useState<articleType[]>([]);
 
   const queryArticleUtil = async (currentPage: number, pageSize: number) => {
     const data = {
@@ -31,6 +40,8 @@ const Article = () => {
       // setTimeout(() => {
       if (res.code === 200) {
         console.log('文章返回_res', res);
+        const { totalCount, result } = res.data;
+        setArticles(result);
         // const { totalCount, result } = res.data;
         // setShowLoading(false);
         // setMoments(result);
@@ -48,31 +59,37 @@ const Article = () => {
     queryArticleUtil(1, 10);
   }, []);
 
+  console.log('articles:', articles);
+
   return (
     <div>
-      <div>
-        <ReactMarkdown
-          children={markdownContent}
-          components={{
-            code({ node, inline, className, children, ...props }) {
-              const match = /language-(\w+)/.exec(className || '');
-              return !inline && match ? (
-                <SyntaxHighlighter
-                  children={String(children).replace(/\n$/, '')}
-                  style={docco}
-                  language={match[1]}
-                  PreTag='div'
-                  {...props}
-                />
-              ) : (
-                <code className={className} {...props}>
-                  {children}
-                </code>
-              );
-            }
-          }}
-        />
-      </div>
+      {articles.map((item) => {
+        return (
+          <div key={item.id}>
+            <ReactMarkdown
+              children={item.content}
+              components={{
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || '');
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      children={String(children).replace(/\n$/, '')}
+                      style={docco}
+                      language={match[1]}
+                      PreTag='div'
+                      {...props}
+                    />
+                  ) : (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                }
+              }}
+            />
+          </div>
+        );
+      })}
     </div>);
 };
 
