@@ -8,13 +8,6 @@ interface resType {
 }
 
 const tmMgmtApi = {
-  onTestReq (data:any){
-
-    const url = `${ manualApiUrl }/moments/122`;
-
-    return http.get<resType>(data, url);
-
-  },
 
   addMoments (data:any){
 
@@ -40,9 +33,33 @@ const tmMgmtApi = {
 
   },
 
+  editArticle (data:any){
+
+    const url = `${ manualApiUrl }/article/edit`;
+
+    return http.post<resType>(data, url);
+
+  },
+
   queryArticles (data:any){
 
     const url = `${ manualApiUrl }/article/query`;
+
+    return http.post<resType>(data, url);
+
+  },
+
+  queryArticleById (data:any){
+
+    const url = `${ manualApiUrl }/article/query/id`;
+
+    return http.post<resType>(data, url);
+
+  },
+
+  deleteArticle (data:any){
+
+    const url = `${ manualApiUrl }/article/delete`;
 
     return http.post<resType>(data, url);
 

@@ -46,3 +46,10 @@
     float:left
   }
 }
+
+.table-operation-row{
+  display: flex;
+  .operation-btn{
+    margin-right: .6rem;
+  }
+}

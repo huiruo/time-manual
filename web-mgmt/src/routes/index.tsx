@@ -1,8 +1,4 @@
 import React from 'react';
-// import Home from '../pages/home/index';
-// import ArticleTest1 from '../pages/article-test1/index';
-// import ArticleTest2 from '../pages/article-test2/index';
-// import PrivateRoute from './private-route'
 import Moments from '../pages/moments/index';
 import MomentsMgmt from '@/pages/moments-mgmt/index';
 import Article from '../pages/article/index';
@@ -23,20 +19,7 @@ const routesConfig = [
 		title: '发文章',
 		element: <Article />,
 		icon: 'FileMarkdownOutlined',
-		children: [
-			// {
-			// 	path: 'articleTest1',
-			// 	url: 'article/articleTest1',
-			// 	title:'测试子集1',
-			// 	element: <ArticleTest1 />,
-			// },
-			// {
-			// 	path: 'articleTest2',
-			// 	url: 'article/articleTest2',
-			// 	title:'测试子集2',
-			// 	element: <ArticleTest2 />,
-			// },
-		]
+		children: []
 	},
 	{
 		path: 'article-mgmt',

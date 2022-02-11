@@ -9,27 +9,42 @@ export class ArticleController {
     @Inject(ArticleService) private readonly articleService: ArticleService,
   ) {}
 
-  // http://localhost:3800/article/20
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Result> {
-    console.log('findone---->');
-    const data = await this.articleService.findOne(id);
-    return { code: 200, message: '查询成功', data };
-  }
-
   @Post('add')
-  async addMomonts(@Body() body: Article) {
+  async addArticle(@Body() body: Article) {
     console.log('add article', body);
     const data = await this.articleService.addArticle(body);
     return data;
   }
 
+  @Post('edit')
+  async editArticle(@Body() body: Article) {
+    console.log('edit article', body);
+    const data = await this.articleService.editArticle(body);
+    return data;
+  }
+
   @Post('query')
   async queryArticles(@Body() body) {
-    console.log('queryArticles', body);
     const currentPage: number = body.currentPage;
     const pageSize: number = body.pageSize;
     const data = await this.articleService.queryArticles(currentPage, pageSize);
     return data;
+  }
+
+  @Post('query/id')
+  async queryArticleById(@Body() body) {
+    const id:string = body.id
+    const data = await this.articleService.queryArticleById(id);
+    return data;
+  }
+
+  @Post('delete')
+  async deleteArticle(@Body() body){
+    const id:string = body.id
+
+    const data = await this.articleService.deleteArticle(id);
+
+    return data;
+
   }
 }
