@@ -7,16 +7,16 @@ const { TextArea } = Input;
 
 const Moments = () => {
   const [content, setContent] = useState<string>('');
-  const [label, setLabel] = useState<string>('');
+  const [tag, setTag] = useState<string>('');
 
   const setContentUtil = (e: any) => {
     const val = e.target.value;
     setContent(val);
   };
 
-  const setLabelUtil = (e: any) => {
+  const setTagUtil = (e: any) => {
     const val = e.target.value;
-    setLabel(val);
+    setTag(val);
   };
 
   const onSubmit = async () => {
@@ -27,7 +27,7 @@ const Moments = () => {
 
     const data = {
       content: content,
-      label: label,
+      tag: tag,
     };
 
     console.log('req_parm', data);
@@ -37,7 +37,7 @@ const Moments = () => {
       setTimeout(() => {
         message.warning('发布成功');
         setContent('');
-        setLabel('');
+        setTag('');
       }, 600);
     } else {
       message.error('发布失败:' + res.msg);
@@ -65,8 +65,8 @@ const Moments = () => {
         <div className='moments-item'>
           <div className='moments-item-name'>标签：</div>
           <Input
-            value={label}
-            onChange={setLabelUtil}
+            value={tag}
+            onChange={setTagUtil}
             placeholder='定义什么标签' />
         </div>
 

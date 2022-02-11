@@ -1,5 +1,5 @@
-import React,{ FC, useEffect, useState } from 'react';
-import { Link,useLocation } from 'react-router-dom'
+import React, { FC, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu } from 'antd';
 import {
   FileMarkdownOutlined,
@@ -10,70 +10,70 @@ import {
 
 const { SubMenu } = Menu;
 
-interface menuItemType{
-  path:string
-  url?:string
-  title?:string
-  children?:any[]
-  element:React.ReactElement,
-  icon?:string
+interface menuItemType {
+  path: string
+  url?: string
+  title?: string
+  children?: any[]
+  element: React.ReactElement,
+  icon?: string
 }
 
-interface navMenu{
-  routesConfig:menuItemType[]
+interface navMenu {
+  routesConfig: menuItemType[]
 }
 
-const NavMenu: FC<navMenu> = ({routesConfig}) => {
+const NavMenu: FC<navMenu> = ({ routesConfig }) => {
 
-  const [selectedKeys,setSelectedKeys] = useState<string[]>([])
-  const { pathname } = useLocation()
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const { pathname } = useLocation();
 
-  const renderIcon = (iconName:string|undefined)=>{
+  const renderIcon = (iconName: string | undefined) => {
     switch (iconName) {
       case 'FileMarkdownOutlined':
-        return <FileMarkdownOutlined />
+        return <FileMarkdownOutlined />;
       case 'ClockCircleOutlined':
-        return <ClockCircleOutlined />
+        return <ClockCircleOutlined />;
       case 'UserOutlined':
-        return <UserOutlined />
+        return <UserOutlined />;
       default:
-        return <FileOutlined />
+        return <FileOutlined />;
     }
-  }
+  };
 
-  useEffect(()=>{
-    setSelectedKeys([pathname])
-  },[pathname])
+  useEffect(() => {
+    setSelectedKeys([pathname]);
+  }, [pathname]);
 
-  const traverseRouteTree = (routeTree:menuItemType[]) => {
+  const traverseRouteTree = (routeTree: menuItemType[]) => {
     return routeTree.map((item, index) => {
-      const path = item.path
+      const path = item.path;
 
       if (item.children !== undefined && item.children.length) {
         return (
           <SubMenu title={item.title} key={index + item.path}>
             {traverseRouteTree(item.children)}
           </SubMenu>
-        )
+        );
       }
 
       return (
-        <Menu.Item title={item.title} key={'/'+item.path} icon={renderIcon(item.icon)}>
-          <Link to={item.url?item.url:path}>{item.title}</Link>
+        <Menu.Item title={item.title} key={'/' + item.path} icon={renderIcon(item.icon)}>
+          <Link to={item.url ? item.url : path}>{item.title}</Link>
         </Menu.Item>
-      )
-    })
-  }
+      );
+    });
+  };
 
-  return(
-			<Menu 
-        theme="dark"
-        selectedKeys={selectedKeys}
-        mode="inline"
-      >
-        {traverseRouteTree(routesConfig)}
-      </Menu>
-  )
-}
+  return (
+    <Menu
+      theme='dark'
+      selectedKeys={selectedKeys}
+      mode='inline'
+    >
+      {traverseRouteTree(routesConfig)}
+    </Menu>
+  );
+};
 
 export default NavMenu;
