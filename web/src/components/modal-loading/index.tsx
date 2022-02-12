@@ -7,10 +7,10 @@ const ModalLoading = () => {
     <div className='modal-loading-content'>
       <div className='spin spin-spinning'>
         <span className='spin-dot spin-dot-spin'>
-          <i className='spin-dot-item'></i>
-          <i className='spin-dot-item'></i>
-          <i className='spin-dot-item'></i>
-          <i className='spin-dot-item'></i>
+          <i className='spin-dot-item' />
+          <i className='spin-dot-item' />
+          <i className='spin-dot-item' />
+          <i className='spin-dot-item' />
         </span>
       </div>
     </div>

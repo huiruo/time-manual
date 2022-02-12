@@ -14,28 +14,24 @@ interface layoutContainerType {
 const LayoutContainer = (props: layoutContainerType) => {
 
   const [collapsed, setCollapsed] = useState<boolean>(false);
-
   const { children, header, routesConfig } = props;
 
-  const onCollapse = (collapsed: boolean) => {
-
-    setCollapsed(collapsed);
-
+  const onCollapse = (collapsedParm: boolean) => {
+    setCollapsed(collapsedParm);
   };
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
       {header}
       <Layout>
-        <div className={collapsed ? 'layout-blank-hidden' : 'layout-blank'}>
-        </div>
+        <div className={collapsed ? 'layout-blank-hidden' : 'layout-blank'} />
 
         <div style={{ zIndex: '99', paddingTop: '3.6rem' }} className='layout-sider'>
           <Sider
             width={'20.8rem'}
             collapsedWidth='4.8rem'
             className='layout-sider-content'
-            collapsible
+            collapsible={true}
             collapsed={collapsed}
             onCollapse={onCollapse}
           >

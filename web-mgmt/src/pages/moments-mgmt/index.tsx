@@ -69,33 +69,25 @@ const MomentsMgmt = () => {
   const [dataSource, setDataSource] = useState<any[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
   const queryUtil = async (currentPage: number, pageSize: number) => {
-
     const data = {
       currentPage,
       pageSize,
     };
-
     const res = await tmMgmtApi.queryMoments(data);
-
     if (res.code === 200) {
-
-      const { totalCount, result } = res.data;
+      const { totalCount: tatal, result } = res.data;
 
       setDataSource(result);
-      setTotalCount(totalCount);
-
+      setTotalCount(tatal);
+      console.log('test');
     } else {
-
       message.error('请求失败' + res.msg);
-
     }
 
   };
 
   useEffect(() => {
-
     queryUtil(1, 10);
-
   }, []);
 
   return (

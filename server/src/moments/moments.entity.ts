@@ -16,7 +16,7 @@ export class Moments {
   @Column({
     comment: '内容',
   })
-    content: string;
+  content: string;
 
   @Column({
     comment: '链接',
@@ -26,7 +26,7 @@ export class Moments {
   @Column({
     comment: '图片',
   })
-    img_url: string;
+  img_url: string;
 
   @UpdateDateColumn({
     type: 'timestamp',
@@ -40,5 +40,5 @@ export class Moments {
     name: 'created_time',
     comment: '创建时间',
   })
-    created_time: Date;
+  created_time: Date;
 }

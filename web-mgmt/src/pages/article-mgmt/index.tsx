@@ -21,91 +21,65 @@ const ArticleMgmt = () => {
   const navigate = useNavigate();
 
   const queryUtil = async (currentPage: number, pageSize: number) => {
-
     const data = {
       currentPage,
       pageSize,
     };
-
     const res = await tmMgmtApi.queryArticles(data);
-
     if (res.code === 200) {
-
-      const { totalCount, result } = res.data;
-
+      const { totalCount: total, result } = res.data;
       console.log('文章查询:', result);
       setDataSource(result);
-      setTotalCount(totalCount);
+      setTotalCount(total);
 
     } else {
-
       message.error('请求失败' + res.msg);
-
     }
 
   };
 
   useEffect(() => {
-
     queryUtil(1, 10);
-
   }, []);
 
   const deleteUtil = async (id: number | string) => {
-
     console.log('deleteUtil');
     const data = {
       id
     };
 
     try {
-
       const res = await tmMgmtApi.deleteArticle(data);
-
       if (res.code === 200) {
-
         message.success('删除成功');
         setTimeout(() => {
-
           queryUtil(1, 10);
-
         }, 600);
 
       } else {
-
         message.error('请求失败' + res.msg);
-
       }
 
     } catch (error) {
-
       message.error('请求失败' + error);
-
     }
 
   };
 
   const onDelete = (record: any) => {
-
     console.log('key', record);
     setModalVisible(true);
     setOperationColumn(record);
-
   };
 
   const onEdit = (record: any) => {
-
     navigate(`/article?id=${record?.id}`);
-
   };
 
   const modalOkCallback = () => {
-
     setModalVisible(false);
     const id = operationColumn?.id as string;
-
     deleteUtil(id);
-
   };
 
   const columns = [
@@ -153,14 +127,14 @@ const ArticleMgmt = () => {
       title: '操作',
       dataIndex: 'operation',
       render: (text: any, record: any) =>
-        <div className='table-operation-row'>
-          <Button onClick={() => onEdit(record)} className='operation-btn' type='primary' size='small'>
-            编辑
-          </Button>
-          <Button onClick={() => onDelete(record)} danger type='primary' size='small'>
-            删除
-          </Button>
-        </div>
+      (<div className='table-operation-row'>
+        <Button onClick={() => onEdit(record)} className='operation-btn' type='primary' size='small'>
+          编辑
+        </Button>
+        <Button onClick={() => onDelete(record)} danger={true} type='primary' size='small'>
+          删除
+        </Button>
+      </div>)
     },
   ];
 
@@ -188,7 +162,7 @@ const ArticleMgmt = () => {
       </div>
       <Modal
         title='Vertically centered modal dialog'
-        centered
+        centered={true}
         visible={modalVisible}
         onOk={() => modalOkCallback()}
         onCancel={() => setModalVisible(false)}

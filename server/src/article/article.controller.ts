@@ -7,7 +7,7 @@ import { Article } from './article.entity';
 export class ArticleController {
   constructor(
     @Inject(ArticleService) private readonly articleService: ArticleService,
-  ) {}
+  ) { }
 
   @Post('add')
   async addArticle(@Body() body: Article) {
@@ -33,14 +33,14 @@ export class ArticleController {
 
   @Post('query/id')
   async queryArticleById(@Body() body) {
-    const id:string = body.id
+    const id: string = body.id
     const data = await this.articleService.queryArticleById(id);
     return data;
   }
 
   @Post('delete')
-  async deleteArticle(@Body() body){
-    const id:string = body.id
+  async deleteArticle(@Body() body) {
+    const id: string = body.id
 
     const data = await this.articleService.deleteArticle(id);
 

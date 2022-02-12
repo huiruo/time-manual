@@ -10,40 +10,32 @@ const Moments = () => {
 
   const [content, setContent] = useState<string>('');
   const [shareUrl, setShareUrl] = useState<string>('');
-  const [imgUrl, setImgUrl] = useState<string>('');
+  // const [imgUrl, setImgUrl] = useState<string>('');
 
   const setContentUtil = (e: any) => {
-
     const val = e.target.value;
-
     setContent(val);
-
   };
 
   const setShareUrlUtil = (e: any) => {
-
     const val = e.target.value;
-
     setShareUrl(val);
-
   };
 
+  /*
   const setImgUrlUtil = (val: any) => {
-
-    console.log('val');
+    console.log('val', imgUrl);
     setImgUrl(val);
-
   };
+  */
 
   const onSubmit = async () => {
-
     if (!content) {
-
       message.warning('内容不能为空');
 
       return;
-
     }
+
     const img_url: string[] = [];
     /*
     // test:
@@ -57,31 +49,24 @@ const Moments = () => {
     const img_url_json:string = '"'+JSON.stringify(img_url)+'"'
     console.log('JSON.stringify:',img_url_json)
     */
-
     const data = {
       content: content,
       share_url: shareUrl,
       img_url: img_url
     };
-
     console.log('req_parm', data);
+
     const res = await tmMgmtApi.addMoments(data);
-
     if (res.code === 200) {
-
       setTimeout(() => {
-
         message.warning('发布成功');
         setContent('');
         setShareUrl('');
         // setImgUrl('')
-
       }, 600);
 
     } else {
-
       message.error('发布失败:' + res.msg);
-
     }
 
   };

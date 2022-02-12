@@ -8,7 +8,7 @@ export class ArticleService {
   constructor(
     @InjectRepository(Article)
     private readonly articleRepo: Repository<Article>,
-  ) {}
+  ) { }
 
   public async addArticle(article: Article) {
 
@@ -36,7 +36,7 @@ export class ArticleService {
 
   public async editArticle(article: Article) {
 
-    const { content, tag ,id } = article;
+    const { content, tag, id } = article;
 
     const row = {
       content: content,
@@ -47,9 +47,9 @@ export class ArticleService {
 
     try {
 
-      const result = await this.articleRepo.update(id,row);
+      const result = await this.articleRepo.update(id, row);
 
-      console.log('编辑 result:',result);
+      console.log('编辑 result:', result);
 
       return { code: 200, msg: '编辑成功', data: null };
 
@@ -72,9 +72,8 @@ export class ArticleService {
     }
 
     try {
-      const sql = `select * from article order by created_time desc limit ${
-        (currentPage - 1) * pageSize
-      },${pageSize}`;
+      const sql = `select * from article order by created_time desc limit ${(currentPage - 1) * pageSize
+        },${pageSize}`;
       const result = await this.articleRepo.query(sql);
       const data = {
         totalCount,
@@ -88,15 +87,15 @@ export class ArticleService {
     }
   }
 
-  public async deleteArticle(id:number|string){
+  public async deleteArticle(id: number | string) {
 
     try {
 
-      const sql:string = `delete from article where id = ${id}` 
+      const sql: string = `delete from article where id = ${id}`
 
       const result = await this.articleRepo.query(sql);
 
-      return { code: 200, msg: '查询成功', data:null };
+      return { code: 200, msg: '查询成功', data: null };
 
     } catch (error) {
 
@@ -106,19 +105,19 @@ export class ArticleService {
 
   }
 
-  public async queryArticleById(id:number|string){
+  public async queryArticleById(id: number | string) {
 
     try {
 
-      const sql:string = `select * from article where id = ${id}` 
+      const sql: string = `select * from article where id = ${id}`
 
       const result = await this.articleRepo.query(sql);
 
-      if(result.length>=1){
+      if (result.length >= 1) {
 
-        return { code: 200, msg: '查询成功', data:result[0] };
+        return { code: 200, msg: '查询成功', data: result[0] };
 
-      }else{
+      } else {
 
         return { code: 500, msg: 'id不存在', data: [] };
 

@@ -21,73 +21,53 @@ const MomentsContent = () => {
   const [totalCount, setTotalCount] = useState<number>(0);
   const [showLoading, setShowLoading] = useState<boolean>(false);
   const [pageCurrent, setPageCurrent] = useState<number>(0);
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   const queryUtil = async (currentPage: number, pageSize: number) => {
-
     const data = {
       currentPage,
       pageSize,
     };
 
     if (!showLoading) {
-
       setShowLoading(true);
-
     }
-    try {
 
+    try {
       const res = await timeManualApi.queryMoments(data);
       // setTimeout(() => {
-
       if (res.code === 200) {
-
-        const { totalCount, result } = res.data;
-
+        const { totalCount: total, result } = res.data;
         setShowLoading(false);
         setMoments(result);
-        setTotalCount(totalCount);
+        setTotalCount(total);
 
       } else {
-
         console.log('请求失败' + res.msg);
-
       }
       // }, 1000);
-
     } catch (error) {
 
       console.log('请求错误');
       setShowLoading(false);
-
     }
 
   };
 
   useEffect(() => {
-
     const hasPage = searchParams.has('page');
-
     if (hasPage) {
-
       const page = searchParams.get('page') as any;
-
       if (page) {
-
         const pageNum = parseInt(page);
         const page_parm = isNaN(pageNum) ? 1 : pageNum;
-
         setPageCurrent(page_parm);
         queryUtil(page_parm, 10);
-
       }
 
     } else {
-
       setPageCurrent(1);
       queryUtil(1, 10);
-
     }
 
   }, []);

@@ -8,13 +8,16 @@ import timeManualApi from '@/services/timeManualApi';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import './index.scss';
 
+/*
 const markdown = `Here is some JavaScript code:
 
 ~~~js
 console.log('It works!')
 ~~~
 `;
-const input = '# This is a header\n\nAnd this is a paragraph';
+*/
+
+// const input = '# This is a header\n\nAnd this is a paragraph';
 
 interface articleType {
   id: number;
@@ -26,51 +29,39 @@ interface articleType {
 
 const Article = () => {
 
-  // const [markdownContent, setMarkdownContent] = useState(input);
-  const [markdownContent, setMarkdownContent] = useState(markdown);
+  // const [markdownContent, setMarkdownContent] = useState(markdown);
   const [articles, setArticles] = useState<articleType[]>([]);
 
   const queryArticleUtil = async (currentPage: number, pageSize: number) => {
-
     const data = {
       currentPage,
       pageSize,
     };
 
     try {
-
       const res = await timeManualApi.queryArticles(data);
       // setTimeout(() => {
-
       if (res.code === 200) {
-
         console.log('文章返回_res', res);
         const { totalCount, result } = res.data;
-
         setArticles(result);
+        console.log('totalCount', totalCount);
         // const { totalCount, result } = res.data;
         // setShowLoading(false);
         // setMoments(result);
         // setTotalCount(totalCount);
-
       } else {
-
         console.log('请求失败' + res.msg);
-
       }
 
     } catch (error) {
-
       console.log('请求文章失败', error);
-
     }
 
   };
 
   useEffect(() => {
-
     queryArticleUtil(1, 10);
-
   }, []);
 
   console.log('articles:', articles);
@@ -86,9 +77,7 @@ const Article = () => {
               children={item.content}
               components={{
                 code({ node, inline, className, children, ...props }) {
-
                   const match = /language-(\w+)/.exec(className || '');
-
 
                   return !inline && match ? (
                     <SyntaxHighlighter

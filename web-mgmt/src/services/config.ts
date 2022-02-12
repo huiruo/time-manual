@@ -1,8 +1,6 @@
 
 const getManualApiUrl = () => {
-
     switch (process.env.APP_ENV) {
-
         case 'dev':
             console.log('getManualApiUrl_dev');
 
@@ -18,9 +16,7 @@ const getManualApiUrl = () => {
         default:
             // console.log('getManualApiUrl_default')
             return '/manualUrl';
-
-}
-
+    }
 };
 
 const manualApiUrl = getManualApiUrl();

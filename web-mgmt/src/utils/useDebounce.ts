@@ -14,25 +14,17 @@ const useDebounce = (fn: (args?: any) => void, delay: number, dep = []) => {
   const { current } = useRef({ fun: fn, timer: 0 });
 
   useEffect(() => {
-
     current.fun = fn;
-
   }, [fn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return useCallback((args?: any) => {
-
     if (current.timer) {
-
       clearTimeout(current.timer);
-
     }
 
     current.timer = window.setTimeout(() => {
-
       current.fun(args);
-
     }, delay);
-
   }, dep); // eslint-disable-line react-hooks/exhaustive-deps
 
 };

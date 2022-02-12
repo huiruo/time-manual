@@ -29,34 +29,30 @@ const NavMenu: FC<navMenu> = ({ routesConfig }) => {
   const { pathname } = useLocation();
 
   const renderIcon = (iconName: string | undefined) => {
-
     switch (iconName) {
-
       case 'FileMarkdownOutlined':
+
         return <FileMarkdownOutlined />;
       case 'ClockCircleOutlined':
+
         return <ClockCircleOutlined />;
       case 'UserOutlined':
+
         return <UserOutlined />;
       default:
+
         return <FileOutlined />;
-
     }
-
   };
 
   useEffect(() => {
-
     setSelectedKeys([pathname]);
-
   }, [pathname]);
 
   const traverseRouteTree = (routeTree: menuItemType[]) => {
 
     return routeTree.map((item, index) => {
-
       const path = item.path;
-
       if (item.children !== undefined && item.children.length) {
 
         return (
@@ -64,7 +60,6 @@ const NavMenu: FC<navMenu> = ({ routesConfig }) => {
             {traverseRouteTree(item.children)}
           </SubMenu>
         );
-
       }
 
       return (
@@ -72,7 +67,6 @@ const NavMenu: FC<navMenu> = ({ routesConfig }) => {
           <Link to={item.url ? item.url : path}>{item.title}</Link>
         </Menu.Item>
       );
-
     });
 
   };

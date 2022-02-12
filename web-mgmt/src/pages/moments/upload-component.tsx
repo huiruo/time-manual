@@ -2,20 +2,19 @@ import React, { useState } from 'react';
 import { Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
+/*
 function getBase64(file: any) {
-
   return new Promise((resolve, reject) => {
-
     const reader = new FileReader();
-
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
-
   });
 
 }
+*/
 
+/*
 const fileList_test = [
   {
     uid: '3',
@@ -50,15 +49,15 @@ const fileList_test = [
     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
   }
 ];
+*/
 
 const UploadComponent = () => {
 
-  const [previewVisible, setPreviewVisible] = useState<boolean>(false);
-  const [previewImage, setPreviewImage] = useState<string>('');
-  const [previewTitle, setPreviewTitle] = useState<string>('');
-  // const [fileList,setFileList] = useState<any[]>(fileList_test)
+  // const [previewVisible, setPreviewVisible] = useState<boolean>(false);
+  // const [previewImage, setPreviewImage] = useState<string>('');
+  // const [previewTitle, setPreviewTitle] = useState<string>('');
   const [fileList, setFileList] = useState<any[]>([]);
-  const [FileSend, setFileSend] = useState<any[]>([]);
+  // const [FileSend, setFileSend] = useState<any[]>([]);
 
   const propsUpload = {
     onRemove: (file: any) => {
@@ -108,7 +107,7 @@ const UploadComponent = () => {
 
       getData().then(data => {
 
-        setFileSend(data);
+        // setFileSend(data);
         console.log('getData:', data);
 
       });

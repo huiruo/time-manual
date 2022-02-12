@@ -5,6 +5,7 @@ import ArticleComponent from './article';
 import './index.scss';
 
 const Article = () => {
+
   return (
     <div className='root-container'>
       <Header />

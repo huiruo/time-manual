@@ -48,26 +48,20 @@ const routesConfig = [
 ];
 
 const RoutesContainer = () => {
-
 	const generateRoute = (routes: any) => {
-
 		return routes.map((route: any) => {
-
 			if (route.children !== undefined && route.children.length) {
 
 				return (
 					<Route key={route.path} path={route.path}>
 						{generateRoute(route.children)}
-						<Route index element={route.element} />
+						<Route index={true} element={route.element} />
 					</Route>
 				);
-
 			}
 
 			return <Route key={route.path} path={route.path} element={route.element} />;
-
 		});
-
 	};
 
 	return (
@@ -78,7 +72,7 @@ const RoutesContainer = () => {
 						{generateRoute(routesConfig)}
 					</Route>
 					{/* <Route index element={<Home />} /> */}
-					<Route index element={<Moments />} />
+					<Route index={true} element={<Moments />} />
 					<Route path='*' element={<NotFound />} />
 				</Routes>
 			</Layout>

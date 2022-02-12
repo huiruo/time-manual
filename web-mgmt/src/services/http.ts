@@ -46,13 +46,11 @@ class HttpRequest {
   // showLoading: boolean
 
   constructor (config: customRequest) {
-
     // this.baseUrl = 'http://localhost:3000'
     this.instance = axios.create(config);
     // this.showLoading = config.showLoading || DEFAULT_LOADING
-
     // 1.request拦截
-    this.instance.interceptors.request.use((config) => {
+    this.instance.interceptors.request.use((configParm) => {
 
       // console.log("request拦截=====>",config)
 
@@ -65,45 +63,30 @@ class HttpRequest {
       // }
       // token拦截
       /*
-          const token = localStorage.getItem('token')
-          if(token) {
-            config.headers.Authorization = token
-          }
-          */
-      return config;
-
-    },
-    (error) => {
-
+      const token = localStorage.getItem('token')
+      if(token) {
+        config.headers.Authorization = token
+      }
+      */
+      return configParm;
+    }, (error) => {
       return error;
-
-    }
-    );
+    });
 
     // 2.response 拦截,处理返回结果
     this.instance.interceptors.response.use(res => {
-
       // console.log("instance response 拦截,处理返回结果",res)
-      /*
-            setTimeout(() => {
-              this.loading?.close()
-            }, 1000)
-          */
       return res.data;
-
     },
     (error) => {
-
       console.log('instance response错误处理1:', error.response);
       console.log('instance response错误处理2:', error);
-      if(!error.response){
-
+      if (!error.response) {
         return {
           data: null,
           code: 408,
           msg:error
         };
-
       }
       const {status}=error.response;
       const errorReq:customRequest ={
@@ -112,15 +95,11 @@ class HttpRequest {
         msg:codeMessage.get(status)
       };
 
-
       return errorReq;
-
-    }
-    );
-
+    });
   }
-  getInsideConfig () {
 
+  getInsideConfig () {
     const config = {
       // baseURL: this.baseUrl,
       headers: {
@@ -128,17 +107,13 @@ class HttpRequest {
       }
     };
 
-
     return config;
-
   }
 
   request<T> (params: customRequest): Promise<T> {
-
     let config:customRequest;
     // 字符串
-
-    if(typeof params === 'string') {
+    if (typeof params === 'string') {
       // config = arguments[1] || {}
       // 处理url
       // config.url = arguments[0]
@@ -146,13 +121,10 @@ class HttpRequest {
       //   config.showLoading = arguments[2] || {}
       // }
     } else {
-
       config = params || {};
-
     }
 
     return new Promise((resolve) => {
-
       /*
         if (config.interceptor?.requestInterceptor) {  //可以删除，没有接口拦截器
           config = config.interceptor.requestInterceptor(config)
@@ -162,7 +134,6 @@ class HttpRequest {
         }
         */
       this.instance.request<any, T>(config).then((res) => {
-
         // console.log("this.instance.request-----res:",res)
         /*
           if (config.interceptor?.resInterceptor) {  //可以删除，没有接口拦截器
@@ -171,11 +142,8 @@ class HttpRequest {
           // this.showLoading = DEFAULT_LOADING
           */
         resolve(res);
-
       });
-
     });
-
   }
 
   toQueryString (obj:any) {
@@ -185,35 +153,26 @@ class HttpRequest {
         Object.keys(obj)
           .sort()
           .map(key => {
-
             const val = obj[key];
-
             if (Array.isArray(val)) {
 
               return val.sort()
                 .map(function (val2) {
 
                   return key + '=' + val2;
-
                 })
                 .join('&');
-
             }
 
             return key + '=' + val;
-
           })
           .join('&')
       : '';
-
   }
 
-  get<T> (options:customRequest, url:string): Promise<T>{
-
+  get<T> (options:customRequest, url:string): Promise<T> {
     if (options) {
-
       url += http.toQueryString(options);
-
     }
     const config = Object.assign(
       {},
@@ -223,13 +182,10 @@ class HttpRequest {
       },
     );
 
-
     return this.request({...config, method: 'GET'});
-
   }
 
-  post<T> (options:customRequest, url:string): Promise<T>{
-
+  post<T> (options:customRequest, url:string): Promise<T> {
     const config = Object.assign(
       {},
       {
@@ -238,16 +194,12 @@ class HttpRequest {
       }
     );
 
-
     return this.request({...config, method: 'POST'});
-
   }
-
 }
 
 const http = new HttpRequest({
   timeout: 30000,
-}
-);
+});
 
 export default http;

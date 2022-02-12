@@ -9,60 +9,46 @@ interface resType {
 
 const tmMgmtApi = {
 
-  addMoments (data:any){
-
+  addMoments (data:any) {
     const url = `${ manualApiUrl }/moments/add`;
 
     return http.post<resType>(data, url);
-
   },
 
-  queryMoments (data:any){
-
+  queryMoments (data:any) {
     const url = `${ manualApiUrl }/moments/query`;
 
     return http.post<resType>(data, url);
-
   },
 
-  addArticle (data:any){
-
+  addArticle (data:any) {
     const url = `${ manualApiUrl }/article/add`;
 
     return http.post<resType>(data, url);
-
   },
 
-  editArticle (data:any){
-
+  editArticle (data:any) {
     const url = `${ manualApiUrl }/article/edit`;
 
     return http.post<resType>(data, url);
-
   },
 
-  queryArticles (data:any){
-
+  queryArticles (data:any) {
     const url = `${ manualApiUrl }/article/query`;
 
     return http.post<resType>(data, url);
-
   },
 
-  queryArticleById (data:any){
-
+  queryArticleById (data:any) {
     const url = `${ manualApiUrl }/article/query/id`;
 
     return http.post<resType>(data, url);
-
   },
 
-  deleteArticle (data:any){
-
+  deleteArticle (data:any) {
     const url = `${ manualApiUrl }/article/delete`;
 
     return http.post<resType>(data, url);
-
   },
 };
 

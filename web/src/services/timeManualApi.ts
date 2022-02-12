@@ -8,31 +8,22 @@ interface resType {
 }
 
 const timeManualApi = {
-  onTestReq (data:any){
-
+  onTestReq (data:any) {
     const url = `${ manualApiUrl }/moments/122`;
 
-
     return http.get<resType>(data, url);
-
   },
 
-  queryMoments (data:any){
-
+  queryMoments (data:any) {
     const url = `${ manualApiUrl }/moments/query`;
 
-
     return http.post<resType>(data, url);
-
   },
 
-  queryArticles (data:any){
-
+  queryArticles (data:any) {
     const url = `${ manualApiUrl }/article/query`;
 
-
     return http.post<resType>(data, url);
-
   },
 };
 
