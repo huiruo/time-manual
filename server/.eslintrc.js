@@ -1,3 +1,8 @@
+
+const OFF = 0;
+const ERROR = 2;
+const WARN = 1;
+
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -23,14 +28,14 @@ module.exports = {
 
     // https://cloud.tencent.com/developer/chapter/12618
 
-    'jsx-quotes': [WARN, 'prefer-single'],
+    // 'jsx-quotes': [WARN, 'prefer-single'],
 
     'indent': [WARN, 2],
     indent: OFF,
 
     'quotes': [WARN, 'single'],
     // 'quotes': [WARN, 'double'],
-    quotes: [ERROR, 'single', {avoidEscape: true, allowTemplateLiterals: true}],
+    // quotes: [ERROR, 'single', {avoidEscape: true, allowTemplateLiterals: true}],
 
     // 语句强制分号结尾
     // "semi": [WARN, "never"],
@@ -86,6 +91,7 @@ module.exports = {
     // react code start
     // react code start
     // react code start
+    // /*
 
     // 每个定义了 setter 的属性设置一个 getter
     'accessor-pairs': OFF,
@@ -104,14 +110,6 @@ module.exports = {
     // 消除类型不安全的等式操作符
     eqeqeq: [ERROR, 'allow-null'],
 
-    /*
-    该规则有一个对象选项：
-    "before": true （默认）在关键字之前至少需要一个空格
-    "before": false 在关键字之前禁止使用空格
-    "after": true （默认）在关键字后至少需要一个空格
-    "after": false 在关键字后禁止使用空格
-    "overrides" 允许覆盖指定关键字的间距样式
-    */
     'keyword-spacing': [ERROR, {after: true, before: true}],
 
     // 此规则不允许按位运算符
@@ -154,5 +152,6 @@ module.exports = {
 
     // 此规则强制执行最大行长度以增加代码的可读性和可维护性
     'max-len': OFF,
+    // */
   },
 };

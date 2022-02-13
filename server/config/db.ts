@@ -40,8 +40,8 @@ const productConfig: TypeOrmModuleOptions = {
   synchronize: false,
 };
 
-//const config =process.env.NODE_ENV==='prod'?productConfig:localConfig;
-//远程连不上，写死本地数据库
-const config = process.env.NODE_ENV === 'dev' ? productConfig : localConfig;
+const config = process.env.NODE_ENV === 'prod' ? productConfig : localConfig;
+// 远程连不上，写死本地数据库
+// const config = process.env.NODE_ENV === 'dev' ? productConfig : localConfig;
 
 export default config;

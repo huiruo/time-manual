@@ -31,4 +31,4 @@ import { ArticleModule } from './article/article.module';
   controllers: [AppController, MomentsController, ArticleController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

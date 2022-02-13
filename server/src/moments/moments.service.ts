@@ -7,7 +7,7 @@ import { Moments } from './moments.entity';
 export class MomentsService {
   constructor(
     @InjectRepository(Moments) private readonly momentRepo: Repository<Moments>,
-  ) { }
+  ) {}
 
   public async findOneById(id: string): Promise<Moments> {
     console.log('根据ID查询单个信息:', id);
@@ -16,6 +16,7 @@ export class MomentsService {
     if (!userInfo) {
       throw new HttpException(`指定 id=${id} 数据不存在`, 404);
     }
+
     return userInfo;
   }
 
@@ -46,6 +47,7 @@ export class MomentsService {
     try {
       const result = await this.momentRepo.save(row);
       // console.log("add return",result)
+
       return { code: 200, msg: '查询成功', data: null };
     } catch (error) {
       // console.log("sql error:",error)
@@ -57,7 +59,7 @@ export class MomentsService {
   /*
   util method:
   */
-  private async addMonentUtil(moments: Moments) { }
+  // private async addMonentUtil(moments: Moments) {}
 
   public async queryMoments(currentPage: number, pageSize: number) {
     let totalCount = 0;
@@ -71,8 +73,9 @@ export class MomentsService {
     }
 
     try {
-      const sql = `select * from moments order by created_time desc limit ${(currentPage - 1) * pageSize
-        },${pageSize}`;
+      const sql = `select * from moments order by created_time desc limit ${
+        (currentPage - 1) * pageSize
+      },${pageSize}`;
       const result = await this.momentRepo.query(sql);
       const data = {
         totalCount,
@@ -80,6 +83,7 @@ export class MomentsService {
         pageSize,
         result,
       };
+
       return { code: 200, msg: '查询成功', data };
     } catch (error) {
       return { code: 500, msg: error.sqlMessage, data: null };

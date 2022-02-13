@@ -14,6 +14,11 @@ export class Article {
   id: number;
 
   @Column({
+    comment: '标题',
+  })
+  title: string;
+
+  @Column({
     comment: '内容',
   })
   content: string;

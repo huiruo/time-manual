@@ -17,6 +17,7 @@ const fromatValue = <T>(
   if (typeof value === 'undefined') {
     return defaultValue;
   }
+
   return callback(value);
 };
 

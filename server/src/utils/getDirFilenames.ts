@@ -39,7 +39,7 @@ export function getDirFilenames(options?: optionsType): string[] {
         if (fs.statSync(dirContentPath).isFile()) {
           if (dirContent.endsWith('.env')) {
             if (params.prefix) {
-              //计算前缀start
+              // 计算前缀start
               if (dirContent === '.env') {
                 results.push(`${params.prefix}${dirContent}`);
               } else {
@@ -49,7 +49,7 @@ export function getDirFilenames(options?: optionsType): string[] {
                   results.push(`config/env-dev/${dirContent}`);
                 }
               }
-              //计算前缀end
+              // 计算前缀end
             } else {
               results.push(dirContent);
             }

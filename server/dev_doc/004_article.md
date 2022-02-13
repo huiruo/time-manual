@@ -4,7 +4,10 @@
 CREATE TABLE `article` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `content` mediumtext NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `tag` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `readed` int NOT NULL DEFAULT 0,
+  `word_count` int NOT NULL DEFAULT 0,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
