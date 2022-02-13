@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import timeManualApi from '@/services/timeManualApi';
 import { formatUnixTime } from '@/utils/index';
-import Pagination from './pagination';
+import Pagination from '@/components/pagination';
 import ModalLoading from '@/components/modal-loading';
 import { useSearchParams } from 'react-router-dom';
 import './index.scss';
@@ -47,11 +47,9 @@ const MomentsContent = () => {
       }
       // }, 1000);
     } catch (error) {
-
       console.log('请求错误');
       setShowLoading(false);
     }
-
   };
 
   useEffect(() => {
@@ -69,7 +67,6 @@ const MomentsContent = () => {
       setPageCurrent(1);
       queryUtil(1, 10);
     }
-
   }, []);
 
   return (
@@ -102,10 +99,8 @@ const MomentsContent = () => {
         total={totalCount}
         current={pageCurrent}
         onChange={(page: number, pageSize = 10) => {
-
           setSearchParams({ page: page.toString() });
           queryUtil(page, pageSize);
-
         }}
       />
     </div>

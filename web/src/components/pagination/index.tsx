@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './index.scss';
 
 /*
 interface PaginationProps {
@@ -52,7 +53,6 @@ const Pagination: React.FC<PaginationType> = (props) => {
   const { total, pagesize = 10, onChange, current } = props;
 
   useEffect(() => {
-    console.log('test');
     if (current) {
       setCurentPage(current);
     }

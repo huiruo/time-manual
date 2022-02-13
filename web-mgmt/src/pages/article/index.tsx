@@ -16,6 +16,7 @@ const { TextArea } = Input;
 
 const Article = () => {
 
+  const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [tag, setTag] = useState<string>('');
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -25,6 +26,11 @@ const Article = () => {
   const setContentUtil = (e: any) => {
     const val = e.target.value;
     setContent(val);
+  };
+
+  const setTitleUtil = (e: any) => {
+    const val = e.target.value;
+    setTitle(val);
   };
 
   const setTagUtil = (e: any) => {
@@ -37,8 +43,7 @@ const Article = () => {
     if (res.code === 200) {
       setTimeout(() => {
         message.warning('发布成功');
-        setContent('');
-        setTag('');
+        onClear();
       }, 600);
 
     } else {
@@ -52,16 +57,19 @@ const Article = () => {
     if (res.code === 200) {
       setTimeout(() => {
         message.warning('编辑成功');
-        setContent('');
-        setTag('');
+        onClear();
         setIsEdit(false);
         navigate('/article', { replace: true });
       }, 600);
-
     } else {
       message.error('编辑失败:' + res.msg);
     }
+  };
 
+  const onClear = () => {
+    setContent('');
+    setTag('');
+    setTitle('');
   };
 
   const onSubmit = () => {
@@ -71,24 +79,34 @@ const Article = () => {
       return;
     }
 
+    if (!tag) {
+      message.warning('标签不能为空');
+
+      return;
+    }
+
+    if (!title) {
+      message.warning('标题不能为空');
+
+      return;
+    }
+
     if (isEdit) {
       const data = {
         id: searchParams.get('id') as string,
+        title,
         content: content,
         tag: tag,
       };
-      console.log('req_parm', data);
       editUtil(data);
-
     } else {
       const data = {
+        title,
         content: content,
         tag: tag,
       };
-      console.log('添加----->', data);
       addUtil(data);
     }
-
   };
 
   const queryArticleById = async (id: string) => {
@@ -97,8 +115,8 @@ const Article = () => {
     try {
       const res = await tmMgmtApi.queryArticleById(data);
       if (res.code === 200) {
-        console.log('查询详情', res);
-        const { content: contentData, tag: tagData } = res.data;
+        const { content: contentData, tag: tagData, title: titleParm } = res.data;
+        setTitle(titleParm);
         setContent(contentData);
         setTag(tagData);
 
@@ -120,7 +138,6 @@ const Article = () => {
     const hasArticleId = searchParams.has('id');
     if (hasArticleId) {
       const id = searchParams.get('id') as any;
-      console.log('useEffect----->', id);
       queryArticleById(id);
       setIsEdit(true);
 
@@ -142,6 +159,15 @@ const Article = () => {
       </div>
 
       <div className='page-children-content test-bg'>
+
+        <div className='moments-item'>
+          <div className='moments-item-name'>标题：</div>
+          <Input
+            value={title}
+            onChange={setTitleUtil}
+            placeholder='文章标题' />
+        </div>
+
         <div className='moments-item'>
           <div className='moments-item-name'>内容：</div>
           <TextArea
@@ -164,7 +190,7 @@ const Article = () => {
           <Button onClick={onSubmit} className='submit-btn' type='primary'>
             {isEdit ? '确定编辑' : '发 射'}
           </Button>
-          <Button>取 消</Button>
+          <Button onClick={onClear}>清 除</Button>
         </div>
       </div>
     </div>

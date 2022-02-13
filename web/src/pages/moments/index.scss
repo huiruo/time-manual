@@ -25,27 +25,4 @@
       }
     }
   }
-
-  .pagination-btn {
-    height: 4rem;
-    min-width: 3.6rem;
-    margin-right: 8px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    background-color: #fff;
-    border-radius: 0.3rem;
-    border: 1px solid #d9d9d9;
-  }
-  .btn-disabled {
-    cursor: not-allowed;
-  }
-  .font-word {
-    font-size: 1.4rem;
-  }
-  .pagination-active {
-    font-weight: 500;
-    background: #fff;
-    color: #1890ff;
-    border-color: #1890ff;
-  }
 }

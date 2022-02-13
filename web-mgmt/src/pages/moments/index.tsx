@@ -29,6 +29,11 @@ const Moments = () => {
   };
   */
 
+  const onClear = () => {
+    setContent('');
+    setShareUrl('');
+  };
+
   const onSubmit = async () => {
     if (!content) {
       message.warning('内容不能为空');
@@ -64,11 +69,9 @@ const Moments = () => {
         setShareUrl('');
         // setImgUrl('')
       }, 600);
-
     } else {
       message.error('发布失败:' + res.msg);
     }
-
   };
 
   return (
@@ -104,7 +107,7 @@ const Moments = () => {
 
         <div className='moments-item'>
           <Button onClick={onSubmit} className='submit-btn' type='primary'>发 射</Button>
-          <Button>取 消</Button>
+          <Button onClick={onClear}>清 除</Button>
         </div>
       </div>
     </div>
