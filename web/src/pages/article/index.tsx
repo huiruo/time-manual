@@ -10,7 +10,7 @@ const Article = () => {
     <div className='root-container'>
       <Header />
       <div className='container'>
-        <div className='main-title'>借助于通透、明净的事物得到快乐</div>
+        {/* <div className='main-title'>借助于通透、明净的事物得到快乐</div> */}
         <ArticleComponent />
       </div>
       <Footer />

@@ -1,14 +1,19 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import './index.scss';
 
 const Header = () => {
 
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const onToLogin = () => {
+    navigate('/login');
+  };
 
   return (
     <div className='header-container nav-div-shadow'>
-      <div className='header-content container'>
+      <div className='header-content'>
         <ul className='ul'>
           <li className='li'>
             <NavLink to='/' className={pathname === '/' ? 'nav-active' : ''}>
@@ -21,7 +26,8 @@ const Header = () => {
               to='/article'
               className={pathname === '/article' ? 'nav-active' : ''}
             >
-              文章
+              {/* 文章 */}
+              test
             </NavLink>
           </li>
 
@@ -43,6 +49,9 @@ const Header = () => {
             </NavLink>
           </li>
         </ul>
+        <div className='header-container-right'>
+          <span onClick={onToLogin}>登录</span>
+        </div>
       </div>
     </div>
   );

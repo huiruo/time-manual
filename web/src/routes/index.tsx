@@ -2,6 +2,7 @@ import React from 'react';
 // import Home from '../pages/home/index';
 import Moments from '../pages/moments/index';
 import Article from '../pages/article/index';
+import Login from '../pages/login';
 import ArticleTest1 from '../pages/article-test1/index';
 import ArticleTest2 from '../pages/article-test2/index';
 import Resume from '../pages/resume/index';
@@ -30,6 +31,10 @@ const routesConfig = [
   {
     path: 'resume',
     element: <Resume />,
+  },
+  {
+    path: 'login',
+    element: <Login />,
   },
 ];
 
