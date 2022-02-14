@@ -16,8 +16,8 @@ const LayoutContainer = (props: layoutContainerType) => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const { children, header, routesConfig } = props;
 
-  const onCollapse = (collapsedParm: boolean) => {
-    setCollapsed(collapsedParm);
+  const onCollapse = (collapsedParam: boolean) => {
+    setCollapsed(collapsedParam);
   };
 
   return (

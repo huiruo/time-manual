@@ -58,9 +58,9 @@ const MomentsContent = () => {
       const page = searchParams.get('page') as any;
       if (page) {
         const pageNum = parseInt(page);
-        const page_parm = isNaN(pageNum) ? 1 : pageNum;
-        setPageCurrent(page_parm);
-        queryUtil(page_parm, 10);
+        const pageParam = isNaN(pageNum) ? 1 : pageNum;
+        setPageCurrent(pageParam);
+        queryUtil(pageParam, 10);
       }
 
     } else {

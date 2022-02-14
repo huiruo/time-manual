@@ -115,8 +115,8 @@ const Article = () => {
     try {
       const res = await tmMgmtApi.queryArticleById(data);
       if (res.code === 200) {
-        const { content: contentData, tag: tagData, title: titleParm } = res.data;
-        setTitle(titleParm);
+        const { content: contentData, tag: tagData, title: titleParam } = res.data;
+        setTitle(titleParam);
         setContent(contentData);
         setTag(tagData);
 

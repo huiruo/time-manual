@@ -1,62 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.scss';
-
-/*
-interface PaginationProps {
-  onChange?: (page: number, pageSize: number) => void;
-  onShowSizeChange?: (current: number, size: number) => void;
-  itemRender?: (
-    page: number,
-    type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next',
-    element: React.ReactNode
-  ) => React.ReactNode;
-  showTotal?: (total: number, range: [number, number]) => React.ReactNode;
-}
-
-interface PaginationData {
-  className: string;
-  selectPrefixCls: string;
-  prefixCls: string;
-  pageSizeOptions: string[] | number[];
-
-  current: number;
-  defaultCurrent: number;
-  total: number;
-  pagesize: number;
-  defaultPageSize: number;
-
-  hideOnSinglePage: boolean;
-  showSizeChanger: boolean;
-  showLessItems: boolean;
-  showPrevNextJumpers: boolean;
-  showQuickJumper: boolean | object;
-  showTitle: boolean;
-  simple: boolean;
-  disabled: boolean;
-
-  style: React.CSSProperties;
-}
-*/
 
 interface PaginationType {
   total: number;
   current?: number;
   pagesize?: number;
   onChange: (page: number, pageSize?: number) => void;
-  onShowSizeChange?: (current: number, size: number) => void;
 }
 
 const Pagination: React.FC<PaginationType> = (props) => {
 
-  const [curentPage, setCurentPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number[]>([1]);
-  const { total, pagesize = 10, onChange, current } = props;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [groupCount] = useState<number>(5);
+  const [startPage, setStartPage] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(1);
 
-  useEffect(() => {
-    if (current) {
-      setCurentPage(current);
-    }
-  }, [current]);
+  const { total, pagesize = 10, current, onChange } = props;
 
   useEffect(() => {
     const pages = Math.floor((total + pagesize - 1) / pagesize);
@@ -64,77 +23,134 @@ const Pagination: React.FC<PaginationType> = (props) => {
     for (let index = 0; index < pages; index++) {
       totalPagesArr.push(index + 1);
     }
-    setTotalPages(totalPagesArr);
+    setTotalPage(totalPagesArr.length);
   }, [total]);
 
+  useEffect(() => {
+    if (current) {
+      setCurrentPage(current);
+      calculateDisplay(current);
+    }
+  }, [current]);
+
+  useEffect(() => {
+    window.scrollTo({
+      behavior: 'smooth',
+      top: 0
+    });
+  }, [currentPage]);
+
+  const pageClick = (currentPageParam: number) => {
+    // 当前页码 > 分组的页码 时，使 当前页 前面 显示 两个页码
+    if (currentPageParam >= groupCount) {
+      setStartPage(currentPageParam - 2);
+    }
+
+    if (currentPageParam < groupCount) {
+      setStartPage(1);
+    }
+
+    // 第一页时重新设置分组的起始页
+    if (currentPageParam === 1) {
+      setStartPage(1);
+    }
+
+    setCurrentPage(currentPageParam);
+
+    onChange(currentPageParam);
+  };
+
+  const calculateDisplay = (currentPageParam: number) => {
+    // 当 当前页码 大于 分组的页码 时，使 当前页 前面 显示 两个页码
+    if (currentPageParam >= groupCount) {
+      setStartPage(currentPageParam - 2);
+    }
+
+    if (currentPageParam < groupCount) {
+      setStartPage(1);
+    }
+
+    // 第一页时重新设置分组的起始页
+    if (currentPageParam === 1) {
+      setStartPage(1);
+    }
+  };
+
   const onPrePage = () => {
-    if (curentPage !== 1) {
-      setCurentPage(curentPage - 1);
-      onChange(curentPage - 1, pagesize);
+    if (currentPage !== 1) {
+      calculateDisplay(currentPage - 1);
+      setCurrentPage(currentPage - 1);
+      onChange(currentPage - 1, pagesize);
     }
   };
 
   const onNextPage = () => {
-    if (curentPage !== totalPages.length) {
-      onChange(curentPage + 1, pagesize);
-      setCurentPage(curentPage + 1);
+    if (currentPage !== totalPage) {
+      calculateDisplay(currentPage + 1);
+      setCurrentPage(currentPage + 1);
+      onChange(currentPage + 1, pagesize);
     }
   };
 
-  const onShowSizeChange = (page: number) => {
-    setCurentPage(page);
-    onChange(page, pagesize);
+  const createPage = (currentPageParam: number) => {
+    console.log('createPage--------->', currentPageParam);
+    const pages = [];
+    // 上一页
+    pages.push(<li className={currentPageParam === 1 ? 'pagination-nomore' : undefined} onClick={() => onPrePage()}
+      key={0}>
+      上一页</li>);
+
+    if (totalPage <= 10) {
+      /* 总页码小于等于10时，全部显示出来*/
+      for (let i = 1; i <= totalPage; i++) {
+        pages.push(<li key={i} onClick={() => pageClick(i)}
+          className={currentPageParam === i ? 'pagination-active' : undefined}>{i}</li>);
+      }
+    } else {
+      // 总页码大于10时，部分显示
+      console.log('总页码大于10时，部分显示---->');
+      // 第一页
+      pages.push(<li className={currentPageParam === 1 ? 'pagination-active' : undefined} key={1}
+        onClick={() => pageClick(1)}>1</li>);
+
+      let pageLength = 0;
+      if (groupCount + startPage > totalPage) {
+        pageLength = totalPage;
+      } else {
+        pageLength = groupCount + startPage;
+      }
+
+      // 前面省略号(当当前页码比分组的页码大时显示省略号)
+      if (currentPageParam >= groupCount) {
+        pages.push(<li className='' key={-1}>···</li>);
+      }
+
+      for (let i = startPage; i < pageLength; i++) {
+        if (i <= totalPage - 1 && i > 1) {
+          pages.push(<li className={currentPageParam === i ? 'pagination-active' : undefined} key={i}
+            onClick={() => pageClick(i)}>{i}</li>);
+        }
+      }
+
+      if (totalPage - startPage >= groupCount + 1) {
+        pages.push(<li className='' key={-2}>···</li>);
+      }
+
+      pages.push(<li className={currentPageParam === totalPage ? 'pagination-active' : undefined} key={totalPage}
+        onClick={() => pageClick(totalPage)}>{totalPage}</li>);
+    }
+
+    pages.push(<li className={currentPageParam === totalPage ? 'pagination-nomore' : undefined}
+      onClick={() => onNextPage()}
+      key={totalPage + 1}>下一页</li>);
+
+    return pages;
   };
 
-  if (!total) {
-    return null;
-  }
-
   return (
-    <div>
-      <button
-        onClick={onPrePage}
-        disabled={curentPage === 1}
-        className='pagination-btn font-word'
-        style={{ cursor: curentPage === 1 ? 'not-allowed' : 'pointer' }}
-        type='button'
-      >
-        上一页
-      </button>
-
-      {totalPages.map((item) => {
-
-        return (
-          <button
-            key={item}
-            onClick={() => onShowSizeChange(item)}
-            className={
-              curentPage === item
-                ? 'pagination-btn pagination-active'
-                : 'pagination-btn'
-            }
-            type='button'
-          >
-            {item}
-          </button>
-        );
-
-      })}
-
-      <button
-        onClick={onNextPage}
-        disabled={curentPage === totalPages.length}
-        className='pagination-btn font-word'
-        style={{
-          cursor: curentPage === totalPages.length ? 'not-allowed' : 'pointer',
-        }}
-        type='button'
-      >
-        下一页
-      </button>
-    </div>
-  );
-
+    <ul className='pagination-container'>
+      {createPage(currentPage)}
+    </ul>);
 };
 
 export default Pagination;

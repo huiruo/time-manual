@@ -50,7 +50,7 @@ class HttpRequest {
     this.instance = axios.create(config);
     // this.showLoading = config.showLoading || DEFAULT_LOADING
     // 1.request拦截
-    this.instance.interceptors.request.use((configParm) => {
+    this.instance.interceptors.request.use((configParam) => {
 
       // console.log("request拦截=====>",config)
 
@@ -68,7 +68,7 @@ class HttpRequest {
         config.headers.Authorization = token
       }
       */
-      return configParm;
+      return configParam;
     }, (error) => {
       return error;
     });

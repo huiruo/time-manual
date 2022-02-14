@@ -21,6 +21,10 @@ module.exports = {
   rules: {
     // https://cloud.tencent.com/developer/chapter/12618
 
+    // 消除未使用的变量，函数和函数的参数
+    'no-unused-vars': [ERROR, {args: 'none'}],
+    // 'no-unused-vars': [WARN, {args: 'none'}],
+
     'jsx-quotes': [WARN, 'prefer-single'],
 
     'indent': [WARN, 2],
@@ -78,7 +82,7 @@ module.exports = {
     'newline-after-var': OFF,
 
     // 要求 return 语句以前有一空行
-    'newline-before-return':WARN,
+    'newline-before-return':ERROR,
 
     // react code start
     // react code start
@@ -129,8 +133,6 @@ module.exports = {
     // 消除对程序状态没有影响的未使用的表达式
     'no-unused-expressions': WARN,
 
-    // 消除未使用的变量，函数和函数的参数
-    'no-unused-vars': [ERROR, {args: 'none'}],
     // 在遇到对尚未声明的标识符的引用时发出警告
     'no-use-before-define': OFF,
     // 这条规则旨在标记2个文字的连接，当它们可以合并成一个文字时。文字可以是字符串或模板文字。

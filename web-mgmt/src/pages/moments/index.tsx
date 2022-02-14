@@ -59,7 +59,6 @@ const Moments = () => {
       share_url: shareUrl,
       img_url: img_url
     };
-    console.log('req_parm', data);
 
     const res = await tmMgmtApi.addMoments(data);
     if (res.code === 200) {
