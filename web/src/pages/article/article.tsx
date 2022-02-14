@@ -113,7 +113,6 @@ const Article = () => {
         total={totalCount}
         current={pageCurrent}
         onChange={(page: number, pageSize = 10) => {
-          console.log('文章分页--->');
           setSearchParams({ page: page.toString() });
           queryArticleUtil(page, pageSize);
         }}
