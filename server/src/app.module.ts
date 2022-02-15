@@ -14,6 +14,10 @@ import { MomentsModule } from './moments/moments.module';
 import { ArticleController } from './article/article.controller';
 import { ArticleModule } from './article/article.module';
 
+// import { UserService } from './user/user.service';
+import { UserController } from './user/user.controller';
+import { UserModule } from './user/user.module';
+
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -27,8 +31,10 @@ import { ArticleModule } from './article/article.module';
     MomentsModule,
     TypeOrmModule.forRoot(dbConfig),
     ArticleModule,
+    UserModule,
   ],
-  controllers: [AppController, MomentsController, ArticleController],
+  controllers: [AppController, MomentsController, ArticleController, UserController],
+  // providers: [AppService, UserService],
   providers: [AppService],
 })
 export class AppModule {}

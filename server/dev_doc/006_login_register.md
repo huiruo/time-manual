@@ -2,8 +2,9 @@
 
 ## test
 ```
-nest g module user
 nest g service user
+nest g controller user
+nest g module user
 ```
 
 ## test 2
