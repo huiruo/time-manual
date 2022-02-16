@@ -25,6 +25,12 @@ const timeManualApi = {
 
     return http.post<resType>(data, url);
   },
+
+  registerApi(data:any) {
+    const url = `${ manualApiUrl }/user/register`;
+
+    return http.post<resType>(data, url);
+  }
 };
 
 export default timeManualApi;

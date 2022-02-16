@@ -17,4 +17,19 @@ export class UserService {
 
     return list;
   }
+
+  // 判断是否有昵称
+  async findNickname(nickname: string) {
+    console.log('nickname');
+  }
+
+  // 判断是否账户注册
+  async findAccount(account: string) {
+    console.log('account');
+  }
+  async register(account: string, nickname: string, password: string) {
+    console.log(account, nickname, password);
+    this.findNickname(nickname);
+    this.findAccount(account);
+  }
 }

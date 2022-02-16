@@ -1,4 +1,4 @@
-import { Controller, Inject, Param, Get } from '@nestjs/common';
+import { Controller, Inject, Param, Body, Get, Post } from '@nestjs/common';
 import { Result } from '../common/result.interface';
 import { UserService } from './user.service';
 
@@ -13,5 +13,20 @@ export class UserController {
     const data = await this.userService.findOne(id);
 
     return { code: 200, message: '查询成功', data };
+  }
+
+  /*
+  account
+  nickname
+  password
+  */
+  @Post('register')
+  async queryArticles(@Body() body) {
+    const account: string = body.account;
+    const nickname: string = body.nickname;
+    const password: string = body.password;
+    const data = await this.userService.register(account, nickname, password);
+
+    return data;
   }
 }

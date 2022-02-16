@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import timeManualApi from '@/services/timeManualApi';
 
 const Register = () => {
 
   const [account, setAccount] = useState<string>('');
+  const [nickname, setNikename] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
@@ -14,10 +16,14 @@ const Register = () => {
         setAccount(val);
         break;
       case 2:
+        console.log('setNikeName');
+        setNikename(val);
+        break;
+      case 3:
         console.log('password');
         setPassword(val);
         break;
-      case 3:
+      case 4:
         console.log('comfirm');
         setConfirmPassword(val);
         break;
@@ -26,36 +32,66 @@ const Register = () => {
     }
   };
 
-  const onRegister = () => {
+  const onRegister = async () => {
+    if (!nickname) {
+      console.log('昵称不能为空');
+
+      return;
+    }
+    if (!account) {
+      console.log('邮箱账户不能为空');
+
+      return;
+    }
+    if (!password) {
+      console.log('密码不能为空');
+
+      return;
+    }
+    if (!confirmPassword) {
+      console.log('请确认密码');
+
+      return;
+    }
     if (password !== confirmPassword) {
       console.log('确认密码不一致');
 
       return;
     }
+
     const data = {
       account,
+      nickname,
       password
     };
     console.log('onRegister', data);
+    const res = timeManualApi.registerApi(data);
+    console.log('res data', res);
   };
 
   return (
     <div className='sign-table'>
       <div className='table-item'>
         <label className='input-wrapper'>
-          <input onChange={(e) => setInputUtil(e, 1)} className='login-input' placeholder='请输入注册邮箱' />
+          <input onChange={(e) => setInputUtil(e, 1)} className='login-input' placeholder='请输入注册邮箱,用于登录' />
         </label>
       </div>
 
       <div className='table-item'>
         <label className='input-wrapper'>
-          <input onChange={(e) => setInputUtil(e, 2)} type='password' className='login-input' placeholder='请输入密码' />
+          <input onChange={(e) => setInputUtil(e, 2)} className='login-input' placeholder='请输入昵称,用于展示' />
         </label>
       </div>
 
       <div className='table-item'>
         <label className='input-wrapper'>
-          <input onChange={(e) => setInputUtil(e, 3)} type='password' className='login-input' placeholder='请再次确认密码' />
+          <input onChange={(e) => setInputUtil(e, 3)} type='password' className='login-input' placeholder='请输入密码' />
+        </label>
+      </div>
+
+      <div className='table-item'>
+        <label className='input-wrapper'>
+          <input onChange={(e) => setInputUtil(e, 4)} type='password' className='login-input' placeholder='请确认密码' />
         </label>
       </div>
 
