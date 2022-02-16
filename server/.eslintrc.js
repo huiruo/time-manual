@@ -31,9 +31,7 @@ module.exports = {
     // 'jsx-quotes': [WARN, 'prefer-single'],
 
     'indent': [WARN, 2],
-    indent: OFF,
-    //避免报错delete (cr)的错
-    // endOfLine: 'auto',
+    // indent: OFF,
 
     'quotes': [WARN, 'single'],
     // 'quotes': [WARN, 'double'],

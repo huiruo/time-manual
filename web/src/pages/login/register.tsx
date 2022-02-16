@@ -12,19 +12,15 @@ const Register = () => {
     const val = e.target.value;
     switch (type) {
       case 1:
-        console.log('setAccount');
         setAccount(val);
         break;
       case 2:
-        console.log('setNikeName');
         setNikename(val);
         break;
       case 3:
-        console.log('password');
         setPassword(val);
         break;
       case 4:
-        console.log('comfirm');
         setConfirmPassword(val);
         break;
       default:
@@ -64,9 +60,13 @@ const Register = () => {
       nickname,
       password
     };
-    console.log('onRegister', data);
-    const res = timeManualApi.registerApi(data);
-    console.log('res data', res);
+
+    const res = await timeManualApi.registerApi(data);
+    if (res.code === 200) {
+      console.log('注册成功', res);
+    } else {
+      console.log('注册失败', res);
+    }
   };
 
   return (

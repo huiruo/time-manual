@@ -28,7 +28,7 @@ module.exports = {
     'jsx-quotes': [WARN, 'prefer-single'],
 
     'indent': [WARN, 2],
-    indent: OFF,
+    // indent: OFF,
 
     'quotes': [WARN, 'single'],
     // 'quotes': [WARN, 'double'],
