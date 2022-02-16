@@ -7,7 +7,7 @@ import { Moments } from './moments.entity';
 export class MomentsService {
   constructor(
     @InjectRepository(Moments) private readonly momentRepo: Repository<Moments>,
-  ) {}
+  ) { }
 
   public async findOneById(id: string): Promise<Moments> {
     console.log('根据ID查询单个信息:', id);
@@ -73,9 +73,8 @@ export class MomentsService {
     }
 
     try {
-      const sql = `select * from moments order by created_time desc limit ${
-        (currentPage - 1) * pageSize
-      },${pageSize}`;
+      const sql = `select * from moments order by created_time desc limit ${(currentPage - 1) * pageSize
+        },${pageSize}`;
       const result = await this.momentRepo.query(sql);
       const data = {
         totalCount,

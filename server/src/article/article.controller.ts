@@ -7,7 +7,7 @@ import { Article } from './article.entity';
 export class ArticleController {
   constructor(
     @Inject(ArticleService) private readonly articleService: ArticleService,
-  ) {}
+  ) { }
 
   @Post('add')
   async addArticle(@Body() body: Article) {

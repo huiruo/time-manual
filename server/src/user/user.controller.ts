@@ -4,7 +4,7 @@ import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-  constructor(@Inject(UserService) private readonly userService: UserService) {}
+  constructor(@Inject(UserService) private readonly userService: UserService) { }
 
   // http://localhost:3800/user/20
   @Get(':id')

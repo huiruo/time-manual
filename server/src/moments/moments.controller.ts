@@ -7,7 +7,7 @@ import { Moments } from './moments.entity';
 export class MomentsController {
   constructor(
     @Inject(MomentsService) private readonly momentsService: MomentsService,
-  ) {}
+  ) { }
 
   // http://localhost:3800/moments/122
   @Get(':id')

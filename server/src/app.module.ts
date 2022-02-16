@@ -33,8 +33,13 @@ import { UserModule } from './user/user.module';
     ArticleModule,
     UserModule,
   ],
-  controllers: [AppController, MomentsController, ArticleController, UserController],
+  controllers: [
+    AppController,
+    MomentsController,
+    ArticleController,
+    UserController,
+  ],
   // providers: [AppService, UserService],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

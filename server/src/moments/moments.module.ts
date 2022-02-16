@@ -12,4 +12,4 @@ import { Moments } from './moments.entity';
   providers: [MomentsService],
   exports: [MomentsService],
 })
-export class MomentsModule {}
+export class MomentsModule { }

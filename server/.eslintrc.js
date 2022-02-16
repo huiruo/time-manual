@@ -32,6 +32,8 @@ module.exports = {
 
     'indent': [WARN, 2],
     indent: OFF,
+    //避免报错delete (cr)的错
+    // endOfLine: 'auto',
 
     'quotes': [WARN, 'single'],
     // 'quotes': [WARN, 'double'],
@@ -85,7 +87,7 @@ module.exports = {
     'newline-after-var': OFF,
 
     // 要求 return 语句以前有一空行
-    'newline-before-return':ERROR,
+    'newline-before-return': ERROR,
 
     // react code start
     // react code start
@@ -105,12 +107,12 @@ module.exports = {
     'dot-location': [ERROR, 'property'],
 
     // 尽可能使用点符号样式来维护代码一致性并提高代码可读性
-    'dot-notation': [ERROR, {allowPattern: '^(error|warn)$'}],
+    'dot-notation': [ERROR, { allowPattern: '^(error|warn)$' }],
 
     // 消除类型不安全的等式操作符
     eqeqeq: [ERROR, 'allow-null'],
 
-    'keyword-spacing': [ERROR, {after: true, before: true}],
+    'keyword-spacing': [ERROR, { after: true, before: true }],
 
     // 此规则不允许按位运算符
     'no-bitwise': OFF,
@@ -130,7 +132,7 @@ module.exports = {
     'no-unused-expressions': WARN,
 
     // 消除未使用的变量，函数和函数的参数
-    'no-unused-vars': [ERROR, {args: 'none'}],
+    'no-unused-vars': [ERROR, { args: 'none' }],
     // 在遇到对尚未声明的标识符的引用时发出警告
     'no-use-before-define': OFF,
     // 这条规则旨在标记2个文字的连接，当它们可以合并成一个文字时。文字可以是字符串或模板文字。
@@ -141,7 +143,7 @@ module.exports = {
     // 在函数括号之前强制执行一致的间距
     'space-before-function-paren': OFF,
     // 此规则强制将typeof表达式与有效的字符串文字进行比较。
-    'valid-typeof': [ERROR, {requireStringLiterals: true}],
+    'valid-typeof': [ERROR, { requireStringLiterals: true }],
 
     // 此规则禁止不必要地使用计算属性键。
     'no-useless-computed-key': OFF,
