@@ -1,13 +1,14 @@
-import { Controller, Inject, Body, Post } from '@nestjs/common';
+import { Controller, Inject, Body, Post, UseGuards } from '@nestjs/common';
 // import { Result } from '../common/result.interface';
 import { ArticleService } from './article.service';
 import { Article } from './article.entity';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('article')
 export class ArticleController {
   constructor(
     @Inject(ArticleService) private readonly articleService: ArticleService,
-  ) { }
+  ) {}
 
   @Post('add')
   async addArticle(@Body() body: Article) {
@@ -25,6 +26,7 @@ export class ArticleController {
     return data;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('query')
   async queryArticles(@Body() body) {
     const currentPage: number = body.currentPage;

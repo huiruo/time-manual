@@ -34,6 +34,7 @@ export class UserController {
   async login(@Body() body) {
     const account: string = body.account;
     const password: string = body.password;
+    console.log('login--->', body);
     const data = await this.userService.login(account, password);
 
     return data;

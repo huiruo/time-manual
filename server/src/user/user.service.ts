@@ -35,12 +35,13 @@ export class UserService {
   }
 
   // 判断是否账户注册
-  private async findAccount(account: string): Promise<User> {
+  public async findByAccount(account: string): Promise<any> {
     /*
     const sql = `select * from user where account = '${account}'`;
     const list = await this.userRepo.query(sql);
     */
     try {
+      console.log('findByAccount判断是否账户注册');
       const accountData = await this.userRepo.findOne({ account });
 
       return accountData;
@@ -51,7 +52,7 @@ export class UserService {
     }
   }
 
-  private async registerUtil(account, nickname, password): Promise<User> {
+  private async registerUtil(account, nickname, password): Promise<any> {
     try {
       const res = await this.userRepo.save({ account, nickname, password });
 
@@ -67,7 +68,7 @@ export class UserService {
     const hasNickname = await this.findNickname(nickname);
 
     let hasAccount = 0;
-    const accountData = await this.findAccount(account);
+    const accountData = await this.findByAccount(account);
     if (accountData) {
       hasAccount = 1;
     } else {
@@ -108,7 +109,8 @@ export class UserService {
   }
 
   public async login(account: string, password: string) {
-    const accountData = await this.findAccount(account);
+    console.log('service,login', account, password);
+    const accountData = await this.findByAccount(account);
     if (accountData) {
       const { password: passwordServer, nickname } = accountData;
       if (password === passwordServer) {

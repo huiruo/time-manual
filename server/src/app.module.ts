@@ -44,4 +44,4 @@ import { AuthModule } from './auth/auth.module';
   // providers: [AppService, UserService],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
