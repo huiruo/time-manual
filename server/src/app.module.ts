@@ -17,6 +17,7 @@ import { ArticleModule } from './article/article.module';
 // import { UserService } from './user/user.service';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { UserModule } from './user/user.module';
     TypeOrmModule.forRoot(dbConfig),
     ArticleModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [
     AppController,
