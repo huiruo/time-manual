@@ -30,6 +30,12 @@ const timeManualApi = {
     const url = `${ manualApiUrl }/user/register`;
 
     return http.post<resType>(data, url);
+  },
+
+  loginApi(data:any) {
+    const url = `${ manualApiUrl }/user/login`;
+
+    return http.post<resType>(data, url);
   }
 };
 

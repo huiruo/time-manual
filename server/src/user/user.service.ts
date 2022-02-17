@@ -7,7 +7,7 @@ import { User } from './user.entity';
 export class UserService {
   constructor(
     @InjectRepository(User) private readonly userRepo: Repository<User>,
-  ) { }
+  ) {}
 
   public async findOne(id: string) {
     const sql = `select * from user where id = ${id}`;
@@ -35,20 +35,19 @@ export class UserService {
   }
 
   // 判断是否账户注册
-  private async findAccount(account: string): Promise<number> {
+  private async findAccount(account: string): Promise<User> {
     /*
     const sql = `select * from user where account = '${account}'`;
     const list = await this.userRepo.query(sql);
     */
     try {
       const accountData = await this.userRepo.findOne({ account });
-      if (accountData) {
-        return 1;
-      } else {
-        return 0;
-      }
+
+      return accountData;
     } catch (error) {
-      return 3;
+      console.log('error', error);
+
+      return null;
     }
   }
 
@@ -66,7 +65,15 @@ export class UserService {
 
   public async register(account: string, nickname: string, password: string) {
     const hasNickname = await this.findNickname(nickname);
-    const hasAccount = await this.findAccount(account);
+
+    let hasAccount = 0;
+    const accountData = await this.findAccount(account);
+    if (accountData) {
+      hasAccount = 1;
+    } else {
+      hasAccount = 0;
+    }
+
     const data = {
       hasNickname,
       hasAccount,
@@ -97,6 +104,25 @@ export class UserService {
       }
 
       return { code: 500, msg: msgHasNickname + msgHasAccount, data };
+    }
+  }
+
+  public async login(account: string, password: string) {
+    const accountData = await this.findAccount(account);
+    if (accountData) {
+      const { password: passwordServer, nickname } = accountData;
+      if (password === passwordServer) {
+        const data = {
+          account,
+          nickname,
+        };
+
+        return { code: 200, msg: '登录成功', data: data };
+      } else {
+        return { code: 500, msg: '密码错误', data: null };
+      }
+    } else {
+      return { code: 500, msg: '账号不存在', data: null };
     }
   }
 }

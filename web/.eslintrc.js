@@ -27,15 +27,12 @@ module.exports = {
 
     'jsx-quotes': [WARN, 'prefer-single'],
 
-    'indent': [WARN, 2],
-    // indent: OFF,
+    // 'indent': [WARN, 2],
+    indent: OFF,
 
     'quotes': [WARN, 'single'],
-    // 'quotes': [WARN, 'double'],
-    quotes: [ERROR, 'single', {avoidEscape: true, allowTemplateLiterals: true}],
 
     // 语句强制分号结尾
-    // "semi": [WARN, "never"],
     'semi': [WARN, 'always'],
 
     // 如果一个变量不会被重新赋值，最好使用const进行声明。

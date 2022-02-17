@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import timeManualApi from '@/services/timeManualApi';
 
 const Login = () => {
 
@@ -9,11 +10,9 @@ const Login = () => {
     const val = e.target.value;
     switch (type) {
       case 1:
-        console.log('setAccount');
         setAccount(val);
         break;
       case 2:
-        console.log('password');
         setPassword(val);
         break;
       default:
@@ -21,14 +20,14 @@ const Login = () => {
     }
   };
 
-  const onLogin = () => {
-    if (account) {
+  const onLogin = async () => {
+    if (!account) {
       console.log('密码不能未空');
 
       return;
     }
 
-    if (password) {
+    if (!password) {
       console.log('密码不能未空');
 
       return;
@@ -37,7 +36,13 @@ const Login = () => {
       account,
       password
     };
-    console.log('onRegister', data);
+    const res = await timeManualApi.loginApi(data);
+    if (res.code === 200) {
+      console.log('登录成功');
+      console.log('登录成功', res.data);
+    } else {
+      console.log('登录错误', res.msg);
+    }
   };
 
   return (

@@ -4,7 +4,7 @@ import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-  constructor(@Inject(UserService) private readonly userService: UserService) { }
+  constructor(@Inject(UserService) private readonly userService: UserService) {}
 
   // http://localhost:3800/user/20
   @Get(':id')
@@ -21,11 +21,20 @@ export class UserController {
   password
   */
   @Post('register')
-  async queryArticles(@Body() body) {
+  async register(@Body() body) {
     const account: string = body.account;
     const nickname: string = body.nickname;
     const password: string = body.password;
     const data = await this.userService.register(account, nickname, password);
+
+    return data;
+  }
+
+  @Post('login')
+  async login(@Body() body) {
+    const account: string = body.account;
+    const password: string = body.password;
+    const data = await this.userService.login(account, password);
 
     return data;
   }
