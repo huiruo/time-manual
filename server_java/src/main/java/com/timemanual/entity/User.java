@@ -7,8 +7,6 @@ import java.util.Date;
 
 /**
  * 用户实体类
- * @Author: liyh
- * @Date: 2020/8/28 11:39
  */
 @Data
 @TableName(value = "t_user")
