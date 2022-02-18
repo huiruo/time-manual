@@ -25,7 +25,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-server_java/src/main/resources/.application.yml
 
 ### STS ###
 .apt_generated
@@ -107,6 +106,7 @@ yarn-error.log*
 # secret
 server/.env
 server/config/env-prod/application-prod.env
+server_java/src/main/resources/application.yml
 
 # js
 node_modules/
