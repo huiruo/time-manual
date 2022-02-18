@@ -5,11 +5,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.timemanual.mapper")
+//@MapperScan("com.timemanual.mapper")
+@MapperScan("com.timemanual.dao")
 public class TimeManualApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TimeManualApplication.class, args);
     }
-
 }
