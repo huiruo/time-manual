@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UsersController {
     @Autowired
     UsersService usersService;
@@ -83,6 +83,7 @@ public class UsersController {
             Users userDb = usersService.register(users);
             return new ReqResult<>(userDb);
         }catch (Exception e){
+            System.out.println("register3---:"+e.getMessage());
             return new ReqResult<>(4, e.getMessage());
         }
     }

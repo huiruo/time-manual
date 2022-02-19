@@ -10,6 +10,10 @@ public interface UsersDao extends BaseMapper<Users> {
     Users findByAccount(String account);
     // 注册
     Users register(Users user);
+    // 查询昵称
+    Users findByNickname(String nikename);
     // 查询
     List<Users> findAllUser();
+
+//    void save(Users users);
 }

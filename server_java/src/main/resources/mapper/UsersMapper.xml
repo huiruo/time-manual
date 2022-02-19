@@ -13,4 +13,14 @@
         select * from user where account = #{account}
     </select>
 
+    <!--用户昵称查询-->
+    <select id="findByNickname" parameterType="String" resultType="com.timemanual.entity.Users">
+        select * from user where nickname = #{nickname}
+    </select>
+
+    <!--用户注册-->
+    <select id="save" parameterType="String" resultType="com.timemanual.entity.Users">
+        insert * from user where nickname = #{nickname}
+    </select>
+
 </mapper>

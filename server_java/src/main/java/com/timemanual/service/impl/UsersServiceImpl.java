@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.timemanual.dao.UsersDao;
 import com.timemanual.entity.Users;
 import com.timemanual.service.UsersService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
@@ -12,16 +14,25 @@ import java.util.List;
 // （注意：在UserServiceImpl类，必须加上@Service注解，否则会报错 Field userService in com.xx.mybatisplus.controller.UserController required）
 @Service
 @Transactional
+@Slf4j
 public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements UsersService {
 //public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements UsersService {
 
     @Resource
     private UsersDao usersDao;
+
+//    @Autowired
+//    UsersService usersService;
+
+
     @Override
     public Users login(Users users) {
        Users userDb = usersDao.findByAccount(users.getAccount());
        if (userDb != null) {
             if (userDb.getPassword().equals(users.getPassword())) {
+
+                log.info("插入---》");
+                usersDao.insert(userDb);
                 return userDb;
             } else {
                 throw new RuntimeException("密码错误");
@@ -36,17 +47,30 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements Us
         System.out.println("register"+users);
 
         Users userDb = usersDao.findByAccount(users.getAccount());
-        System.out.println("register2:"+userDb);
-        System.out.println("register3:"+userDb.getNickname());
+        log.info("test1");
+        System.out.println(userDb);
+        System.out.println(userDb == null);
+        log.info("test2");
         if (userDb == null) {
-//            if (userDb.getNickname().equals(users.getNickname())) {
-//                throw new RuntimeException("昵称被使用");
-//            } else {
-                System.out.println("可以注册");
-                return userDb;
-//            }
+            Users usersDbByNickname = usersDao.findByNickname(users.getNickname());
+            if (userDb == null) {
+                System.out.println("可以注册-hello123--->");
+
+                usersDao.insert(users);
+
+                return users;
+            }
+            throw new RuntimeException("昵称被使用");
+
         } else {
+            log.info("register3:"+userDb.getNickname());
             System.out.println("register3:");
+            if(userDb.getAccount().equals(users.getAccount())){
+
+                log.info("register3:"+userDb.getNickname());
+                throw new RuntimeException("用户名被使用");
+            }
+
             throw new RuntimeException("用户名被使用");
         }
     }
@@ -59,5 +83,10 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements Us
     @Override
     public Users findByAccount(String account) {
         return usersDao.findByAccount(account);
+    }
+
+    @Override
+    public Users findByNickname(String nikename) {
+        return usersDao.findByNickname(nikename);
     }
 }

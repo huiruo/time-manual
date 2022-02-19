@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/user_test")
 public class UserController {
     @Autowired
     UserService userService;

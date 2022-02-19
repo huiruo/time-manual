@@ -8,7 +8,10 @@ import java.util.List;
 public interface UsersService extends IService<Users> {
     Users login(Users users);
     Users register(Users users);
-    public List<Users> findAllUser();
-    //查询用户
-    public Users findByAccount(String account);
+    List<Users> findAllUser();
+    // 查询用户
+    Users findByAccount(String account);
+
+    // 查询昵称
+    Users findByNickname(String nikename);
 }
