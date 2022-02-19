@@ -22,8 +22,8 @@ module.exports = {
     // https://cloud.tencent.com/developer/chapter/12618
 
     // 消除未使用的变量，函数和函数的参数
-    'no-unused-vars': [ERROR, {args: 'none'}],
-    // 'no-unused-vars': [WARN, {args: 'none'}],
+    // 'no-unused-vars': [ERROR, {args: 'none'}],
+    'no-unused-vars': [OFF, {args: 'none'}],
 
     'jsx-quotes': [WARN, 'prefer-single'],
 

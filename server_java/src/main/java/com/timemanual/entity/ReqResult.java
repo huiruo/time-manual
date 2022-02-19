@@ -7,10 +7,10 @@ public class ReqResult<T> {
     private T data;
     private int code;
     private String msg;
-    private static final int constCode = 0;
+    private static final int constCode = 200;
 
     /**
-     * 若没有数据返回，默认状态码为 0，提示信息为“操作成功！”
+     * 若没有数据返回，默认状态码为 200，提示信息为“操作成功！”
      */
     public ReqResult() {
         this.code = constCode;

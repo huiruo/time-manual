@@ -15,8 +15,8 @@ interface articleType {
   title: string;
   content: string;
   tag: string;
-  update_time: string;
-  created_time: string;
+  updatetime: string;
+  createdTime: string;
 }
 
 const Article = () => {
@@ -24,7 +24,7 @@ const Article = () => {
   const [articles, setArticles] = useState<articleType[]>([]);
   const [showLoading, setShowLoading] = useState<boolean>(false);
   const [pageCurrent, setPageCurrent] = useState<number>(0);
-  const [totalCount, setTotalCount] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const queryArticleUtil = async (currentPage: number, pageSize: number) => {
@@ -41,9 +41,10 @@ const Article = () => {
       const res = await timeManualApi.queryArticles(data);
       if (res.code === 200) {
         setShowLoading(false);
-        const { totalCount: total, result } = res.data;
+        const { total: totalCount, data: result } = res.data;
+        console.log('res.data', res.data);
         setArticles(result);
-        setTotalCount(total);
+        setTotal(totalCount);
       } else {
         console.log('请求失败' + res.msg);
       }
@@ -79,7 +80,7 @@ const Article = () => {
         return (
           <div key={item.id} className='article-item'>
             <h4 className='article-title'>{item.title}</h4>
-            <div className='article-info'>{formatUnixTime(item.created_time)}</div>
+            <div className='article-info'>{formatUnixTime(item.createdTime)}</div>
             <ReactMarkdown
               children={item.content}
               components={{
@@ -110,7 +111,7 @@ const Article = () => {
       {showLoading && <ModalLoading />}
 
       <Pagination
-        total={totalCount}
+        total={total}
         current={pageCurrent}
         onChange={(page: number, pageSize = 10) => {
           setSearchParams({ page: page.toString() });

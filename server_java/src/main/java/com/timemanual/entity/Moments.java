@@ -1,6 +1,9 @@
 package com.timemanual.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,8 +14,18 @@ import java.util.Date;
 public class Moments implements Serializable {
     private Integer id;
     private String content;
-    private String share_url;
-    private String img_url;
-    private Date update_time;
-    private Date created_time;
+    @TableField(value = "share_url",fill = FieldFill.INSERT_UPDATE)
+    private String shareUrl;
+    @TableField(value = "img_url",fill = FieldFill.INSERT_UPDATE)
+    private String imgUrl;
+
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
+
+    // 例如：@TableField(.. , update="%s+1") 其中 %s 会填充为字段
+    // 输出 SQL 为：update 表 set 字段=字段+1 where ...
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "created_time",fill = FieldFill.INSERT_UPDATE)
+    private Date createdTime;
 }

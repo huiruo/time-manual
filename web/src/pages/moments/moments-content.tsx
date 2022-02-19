@@ -9,16 +9,16 @@ import './index.scss';
 interface momentType {
   id: number;
   content: string;
-  share_url: string;
+  shareUrl: string;
   img_url: string;
-  update_time: string;
-  created_time: string;
+  updatetime: string;
+  createdTime: string;
 }
 
 const MomentsContent = () => {
 
   const [moments, setMoments] = useState<momentType[]>([]);
-  const [totalCount, setTotalCount] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
   const [showLoading, setShowLoading] = useState<boolean>(false);
   const [pageCurrent, setPageCurrent] = useState<number>(0);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -37,10 +37,10 @@ const MomentsContent = () => {
       const res = await timeManualApi.queryMoments(data);
       // setTimeout(() => {
       if (res.code === 200) {
-        const { totalCount: total, result } = res.data;
+        const { total: totalCount, data: result } = res.data;
         setShowLoading(false);
         setMoments(result);
-        setTotalCount(total);
+        setTotal(totalCount);
 
       } else {
         console.log('请求失败' + res.msg);
@@ -78,14 +78,14 @@ const MomentsContent = () => {
             <div key={item.id} className='moment-card'>
               <div>{item.content}</div>
 
-              {item.share_url && (
+              {item.shareUrl && (
                 <div className='moment-link'>
-                  <div>{item.share_url}</div>
+                  <div>{item.shareUrl}</div>
                 </div>
               )}
 
               <div className='moment-time'>
-                <span>{formatUnixTime(item.created_time)}</span>
+                <span>{formatUnixTime(item.createdTime)}</span>
               </div>
             </div>
           );
@@ -96,7 +96,7 @@ const MomentsContent = () => {
       {showLoading && <ModalLoading />}
 
       <Pagination
-        total={totalCount}
+        total={total}
         current={pageCurrent}
         onChange={(page: number, pageSize = 10) => {
           setSearchParams({ page: page.toString() });

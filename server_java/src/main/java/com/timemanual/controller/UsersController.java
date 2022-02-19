@@ -3,6 +3,7 @@ package com.timemanual.controller;
 import com.timemanual.entity.ReqResult;
 import com.timemanual.entity.Users;
 import com.timemanual.service.UsersService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UsersController {
     @Autowired
     UsersService usersService;
@@ -59,6 +61,7 @@ public class UsersController {
     @PostMapping("/login")
     // public List<Users> login(@RequestBody Users user, HttpServletRequest request){
     public ReqResult<Users> login(@RequestBody Users user, HttpServletRequest request){
+        log.info("user:",user);
         Users users = new Users();
         users.setAccount(user.getAccount());
         users.setPassword(user.getPassword());
