@@ -17,8 +17,8 @@ const columns = [
   },
   {
     title: '分享链接',
-    dataIndex: 'share_url',
-    key: 'share_url',
+    dataIndex: 'shareUrl',
+    key: 'shareUrl',
     render: (val: any) => (
       <div>
         {<div style={{ maxWidth: '20rem' }}>{val}</div>}
@@ -27,8 +27,8 @@ const columns = [
   },
   {
     title: '图片',
-    dataIndex: 'img_url',
-    key: 'img_url',
+    dataIndex: 'imgUrl',
+    key: 'imgUrl',
     render: (val: any) => (
       <div>
         {!val ? '无' : val.split(',').map((item: any, index: number) => {
@@ -43,8 +43,8 @@ const columns = [
   },
   {
     title: '更新时间',
-    dataIndex: 'update_time',
-    key: 'update_time',
+    dataIndex: 'updateTime',
+    key: 'updateTime',
     render: (val: any) => (
       <div>
         <div style={{ maxWidth: '20rem' }}>{formatUnixTime(val)}</div>
@@ -53,8 +53,8 @@ const columns = [
   },
   {
     title: '创建时间',
-    dataIndex: 'created_time',
-    key: 'created_time',
+    dataIndex: 'createdTime',
+    key: 'createdTime',
     render: (val: any) => (
       <div>
         <div style={{ maxWidth: '20rem' }}>{formatUnixTime(val)}</div>
@@ -67,7 +67,7 @@ const columns = [
 const MomentsMgmt = () => {
 
   const [dataSource, setDataSource] = useState<any[]>([]);
-  const [totalCount, setTotalCount] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
   const queryUtil = async (currentPage: number, pageSize: number) => {
     const data = {
       currentPage,
@@ -75,11 +75,9 @@ const MomentsMgmt = () => {
     };
     const res = await tmMgmtApi.queryMoments(data);
     if (res.code === 200) {
-      const { totalCount: tatal, result } = res.data;
-
+      const { total: totalCount, data: result } = res.data;
       setDataSource(result);
-      setTotalCount(tatal);
-      console.log('test');
+      setTotal(totalCount);
     } else {
       message.error('请求失败' + res.msg);
     }
@@ -104,7 +102,7 @@ const MomentsMgmt = () => {
           dataSource={dataSource}
           columns={columns}
           pagination={{
-            total: totalCount,
+            total: total,
             onChange: ((page, pageSize) => {
 
               queryUtil(page, pageSize);

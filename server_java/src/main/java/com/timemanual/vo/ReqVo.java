@@ -1,9 +1,9 @@
-package com.timemanual.entity;
+package com.timemanual.vo;
 
 import lombok.Data;
 
 @Data
-public class ReqResult<T> {
+public class ReqVo<T> {
     private T data;
     private int code;
     private String msg;
@@ -12,7 +12,7 @@ public class ReqResult<T> {
     /**
      * 若没有数据返回，默认状态码为 200，提示信息为“操作成功！”
      */
-    public ReqResult() {
+    public ReqVo() {
         this.code = constCode;
         this.msg = "操作成功！";
     }
@@ -23,7 +23,7 @@ public class ReqResult<T> {
      * @param code
      * @param msg
      */
-    public ReqResult(int code, String msg) {
+    public ReqVo(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }
@@ -33,7 +33,7 @@ public class ReqResult<T> {
      *
      * @param data
      */
-    public ReqResult(T data) {
+    public ReqVo(T data) {
         this.data = data;
         this.code = constCode;
         this.msg = "操作成功！";
@@ -45,7 +45,7 @@ public class ReqResult<T> {
      * @param data
      * @param msg
      */
-    public ReqResult(T data, String msg) {
+    public ReqVo(T data, String msg) {
         this.data = data;
         this.code = constCode;
         this.msg = msg;

@@ -41,23 +41,23 @@ const Moments = () => {
       return;
     }
 
-    const img_url: string[] = [];
+    // const imgUrl: string[] = [];
     /*
     // test:
-    const img_url:string[] = [
+    const imgUrl:string[] = [
         'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
         'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
         'https://avatars.githubusercontent.com/u/11364222?v=4'
     ]
     const content = 'test_content'
     const shareUrl = 'www.baidu.com'
-    const img_url_json:string = '"'+JSON.stringify(img_url)+'"'
-    console.log('JSON.stringify:',img_url_json)
+    const imgUrl_json:string = '"'+JSON.stringify(imgUrl)+'"'
+    console.log('JSON.stringify:',imgUrl_json)
     */
     const data = {
       content: content,
-      share_url: shareUrl,
-      img_url: img_url
+      shareUrl: shareUrl,
+      // imgUrl: imgUrl
     };
 
     const res = await tmMgmtApi.addMoments(data);

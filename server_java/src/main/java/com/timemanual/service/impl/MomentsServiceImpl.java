@@ -23,7 +23,6 @@ public class MomentsServiceImpl  extends ServiceImpl<MomentsDao, Moments> implem
 
     @Override
     public PaginationVo queryMoments(Integer currentPage, Integer pageSize) {
-
         /*
         如果没有添加分页插件，selectPage方法也可以代用。
         但是会把数据数据全部返回。getPage和getTotal获取到总页数和总记录数的值都是0。
@@ -53,5 +52,10 @@ public class MomentsServiceImpl  extends ServiceImpl<MomentsDao, Moments> implem
         paginationVo.setData(iPage.getRecords());
 
         return paginationVo;
+    }
+
+    @Override
+    public Boolean add(Moments moments) {
+        return this.save(moments);
     }
 }

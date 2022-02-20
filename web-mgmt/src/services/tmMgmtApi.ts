@@ -42,13 +42,13 @@ const tmMgmtApi = {
   queryArticleById (data:any) {
     const url = `${ manualApiUrl }/article/query/id`;
 
-    return http.post<resType>(data, url);
+    return http.get<resType>(data, url);
   },
 
   deleteArticle (data:any) {
     const url = `${ manualApiUrl }/article/delete`;
 
-    return http.post<resType>(data, url);
+    return http.get<resType>(data, url);
   },
 };
 

@@ -8,8 +8,8 @@ interface articleType {
   id?: number | string;
   content: string;
   tag: string;
-  update_time?: string;
-  created_time?: string;
+  updateTime?: string;
+  createdTime?: string;
 }
 
 const { TextArea } = Input;

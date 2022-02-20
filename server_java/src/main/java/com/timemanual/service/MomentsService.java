@@ -6,4 +6,5 @@ import com.timemanual.vo.PaginationVo;
 
 public interface MomentsService extends IService<Moments> {
    PaginationVo queryMoments(Integer currentPage, Integer pageSize);
+   Boolean add(Moments moments);
 }

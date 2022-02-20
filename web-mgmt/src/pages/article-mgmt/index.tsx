@@ -8,14 +8,14 @@ interface articleType {
   id: number | string;
   content: string;
   tag: string;
-  update_time: string;
-  created_time: string;
+  updateTime: string;
+  createdTime: string;
 }
 
 const ArticleMgmt = () => {
 
   const [dataSource, setDataSource] = useState<articleType[]>([]);
-  const [totalCount, setTotalCount] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [operationColumn, setOperationColumn] = useState<articleType>();
   const navigate = useNavigate();
@@ -27,10 +27,9 @@ const ArticleMgmt = () => {
     };
     const res = await tmMgmtApi.queryArticles(data);
     if (res.code === 200) {
-      const { totalCount: total, result } = res.data;
-      console.log('文章查询:', result);
+      const { total: totalCount, data: result } = res.data;
       setDataSource(result);
-      setTotalCount(total);
+      setTotal(totalCount);
 
     } else {
       message.error('请求失败' + res.msg);
@@ -110,8 +109,8 @@ const ArticleMgmt = () => {
     },
     {
       title: '更新时间',
-      dataIndex: 'update_time',
-      key: 'update_time',
+      dataIndex: 'updateTime',
+      key: 'updateTime',
       render: (val: any) => (
         <div>
           <div style={{ maxWidth: '20rem' }}>{formatUnixTime(val)}</div>
@@ -120,8 +119,8 @@ const ArticleMgmt = () => {
     },
     {
       title: '创建时间',
-      dataIndex: 'created_time',
-      key: 'created_time',
+      dataIndex: 'createdTime',
+      key: 'createdTime',
       render: (val: any) => (
         <div>
           <div style={{ maxWidth: '20rem' }}>{formatUnixTime(val)}</div>
@@ -157,7 +156,7 @@ const ArticleMgmt = () => {
           dataSource={dataSource}
           columns={columns}
           pagination={{
-            total: totalCount,
+            total: total,
             onChange: ((page, pageSize) => {
 
               queryUtil(page, pageSize);

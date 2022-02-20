@@ -1,6 +1,6 @@
 package com.timemanual.controller;
 
-import com.timemanual.entity.ReqResult;
+import com.timemanual.vo.ReqVo;
 import com.timemanual.entity.Users;
 import com.timemanual.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
@@ -60,16 +60,16 @@ public class UsersController {
     * */
     @PostMapping("/login")
     // public List<Users> login(@RequestBody Users user, HttpServletRequest request){
-    public ReqResult<Users> login(@RequestBody Users user, HttpServletRequest request){
+    public ReqVo<Users> login(@RequestBody Users user, HttpServletRequest request){
         log.info("user:",user);
         Users users = new Users();
         users.setAccount(user.getAccount());
         users.setPassword(user.getPassword());
         try{
             Users userDb = usersService.login(users);
-            return new ReqResult<>(userDb);
+            return new ReqVo<>(userDb);
         }catch (Exception e){
-            return new ReqResult<>(4, e.getMessage());
+            return new ReqVo<>(4, e.getMessage());
         }
     }
 
@@ -77,17 +77,17 @@ public class UsersController {
      * 注册
      * */
     @PostMapping("/register")
-    public ReqResult<Users> register(@RequestBody Users user){
+    public ReqVo<Users> register(@RequestBody Users user){
         Users users = new Users();
         users.setAccount(user.getAccount());
         users.setNickname(user.getNickname());
         users.setPassword(user.getPassword());
         try{
             Users userDb = usersService.register(users);
-            return new ReqResult<>(userDb);
+            return new ReqVo<>(userDb);
         }catch (Exception e){
             System.out.println("register3---:"+e.getMessage());
-            return new ReqResult<>(4, e.getMessage());
+            return new ReqVo<>(4, e.getMessage());
         }
     }
 }
