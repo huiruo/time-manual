@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import timeManualApi from '@/services/timeManualApi';
+import { setTiemManualToken } from '@/utils/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
   const [account, setAccount] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const navigate = useNavigate();
 
   const setInputUtil = (e: any, type: number) => {
     const val = e.target.value;
@@ -22,24 +25,29 @@ const Login = () => {
 
   const onLogin = async () => {
     if (!account) {
-      console.log('密码不能未空');
+      console.log('密码不能为空');
 
-      return;
+      // return;
     }
 
     if (!password) {
-      console.log('密码不能未空');
+      console.log('密码不能为空');
 
-      return;
+      // return;
     }
     const data = {
-      account,
-      password
+      // account,
+      // username: account,
+      // password,
+      username: 'admin',
+      password: '123456'
     };
     const res = await timeManualApi.loginApi(data);
     if (res.code === 200) {
-      console.log('登录成功');
-      console.log('登录成功', res.data);
+      const { token } = res.result;
+      console.log('登录成功', token);
+      setTiemManualToken(token);
+      navigate('/');
     } else {
       console.log('登录错误', res.msg);
     }

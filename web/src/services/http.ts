@@ -1,4 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
+import { getTiemManualToken } from '@/utils/auth';
 
 /*
 //自定义拦截器类型
@@ -50,7 +51,7 @@ class HttpRequest {
     this.instance = axios.create(config);
     // this.showLoading = config.showLoading || DEFAULT_LOADING
     // 1.request拦截
-    this.instance.interceptors.request.use((configParam) => {
+    this.instance.interceptors.request.use((configParam:any) => {
 
       // console.log("request拦截=====>",config)
 
@@ -68,6 +69,12 @@ class HttpRequest {
         config.headers.Authorization = token
       }
       */
+     const token = getTiemManualToken();
+      if (token) {
+        console.log('interceptors', token);
+        configParam.headers.token = token;
+      }
+
       return configParam;
     }, (error) => {
       return error;

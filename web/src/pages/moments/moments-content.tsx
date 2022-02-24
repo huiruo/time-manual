@@ -37,7 +37,7 @@ const MomentsContent = () => {
       const res = await timeManualApi.queryMoments(data);
       // setTimeout(() => {
       if (res.code === 200) {
-        const { total: totalCount, data: result } = res.data;
+        const { total: totalCount, data: result } = res.result;
         setShowLoading(false);
         setMoments(result);
         setTotal(totalCount);
