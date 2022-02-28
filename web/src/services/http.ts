@@ -72,7 +72,9 @@ class HttpRequest {
      const token = getTiemManualToken();
       if (token) {
         console.log('interceptors', token);
-        configParam.headers.token = token;
+        // configParam.headers.token = token;
+        configParam.headers.Authorization = token;
+        // configParam.headers.Authorization = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDYwNDUwOTIsInVzZXJuYW1lIjoiYWRtaW4ifQ.7DKrvoor_2bDLABFaVS-kvyU5ls3V4O1At2_vcMO43E';
       }
 
       return configParam;

@@ -21,7 +21,7 @@ const timeManualApi = {
   },
 
   queryArticles(data: any) {
-    const url = `${manualApiUrl}/article/query`;
+    const url = `${manualApiUrl}/user/article/query`;
 
     return http.post<resType>(data, url);
   },
