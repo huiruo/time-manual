@@ -62,19 +62,10 @@ class HttpRequest {
       // })
       // console.log("正在加载中...")
       // }
-      // token拦截
-      /*
-      const token = localStorage.getItem('token')
-      if(token) {
-        config.headers.Authorization = token
-      }
-      */
      const token = getTiemManualToken();
       if (token) {
-        console.log('interceptors', token);
-        // configParam.headers.token = token;
+        console.log('http interceptors', token);
         configParam.headers.Authorization = token;
-        // configParam.headers.Authorization = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDYwNDUwOTIsInVzZXJuYW1lIjoiYWRtaW4ifQ.7DKrvoor_2bDLABFaVS-kvyU5ls3V4O1At2_vcMO43E';
       }
 
       return configParam;
