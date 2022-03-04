@@ -8,6 +8,7 @@ import ArticleTest2 from '../pages/article-test2/index';
 import Resume from '../pages/resume/index';
 import NotFound from '../pages/not-found/index';
 import { HashRouter, Routes, Route } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 
 const routesConfig = [
   {
@@ -64,7 +65,8 @@ const RoutesContainer = () => {
     <HashRouter>
       <Routes>
         <Route path='/'>{generateRoute(routesConfig)}</Route>
-        <Route index={true} element={<Article />} />
+        {/* <Route index={true} element={<Article />} /> */}
+        <Route index={true} element={<PrivateRoute><Article /></PrivateRoute>} />
         {/* <Route index element={<Moments />} /> */}
         <Route path='*' element={<NotFound />} />
       </Routes>

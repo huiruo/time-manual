@@ -1,5 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
-import { getTiemManualToken } from '@/utils/auth';
+import { getTiemManualToken, setTiemManualToken, removeTiemManualToken } from '@/utils/auth';
 
 /*
 //自定义拦截器类型
@@ -47,9 +47,7 @@ class HttpRequest {
   // showLoading: boolean
 
   constructor (config: customRequest) {
-    // this.baseUrl = 'http://localhost:3000'
     this.instance = axios.create(config);
-    // this.showLoading = config.showLoading || DEFAULT_LOADING
     // 1.request拦截
     this.instance.interceptors.request.use((configParam:any) => {
 
@@ -63,10 +61,10 @@ class HttpRequest {
       // console.log("正在加载中...")
       // }
      const token = getTiemManualToken();
-      if (token) {
+     if (token) {
         console.log('http interceptors', token);
         configParam.headers.Authorization = token;
-      }
+     }
 
       return configParam;
     }, (error) => {
@@ -75,7 +73,21 @@ class HttpRequest {
 
     // 2.response 拦截,处理返回结果
     this.instance.interceptors.response.use(res => {
-      // console.log("instance response 拦截,处理返回结果",res)
+      console.log('instance response 拦截,处理返回结果', res);
+      const {refreshtoken} = res.headers;
+      const reqData = res.data as customRequest;
+      if (refreshtoken) {
+        console.log('刷新token 存在开始设置', refreshtoken);
+        setTiemManualToken(refreshtoken);
+      } else {
+        console.log('刷新token 不存在');
+      }
+
+      if (reqData.code) {
+        removeTiemManualToken();
+        console.log('没有权限,需要一出token');
+      }
+
       return res.data;
     },
     (error) => {
