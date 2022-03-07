@@ -83,9 +83,10 @@ class HttpRequest {
         console.log('刷新token 不存在');
       }
 
-      if (reqData.code) {
+      if (reqData.code === 401) {
+        // removeTiemManualToken();
+        console.log('没有权限,需要移除token?', reqData);
         removeTiemManualToken();
-        console.log('没有权限,需要一出token');
       }
 
       return res.data;

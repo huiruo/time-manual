@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
-  const [account, setAccount] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [account, setAccount] = useState<string>('admin');
+  const [password, setPassword] = useState<string>('123456');
   const navigate = useNavigate();
 
   const setInputUtil = (e: any, type: number) => {
@@ -27,25 +27,22 @@ const Login = () => {
     if (!account) {
       console.log('密码不能为空');
 
-      // return;
+      return;
     }
 
     if (!password) {
       console.log('密码不能为空');
 
-      // return;
+      return;
     }
     const data = {
       // account,
-      // username: account,
-      // password,
-      username: 'admin',
-      password: '123456'
+      username: account,
+      password,
     };
     const res = await timeManualApi.loginApi(data);
     if (res.code === 200) {
       const { token } = res.result;
-      console.log('登录成功', token);
       setTiemManualToken(token);
       navigate('/');
     } else {
@@ -57,13 +54,13 @@ const Login = () => {
     <div className='sign-table'>
       <div className='table-item'>
         <label className='input-wrapper'>
-          <input onChange={(e) => setInputUtil(e, 1)} className='login-input' placeholder='请输入账号' />
+          <input defaultValue={account} onChange={(e) => setInputUtil(e, 1)} className='login-input' placeholder='请输入账号' />
         </label>
       </div>
 
       <div className='table-item'>
         <label className='input-wrapper'>
-          <input onChange={(e) => setInputUtil(e, 2)} type='password' className='login-input' placeholder='请输入注册密码' />
+          <input defaultValue={password} onChange={(e) => setInputUtil(e, 2)} type='password' className='login-input' placeholder='请输入注册密码' />
         </label>
       </div>
 

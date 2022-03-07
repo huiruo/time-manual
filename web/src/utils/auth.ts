@@ -4,7 +4,7 @@ const tokenKey = 'Tiem-Manual-Token';
 
 export function setTiemManualToken (value:any) {
   Cookies.set(tokenKey, value);
-  // window.sessionStorage.setItem(traderToKenKey, value);
+  window.sessionStorage.setItem(tokenKey, value);
 }
 
 export function getTiemManualToken () {
