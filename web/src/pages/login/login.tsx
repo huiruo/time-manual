@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import timeManualApi from '@/services/timeManualApi';
 import { setTiemManualToken } from '@/utils/auth';
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loginAction } from '@/stores/actions/userActions';
 
-const Login = () => {
+interface LonginProps {
+  loginAction?(): void
+}
+
+const Login = (props: LonginProps) => {
 
   const [account, setAccount] = useState<string>('admin');
   const [password, setPassword] = useState<string>('123456');
   const navigate = useNavigate();
+
+  const { loginAction } = props;
 
   const setInputUtil = (e: any, type: number) => {
     const val = e.target.value;
@@ -44,6 +52,9 @@ const Login = () => {
     if (res.code === 200) {
       const { token } = res.result;
       setTiemManualToken(token);
+
+      loginAction(token);
+
       navigate('/');
     } else {
       console.log('登录错误', res.msg);
@@ -72,4 +83,11 @@ const Login = () => {
 
 };
 
-export default Login;
+const mapDispatchToProps = (dispatch: any) => {
+
+  return {
+    dispatch: (data: any) => dispatch(loginAction(data)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Login);

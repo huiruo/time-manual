@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { getTiemManualToken, removeTiemManualToken } from '@/utils/auth';
+import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 import './index.scss';
 
 const Header = () => {
@@ -10,6 +12,15 @@ const Header = () => {
   const onToLogin = () => {
     navigate('/login');
   };
+
+  const onLogout = () => {
+    console.log('onLogout===>');
+    removeTiemManualToken();
+    navigate('/login');
+  };
+
+  const logined: boolean = getTiemManualToken() ? true : false;
+  console.log('Header:', logined);
 
   return (
     <div className='header-container nav-div-shadow'>
@@ -50,12 +61,21 @@ const Header = () => {
           </li>
         </ul>
         <div className='header-container-right'>
-          <span onClick={onToLogin}>登录</span>
+          <Popover>
+            <PopoverTrigger>
+              <div>用户信息</div>
+            </PopoverTrigger>
+
+            <PopoverContent className='popover-content'>
+              {() => (
+                <div className='popover-logout' onClick={onLogout}>退出登录</div>
+              )}
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
-    </div>
+    </div >
   );
-
 };
 
 export default Header;

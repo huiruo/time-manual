@@ -50,3 +50,10 @@
     padding-left: 0.5rem;
   }
 }
+
+.popover-content{
+  top:4rem!important;
+  .popover-logout{
+    cursor: pointer;
+  }
+}
