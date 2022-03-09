@@ -2,9 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 /*
 use：
-const queryUtil = ()=>{
-  console.log('req:')
-}
+const queryUtil = ()=>{}
 const handleClick = useDebounce((val)=>queryUtil(val),600)
 or:
 const handleClick = useDebounce(()=>queryUtil(),600)
@@ -17,7 +15,7 @@ const useDebounce = (fn: (args?: any) => void, delay: number, dep = []) => {
 
     current.fun = fn;
 
-  }, [fn]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fn]);
 
   return useCallback((args?: any) => {
 
@@ -33,7 +31,7 @@ const useDebounce = (fn: (args?: any) => void, delay: number, dep = []) => {
 
     }, delay);
 
-  }, dep); // eslint-disable-line react-hooks/exhaustive-deps
+  }, dep);
 
 };
 

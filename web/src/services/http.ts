@@ -1,5 +1,8 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
 import { getTiemManualToken, setTiemManualToken, removeTiemManualToken } from '@/utils/auth';
+import store from '@/stores';
+import { LOGOUT } from '@/stores/actions/actiontypes';
+
 
 /*
 //自定义拦截器类型
@@ -87,6 +90,9 @@ class HttpRequest {
         // removeTiemManualToken();
         console.log('没有权限,需要移除token?', reqData);
         removeTiemManualToken();
+        store.dispatch( {
+          type: LOGOUT,
+        });
       }
 
       return res.data;

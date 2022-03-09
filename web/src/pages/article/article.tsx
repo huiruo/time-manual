@@ -42,7 +42,6 @@ const Article = () => {
       if (res.code === 200) {
         setShowLoading(false);
         const { total: totalCount, data: result } = res.result;
-        console.log('res.data', res.result);
         setArticles(result);
         setTotal(totalCount);
       } else {
