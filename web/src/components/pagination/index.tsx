@@ -93,7 +93,6 @@ const Pagination: React.FC<PaginationType> = (props) => {
   };
 
   const createPage = (currentPageParam: number) => {
-    console.log('createPage--------->', currentPageParam);
     const pages = [];
     // 上一页
     pages.push(<li className={currentPageParam === 1 ? 'pagination-nomore' : undefined} onClick={() => onPrePage()}
@@ -108,7 +107,6 @@ const Pagination: React.FC<PaginationType> = (props) => {
       }
     } else {
       // 总页码大于10时，部分显示
-      console.log('总页码大于10时，部分显示---->');
       // 第一页
       pages.push(<li className={currentPageParam === 1 ? 'pagination-active' : undefined} key={1}
         onClick={() => pageClick(1)}>1</li>);

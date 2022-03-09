@@ -10,10 +10,18 @@ import NotFound from '../pages/not-found/index';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import AuthRoute from './authRoute';
 
+interface IRoute {
+  path: string,
+  element: React.ReactNode,
+  auth: boolean,
+  children: any
+}
+
 const routesConfig = [
   {
     path: 'article',
     element: <Article />,
+    auth: true,
     children: [
       {
         path: 'articleTest1',
@@ -28,46 +36,49 @@ const routesConfig = [
   {
     path: 'moments',
     element: <Moments />,
+    auth: true
   },
   {
     path: 'resume',
     element: <Resume />,
+    auth: true
   },
   {
     path: 'login',
     element: <Login />,
+    auth: false
   },
 ];
 
 const RoutesContainer = () => {
+  console.log('===RoutesRender===');
 
   const generateRoute = (routes: any) => {
-
-    return routes.map((route: any) => {
+    return routes.map((route: IRoute) => {
       if (route.children !== undefined && route.children.length) {
+        const element = route.auth ? <AuthRoute>{route.element}</AuthRoute> : route.element;
 
         return (
           <Route key={route.path} path={route.path}>
             {generateRoute(route.children)}
-            <Route index={true} element={route.element} />
+            <Route index={true} element={element} />
           </Route>
         );
       }
 
+      const element = route.auth ? <AuthRoute>{route.element}</AuthRoute> : route.element;
+
       return (
-        <Route key={route.path} path={route.path} element={route.element} />
+        <Route key={route.path} path={route.path} element={element} />
       );
     });
-
   };
 
   return (
     <HashRouter>
       <Routes>
         <Route path='/'>{generateRoute(routesConfig)}</Route>
-        {/* <Route index={true} element={<Article />} /> */}
         <Route index={true} element={<AuthRoute><Article /></AuthRoute>} />
-        {/* <Route index element={<Moments />} /> */}
         <Route path='*' element={<NotFound />} />
       </Routes>
     </HashRouter>

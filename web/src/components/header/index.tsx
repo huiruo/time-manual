@@ -1,14 +1,16 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getTiemManualToken } from '@/utils/auth';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
-import './index.scss';
 import { Dispatch } from 'redux';
 import { LOGOUT } from '@/stores/actions/actiontypes';
+import { IUser } from '@/utils/types';
+import './index.scss';
 
 interface HeaderProps {
-  logoutAction?(): void
+  logoutAction?(): void;
+  user?: IUser;
+  token?: string
 }
 
 const Header: FC<HeaderProps> = (props) => {
@@ -21,13 +23,7 @@ const Header: FC<HeaderProps> = (props) => {
     navigate('/login');
   };
 
-  const logined: boolean = getTiemManualToken() ? true : false;
-  console.log('Header:', logined);
-
-  useEffect(() => {
-    console.log('header props:', props);
-    console.log('header props:', props.logoutAction);
-  }, []);
+  console.log('===headerReder===', props);
 
   return (
     <div className='header-container nav-div-shadow'>
@@ -85,14 +81,15 @@ const Header: FC<HeaderProps> = (props) => {
   );
 };
 
+/*
 const mapStateToProps = (state: any) => {
   return {
-    userStore: state.userStore
+    user: state.userStore.user,
   };
 };
+*/
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
-
   return {
     logoutAction: () => dispatch({
       type: LOGOUT,
@@ -100,4 +97,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(null, mapDispatchToProps)(Header);

@@ -1,5 +1,5 @@
 import { sessionStorage } from '../utils/storage';
-import { removeTiemManualToken, setTiemManualToken, tokenKey } from '@/utils/auth';
+import { removeTiemManualToken, setTiemManualToken } from '@/utils/auth';
 import { IAction, IUser } from '@/utils/types';
 import { LOGIN_SUCCESS, LOGOUT } from './actions/actiontypes';
 
@@ -20,20 +20,17 @@ const userStore = (
 	switch (type) {
 		case LOGIN_SUCCESS:
 			setTiemManualToken(payload);
-			sessionStorage.setItem(tokenKey, payload );
       const userState = {...state, token:action.payload};
       sessionStorage.setItem('user', userState);
 
       return userState;
-
 		case LOGOUT:
+      console.log('LOGOUT-退出登陆');
       removeTiemManualToken();
       sessionStorage.removeItem('user');
-      sessionStorage.removeItem(tokenKey);
 
-      return { ...state };
+      return {};
 		default:
-
 			return state;
 	}
 };

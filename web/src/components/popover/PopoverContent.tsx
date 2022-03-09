@@ -21,9 +21,6 @@ export const PopoverContent: FC<PopoverContentProps> = forwardRef(
 
     const { isOpen, layerProps, renderLayer, getRenderProps, triggerWidth } = usePopoverContext();
 
-    console.log('layerProps:', layerProps);
-    console.log('getRenderProps:', getRenderProps);
-    console.log('分割线=====:');
     const widthProps: any = {};
     if (triggerWidth && useTriggerWidth) {
       widthProps.w = triggerWidth + '!important';

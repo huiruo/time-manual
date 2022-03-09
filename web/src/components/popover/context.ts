@@ -6,7 +6,5 @@ export const popoverContext = createContext({} as PopoverContext);
 export const PopoverProvider = popoverContext.Provider;
 
 export function usePopoverContext() {
-  console.log('usePopoverContext', popoverContext);
-
   return useContext(popoverContext);
 }

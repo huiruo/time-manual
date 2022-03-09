@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Navigate } from 'react-router-dom';
-import { getTiemManualToken } from '@/utils/auth';
+import { connect } from 'react-redux';
 
-const AuthRoute = (props: { children: React.ReactNode }) => {
-  const { children } = props;
-  const logined: boolean = getTiemManualToken() ? true : false;
-  console.log('PrivateRoute:', logined);
+interface IAuthRoute {
+  children: React.ReactNode
+  token?: string
+}
+
+const AuthRoute: FC<IAuthRoute> = (props) => {
+  const { children, token } = props;
+  const logined: boolean = token ? true : false;
+  console.log('=====AuthRouteRender=====', logined);
 
   return (logined ? <>{children}</> : (
     <Navigate
@@ -16,4 +21,10 @@ const AuthRoute = (props: { children: React.ReactNode }) => {
   ));
 };
 
-export default AuthRoute;
+const mapStateToProps = (state: any) => {
+  return {
+    token: state.userStore.token
+  };
+};
+
+export default connect(mapStateToProps, null)(AuthRoute);
