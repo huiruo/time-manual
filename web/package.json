@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "cross-env node scripts/start.js",
+    "start": "cross-env APP_ENV=dev node scripts/start.js",
+    "start:prod": "cross-env APP_ENV=prod node scripts/start.js",
     "build": "cross-env node scripts/build.js",
     "release": "cross-env node scripts/start.js",
     "test": "node scripts/test.js"
@@ -162,6 +163,7 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-no-for-of-loops": "^1.0.1"
+    "eslint-plugin-no-for-of-loops": "^1.0.1",
+    "redux-devtools-extension": "^2.13.9"
   }
 }
