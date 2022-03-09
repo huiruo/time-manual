@@ -1,5 +1,16 @@
 import { Placement } from './PlacementType';
 
+export interface IAction {
+	type: string;
+	payload?: any;
+}
+
+export interface IUser {
+	username?: string;
+	userId?: number | string;
+	role: string;
+}
+
 export interface PopoverContext {
   popoverProps: PopoverProps
 

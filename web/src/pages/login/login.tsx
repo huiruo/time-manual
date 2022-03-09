@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import timeManualApi from '@/services/timeManualApi';
-import { setTiemManualToken } from '@/utils/auth';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginAction } from '@/stores/actions/userActions';
 
 interface LonginProps {
-  loginAction?(): void
+  loginAction?(tokeng: string): void
+}
+
+interface IResult {
+  token: string
 }
 
 const Login = (props: LonginProps) => {
@@ -15,7 +18,10 @@ const Login = (props: LonginProps) => {
   const [password, setPassword] = useState<string>('123456');
   const navigate = useNavigate();
 
-  const { loginAction } = props;
+  const handleLoginAction = (token: string) => {
+    // eslint-disable-next-line no-unused-expressions
+    props.loginAction && props.loginAction(token);
+  };
 
   const setInputUtil = (e: any, type: number) => {
     const val = e.target.value;
@@ -50,11 +56,8 @@ const Login = (props: LonginProps) => {
     };
     const res = await timeManualApi.loginApi(data);
     if (res.code === 200) {
-      const { token } = res.result;
-      setTiemManualToken(token);
-
-      loginAction(token);
-
+      const { token } = res.result as IResult;
+      handleLoginAction(token);
       navigate('/');
     } else {
       console.log('登录错误', res.msg);
@@ -83,10 +86,11 @@ const Login = (props: LonginProps) => {
 
 };
 
+// const mapDispatchToProps = (dispatch: Dispatch) => {
 const mapDispatchToProps = (dispatch: any) => {
 
   return {
-    dispatch: (data: any) => dispatch(loginAction(data)),
+    loginAction: (data: string) => dispatch(loginAction(data)),
   };
 };
 

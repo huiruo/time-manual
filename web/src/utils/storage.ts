@@ -12,7 +12,9 @@ const getItem = (key: string) => {
 const setItem = (key: string, data: any) => {
 	if (typeof data === 'object') {
 		storageBroswer.setItem(key, JSON.stringify(data));
-	}
+	} else {
+		storageBroswer.setItem(key, data);
+  }
 };
 
 const clearStorage = () => storageBroswer.clear();

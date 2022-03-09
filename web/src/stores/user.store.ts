@@ -1,31 +1,40 @@
 import { sessionStorage } from '../utils/storage';
-import { setTiemManualToken } from '@/utils/auth';
-import { ActionType, UserInfoType } from './types';
+import { removeTiemManualToken, setTiemManualToken, tokenKey } from '@/utils/auth';
+import { IAction, IUser } from '@/utils/types';
+import { LOGIN_SUCCESS, LOGOUT } from './actions/actiontypes';
 
-const storageUserInfo: UserInfoType = sessionStorage.getItem('userInfo') || {};
+export interface IUserState {
+  user?: IUser;
+  token?:string
+}
+
+const initUserState: IUserState = sessionStorage.getItem('user') || {};
 
 const userStore = (
-	userInfo: UserInfoType = storageUserInfo,
-	action: ActionType
+  state: IUserState = initUserState,
+	action: IAction
 ) => {
-	switch (action.type) {
-		case 'LOGIN_REQUEST':
-			console.log('LOGIN_REQUEST---->', action);
 
-      return { ...action.payload };
+  const { payload, type } = action;
 
-		case 'LOGIN_SUCCESS':
-			setTiemManualToken(action.payload.token);
-			sessionStorage.setItem('userInfo', action.payload);
+	switch (type) {
+		case LOGIN_SUCCESS:
+			setTiemManualToken(payload);
+			sessionStorage.setItem(tokenKey, payload );
+      const userState = {...state, token:action.payload};
+      sessionStorage.setItem('user', userState);
 
-      return { ...action.payload };
+      return userState;
 
-		case 'LOGIN_FAIL':
+		case LOGOUT:
+      removeTiemManualToken();
+      sessionStorage.removeItem('user');
+      sessionStorage.removeItem(tokenKey);
 
-			return { ...action.payload };
+      return { ...state };
 		default:
 
-			return userInfo;
+			return state;
 	}
 };
 
