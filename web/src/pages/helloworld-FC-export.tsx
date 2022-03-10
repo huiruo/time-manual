@@ -7,7 +7,6 @@ interface ExampleType {
 const App: FC<ExampleType> = () => {
 
   return <div>App</div>;
-
 };
 
 export default App;

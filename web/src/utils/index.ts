@@ -41,3 +41,14 @@ export function formatUnixTime (val:any, fmt='yyyy-MM-dd hh:mm:ss') {
 
   return fmt;
 }
+
+export function isEmpty(value:any):boolean {
+  if (value === null) {
+    return true;
+  }
+  if (value === undefined) {
+    return true;
+  }
+
+  return false;
+}

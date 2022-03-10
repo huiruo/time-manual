@@ -1,4 +1,6 @@
 import React from 'react';
+import { HashRouter, Routes, Route } from 'react-router-dom';
+import AuthRoute from './authRoute';
 // import Home from '../pages/home/index';
 import Moments from '../pages/moments/index';
 import Article from '../pages/article/index';
@@ -7,8 +9,7 @@ import ArticleTest1 from '../pages/article-test1/index';
 import ArticleTest2 from '../pages/article-test2/index';
 import Resume from '../pages/resume/index';
 import NotFound from '../pages/not-found/index';
-import { HashRouter, Routes, Route } from 'react-router-dom';
-import AuthRoute from './authRoute';
+import CrytoIncreaseCalculator from '../pages/cryto-increase-calculator';
 
 interface IRoute {
   path: string,
@@ -42,6 +43,11 @@ const routesConfig = [
     path: 'resume',
     element: <Resume />,
     auth: true
+  },
+  {
+    path: 'cryto-increase-calculator',
+    element: <CrytoIncreaseCalculator />,
+    auth: false
   },
   {
     path: 'login',
