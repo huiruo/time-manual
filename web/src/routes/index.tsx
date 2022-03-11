@@ -9,7 +9,7 @@ import ArticleTest1 from '../pages/article-test1/index';
 import ArticleTest2 from '../pages/article-test2/index';
 import Resume from '../pages/resume/index';
 import NotFound from '../pages/not-found/index';
-import CrytoIncreaseCalculator from '../pages/cryto-increase-calculator';
+import Calculator from '../pages/calculator';
 
 interface IRoute {
   path: string,
@@ -45,8 +45,8 @@ const routesConfig = [
     auth: true
   },
   {
-    path: 'cryto-increase-calculator',
-    element: <CrytoIncreaseCalculator />,
+    path: 'calculator',
+    element: <Calculator />,
     auth: false
   },
   {

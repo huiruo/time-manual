@@ -83,6 +83,7 @@ const TableList: FC<TableListProps> = ({
               {columns.map((v, i) => (
                 <td
                   key={v?.key + '_content_' + i}
+                  align='center'
                   className='td-item'
                   style={{ width: (100 / columns.length).toFixed(2) || 1 + '%' }}
                 >
