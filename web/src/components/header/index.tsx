@@ -56,6 +56,15 @@ const Header: FC<HeaderProps> = (props) => {
 
           <li className='li'>
             <NavLink
+              to='/analyze'
+              className={pathname === '/analyze' ? 'nav-active' : ''}
+            >
+              数据分析
+            </NavLink>
+          </li>
+
+          <li className='li'>
+            <NavLink
               to='/resume'
               className={pathname === '/resume' ? 'nav-active' : ''}
             >

@@ -41,7 +41,7 @@ const Article = () => {
       const res = await timeManualApi.queryArticles(data);
       if (res.code === 200) {
         setShowLoading(false);
-        const { total: totalCount, data: result } = res.result;
+        const { total: totalCount, result } = res.result;
         setArticles(result);
         setTotal(totalCount);
       } else {

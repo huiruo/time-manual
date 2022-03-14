@@ -10,6 +10,7 @@ import ArticleTest2 from '../pages/article-test2/index';
 import Resume from '../pages/resume/index';
 import NotFound from '../pages/not-found/index';
 import Calculator from '../pages/calculator';
+import DataAnalyze from '../pages/data-analyze';
 
 interface IRoute {
   path: string,
@@ -42,6 +43,16 @@ const routesConfig = [
   {
     path: 'resume',
     element: <Resume />,
+    auth: true
+  },
+  {
+    path: 'resume',
+    element: <Resume />,
+    auth: true
+  },
+  {
+    path: 'analyze',
+    element: <DataAnalyze />,
     auth: true
   },
   {

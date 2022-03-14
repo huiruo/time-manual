@@ -33,11 +33,15 @@ const timeManualApi = {
   },
 
   loginApi(data: any) {
-    // const url = `${ manualApiUrl }/user/login`;
     const url = `${manualApiUrl}/login/auth`;
 
     return http.post<resType>(data, url);
-  }
+  },
+  queryTradeOrderApi(data: any) {
+    const url = `${manualApiUrl}/trade/order/query`;
+
+    return http.post<resType>(data, url);
+  },
 };
 
 export default timeManualApi;
