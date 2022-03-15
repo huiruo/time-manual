@@ -5,6 +5,7 @@ import Article from '../pages/article/index';
 import ArticleMgmt from '@/pages/article-mgmt/index';
 import Resume from '../pages/resume/index';
 import NotFound from '../pages/not-found/index';
+import SystemDept from '../pages/system-dept/index';
 import {
 	HashRouter,
 	Routes,
@@ -44,7 +45,13 @@ const routesConfig = [
 		title: '个人管理',
 		element: <Resume />,
 		icon: 'UserOutlined'
-	}
+	},
+	{
+		path: 'system/dept',
+		title: '部门管理',
+		element: <SystemDept />,
+		icon: 'UserOutlined'
+	},
 ];
 
 const RoutesContainer = () => {
