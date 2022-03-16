@@ -1,21 +1,22 @@
-import React, { useEffect, useState, FC } from 'react';
+import React, { useEffect, useState, FC, useMemo } from 'react';
 import { Input, Button, Tree } from 'antd';
 import { DeleteOutlined, DownOutlined } from '@ant-design/icons';
 import { treeDateMock } from './mock';
+import { IOneDimensionalList } from './type';
 
 interface LeftTreePorps {
-  selectCallback(deptId: string): void
+  selectCallback(callbackObj: any): void
+  cleanSelectedRow(): void
 }
 
 const { Search } = Input;
 
 const LeftTree: FC<LeftTreePorps> = (props) => {
   const [treeData, setTreeData] = useState<any[]>([]);
-  // const [expandedKeys, setExpandedKeys] = useState<string[]>(['2307', '2310']);
+  const [selectedDept, setSelectedDept] = useState<IOneDimensionalList[]>([]);
   const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
-  // const [autoExpandParent, setAutoExpandParent] = useState(true);
   const [autoExpandParent, setAutoExpandParent] = useState(false);
-  const { selectCallback } = props;
+  const { selectCallback, cleanSelectedRow } = props;
 
   // 将树形节点改为一维数组
   const generateList = (data: any, dataList: any[]) => {
@@ -31,6 +32,17 @@ const LeftTree: FC<LeftTreePorps> = (props) => {
     return dataList;
   };
 
+  const oneDimensionalList: IOneDimensionalList[] = useMemo(() => {
+    if (treeData.length) {
+      const dataList: IOneDimensionalList[] = generateList(treeData, []);
+
+      return dataList;
+    } else {
+      return [];
+    }
+
+  }, [treeData]);
+
   const getParentKey = (id: any, tree: any): any => {
     let parentKey;
     for (let i = 0; i < tree.length; i++) {
@@ -38,7 +50,9 @@ const LeftTree: FC<LeftTreePorps> = (props) => {
       if (node.children) {
         if (node.children.some((item: any) => item.id === id)) {
           parentKey = node.id;
+          console.log('getParentKey 1:', node);
         } else if (getParentKey(id, node.children)) {
+          console.log('getParentKey 2:', node);
           parentKey = getParentKey(id, node.children);
         }
       }
@@ -48,24 +62,18 @@ const LeftTree: FC<LeftTreePorps> = (props) => {
   };
 
   const onSearch = (val: string) => {
-    console.log('expandedKeys', expandedKeys);
-    console.log('expandedKeys', !autoExpandParent);
-    /*
-    setAutoExpandParent(!autoExpandParent);
-    if (autoExpandParent) {
-      setExpandedKeys([]);
-    }
-    */
     if (!val) {
       return;
     }
     let value = val;
     value = String(value).trim();
     console.log('onSearch', val, 'value', value);
-    const dataList: any[] = generateList(treeData, []);
+    console.log('dataList B:', oneDimensionalList);
+    console.log('expandedKeys', expandedKeys);
+    console.log('expandedKeys', !autoExpandParent);
 
-    const _expandedKeys = dataList
-      .map(item => {
+    const _expandedKeys = oneDimensionalList
+      .map((item: IOneDimensionalList) => {
         if (item.label.indexOf(value) > -1) {
           const parentKey = getParentKey(item.id, treeData);
 
@@ -78,25 +86,47 @@ const LeftTree: FC<LeftTreePorps> = (props) => {
 
     setExpandedKeys(_expandedKeys);
     setAutoExpandParent(true);
-    console.log('====expandedKeysTemp====', _expandedKeys);
+  };
+
+  const uniqueArr = (array: any[]): IOneDimensionalList[] => {
+    return Array.from(new Set(array));
   };
 
   const onSelect = (val: any) => {
-    console.log('onSelect', val);
-    console.log('onSelect', typeof val[0]);
-    selectCallback(val[0]);
-    // setAutoExpandParent(true);
+    const deptId = val[0];
+    if (!deptId) return;
+    // const result = getParentKey(deptId, treeData);
+    const targetSelect = oneDimensionalList.find((item) => item.id === deptId) as IOneDimensionalList;
+    const selectedDepTemp = selectedDept;
+
+    selectedDepTemp.push(targetSelect);
+    const uniqueDep = uniqueArr(selectedDepTemp);
+
+    /*
+    console.log('onSelect - targetSelect A:', targetSelect);
+    console.log('onSelect:depId', deptId, '- result_bb:', result);
+    console.log('onSelect - result_aa:', oneDimensionalList);
+    console.log('uniqueDep', uniqueDep);
+    console.log('onSelect - selectedDepTemp B:', selectedDepTemp);
+    */
+
+    const callbackObj = {
+      deptId,
+      selectedDept: uniqueDep
+    };
+
+    cleanSelectedRow();
+    setSelectedDept(uniqueDep);
+    selectCallback(callbackObj);
+  };
+
+  const onCleanSelectedRow = () => {
+    cleanSelectedRow();
   };
 
   useEffect(() => {
     setTreeData(treeDateMock);
-    console.log('setExpandedKeys', setExpandedKeys);
-    console.log('autoExpandParent', autoExpandParent);
-    console.log('setAutoExpandParent', setAutoExpandParent);
   }, []);
-
-  console.log('treeData render:', treeData);
-  console.log('expandedKeys render:', expandedKeys);
 
   return (
     <div>
@@ -105,15 +135,15 @@ const LeftTree: FC<LeftTreePorps> = (props) => {
           <Search onSearch={onSearch} allowClear={true} style={{ width: '100%' }} placeholder='输入部门或人员名称后回车进行搜索' />
         </div>
         <div style={{ flex: '1', marginLeft: '10px' }}>
-          <Button type='primary' shape='circle' icon={<DeleteOutlined />} />
+          <Button onClick={onCleanSelectedRow} type='primary' icon={<DeleteOutlined />}>
+            清空所选人员
+          </Button>
         </div>
       </div>
       <div className='tree-content'>
         <Tree
           switcherIcon={<DownOutlined />}
           onSelect={(e) => onSelect(e)}
-          // expandedKeys={expandedKeys}
-          // autoExpandParent={false}
           autoExpandParent={autoExpandParent}
           treeData={treeData}
           fieldNames={{

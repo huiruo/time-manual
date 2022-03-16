@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Table, Space } from 'antd';
-import DeptModal from './dept-modal';
 import 'antd/dist/antd.min.css';
 // import './systemdept.less';
-import './systemdept.scss';
+import './system-dept/systemdept.scss';
+import DeptModal from './system-dept/dept-modal';
+import { ISelectedWorker } from './system-dept/type';
 
 const data = [
   {
@@ -29,17 +30,13 @@ const data = [
   },
 ];
 const Systemdept = () => {
-
-  // const [deptModalVisible, setDeptModalVisible] = useState<boolean>(false);
   const [deptModalVisible, setDeptModalVisible] = useState<boolean>(true);
 
   const onEdit = () => {
-    console.log('onEdit');
     setDeptModalVisible(true);
   };
 
   const modalSwitch = (visible: boolean) => {
-    console.log('modalSwitch');
     setDeptModalVisible(visible);
   };
 
@@ -71,12 +68,16 @@ const Systemdept = () => {
     },
   ];
 
+  const onClose = (selectedWorker: ISelectedWorker) => {
+    console.log('selectedWorker===回调:', selectedWorker);
+  };
+
   return (
     <div className='test-systemdept-content' style={{ fontSize: '10.2095px' }}>
       <div>
         <Table columns={columns} dataSource={data} />
       </div>
-      <DeptModal visible={deptModalVisible} modalSwitch={modalSwitch} />
+      <DeptModal visible={deptModalVisible} modalSwitch={modalSwitch} onClose={onClose} />
     </div>
   );
 };

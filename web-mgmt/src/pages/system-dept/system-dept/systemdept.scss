@@ -1,23 +1,8 @@
-.test-systemdept-content{
-  margin:40px 10px;
-  background: gainsboro;
-  font-size: 10.2095px;
-}
-
-.test-bg1{
-  background: gray;
-}
-
-.test-bg2{
-  background: gainsboro;
-}
-
 .xy-center{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 
 .tree-modal-body{
   .ant-modal-header{
@@ -31,6 +16,7 @@
     font-size: 18.2857px;
   }
 }
+
 .dept-tree{
   display: flex;
   width: 100%;
@@ -50,6 +36,17 @@
   .dept-right-content{
     .right-content-label{
       height: 46px;
+    }
+    .table-deptName-cell{
+      width: 300px;
+      box-sizing: border-box;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      line-height: 1.4375rem;
+      padding-left: 0.625rem;
+      padding-right: 0.625rem;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
 }

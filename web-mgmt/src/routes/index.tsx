@@ -52,6 +52,12 @@ const routesConfig = [
 		element: <SystemDept />,
 		icon: 'UserOutlined'
 	},
+	{
+		path: 'system/dept',
+		title: '部门管理',
+		element: <SystemDept />,
+		icon: 'UserOutlined'
+	}
 ];
 
 const RoutesContainer = () => {
