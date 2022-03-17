@@ -17,6 +17,7 @@ const LeftTree: FC<LeftTreePorps> = (props) => {
   const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
   const [autoExpandParent, setAutoExpandParent] = useState(false);
   const { selectCallback, cleanSelectedRow } = props;
+  const [searchValue, setSearchValue] = useState<string>('');
 
   // 将树形节点改为一维数组
   const generateList = (data: any, dataList: any[]) => {
@@ -50,9 +51,7 @@ const LeftTree: FC<LeftTreePorps> = (props) => {
       if (node.children) {
         if (node.children.some((item: any) => item.id === id)) {
           parentKey = node.id;
-          console.log('getParentKey 1:', node);
         } else if (getParentKey(id, node.children)) {
-          console.log('getParentKey 2:', node);
           parentKey = getParentKey(id, node.children);
         }
       }
@@ -63,28 +62,24 @@ const LeftTree: FC<LeftTreePorps> = (props) => {
 
   const onSearch = (val: string) => {
     if (!val) {
+      setExpandedKeys([]);
+      setSearchValue('');
+
       return;
     }
-    let value = val;
-    value = String(value).trim();
-    console.log('onSearch', val, 'value', value);
-    console.log('dataList B:', oneDimensionalList);
-    console.log('expandedKeys', expandedKeys);
-    console.log('expandedKeys', !autoExpandParent);
+    const value = String(val).trim();
+    const _expandedKeysTemp = oneDimensionalList.map((item: IOneDimensionalList) => {
+      if (item.label.indexOf(value) > -1) {
+        const parentKey = getParentKey(item.id, treeData);
 
-    const _expandedKeys = oneDimensionalList
-      .map((item: IOneDimensionalList) => {
-        if (item.label.indexOf(value) > -1) {
-          const parentKey = getParentKey(item.id, treeData);
+        return parentKey;
+      }
 
-          return parentKey;
-        }
-
-        return null;
-      })
-      .filter((item, i, self) => item && self.indexOf(item) === i);
-
-    setExpandedKeys(_expandedKeys);
+      return null;
+    });
+    const filerData = _expandedKeysTemp.filter((item, i, self) => item && self.indexOf(item) === i);
+    setSearchValue(value);
+    setExpandedKeys(filerData);
     setAutoExpandParent(true);
   };
 
@@ -128,6 +123,42 @@ const LeftTree: FC<LeftTreePorps> = (props) => {
     setTreeData(treeDateMock);
   }, []);
 
+  const onExpand = (expandedKeysParm: any[]) => {
+    setExpandedKeys(expandedKeysParm);
+    setAutoExpandParent(false);
+  };
+
+  const loopData = useMemo(() => {
+    const loop = (data: any) => {
+      return data.map((item: any) => {
+        const index = item.label.indexOf(searchValue);
+        const beforeStr = item.label.substr(0, index);
+        const afterStr = item.label.substr(index + searchValue.length);
+        const label =
+          index > -1 ? (
+            <span>
+              {beforeStr}
+              <span className='site-tree-search-value'>{searchValue}</span>
+              {afterStr}
+            </span>
+          ) : (
+            <span>{item.label}</span>
+          );
+
+        if (item.children) {
+          return { label, id: item.id, children: loop(item.children) };
+        }
+
+        return {
+          label,
+          id: item.id
+        };
+      });
+    };
+
+    return loop(treeData);
+  }, [searchValue, treeData]);
+
   return (
     <div>
       <div className='xy-center'>
@@ -143,9 +174,12 @@ const LeftTree: FC<LeftTreePorps> = (props) => {
       <div className='tree-content'>
         <Tree
           switcherIcon={<DownOutlined />}
-          onSelect={(e) => onSelect(e)}
+          onSelect={e => onSelect(e)}
+          onExpand={onExpand}
+          expandedKeys={expandedKeys}
           autoExpandParent={autoExpandParent}
-          treeData={treeData}
+          treeData={loopData}
+          // treeData={treeData}
           fieldNames={{
             title: 'label',
             key: 'id'

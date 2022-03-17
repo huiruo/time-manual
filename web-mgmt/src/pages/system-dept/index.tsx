@@ -3,7 +3,7 @@ import { Button, Table, Space } from 'antd';
 import 'antd/dist/antd.min.css';
 // import './systemdept.less';
 import './system-dept/systemdept.scss';
-import DeptModal from './system-dept/dept-modal';
+import DeptModal from './system-dept';
 import { ISelectedWorker } from './system-dept/type';
 
 const data = [

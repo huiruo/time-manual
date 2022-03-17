@@ -49,26 +49,26 @@ const NavMenu: FC<navMenu> = ({ routesConfig }) => {
     setSelectedKeys([pathname]);
   }, [pathname]);
 
-  const traverseRouteTree = (routeTree: menuItemType[]) => {
+  const traverseRouteTree = (routeTree: menuItemType[], parentPathParm?: string) => {
 
     return routeTree.map((item, index) => {
       const path = item.path;
       if (item.children !== undefined && item.children.length) {
+        const parentPath = item.path;
 
         return (
           <SubMenu title={item.title} key={index + item.path}>
-            {traverseRouteTree(item.children)}
+            {traverseRouteTree(item.children, parentPath)}
           </SubMenu>
         );
       }
 
       return (
         <Menu.Item title={item.title} key={'/' + item.path} icon={renderIcon(item.icon)}>
-          <Link to={item.url ? item.url : path}>{item.title}</Link>
+          <Link to={item.url ? item.url : `${parentPathParm ? parentPathParm : ''}${path}`}>{item.title}</Link>
         </Menu.Item>
       );
     });
-
   };
 
   return (
