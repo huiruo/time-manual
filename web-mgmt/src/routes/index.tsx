@@ -13,13 +13,10 @@ import {
 } from 'react-router-dom';
 import Header from '@/components/header';
 import Layout from '@/layout/index';
-import SmartData from '@/pages/smartData';
-// import RecentlyViewed from '@/pages/smartData/views/recentlyViewed';
-// import ProjectTemplate from '@/pages/smartData/views/projectTemplate';
-// import ProjectSpace from '@/pages/smartData/views/projectSpace';
-// import ProjectTemplate from '@/pages/smartData/views/projectTemplate';
-// import { DataLayout } from '@/pages/smartData/layout';
-// import RecentlyViewed from '@/pages/smartData/views/recentlyViewed';
+import ProjectTemplate from '@/pages/smartData/views/projectTemplate';
+import RecentlyViewed from '@/pages/smartData/views/recentlyViewed';
+import ProjectSpace from '@/pages/smartData/views/projectSpace';
+import {DataLayout} from '@/pages/smartData/layout';
 
 const routesConfig = [
 	{
@@ -65,16 +62,13 @@ const routesConfig = [
 		title: '智能数据应用',
 		// element: <SmartData />,
 		icon: 'UserOutlined',
-		// /*
 		children: [
 			{
 				path: 'projectSpace',
 				title: '项目空间',
-				// element: <ProjectSpace />,
-				element: <SmartData />,
+				element: <ProjectSpace />,
 				icon: 'UserOutlined'
 			},
-			/*
 			{
 				path: 'projectTemplate',
 				title: '模板项目',
@@ -88,10 +82,8 @@ const routesConfig = [
 				element: <RecentlyViewed />,
 				// element: <SmartData />,
 				icon: 'UserOutlined'
-			},
-			*/
+			}
 		]
-		// */
 	}
 	// 项目开始end
 ];
@@ -116,16 +108,16 @@ const RoutesContainer = () => {
 	return (
 		<HashRouter>
 			<Layout routesConfig={routesConfig} header={<Header />}>
-				{/* <DataLayout> */}
-				<Routes>
-					<Route path='/'>
-						{generateRoute(routesConfig)}
-					</Route>
-					{/* <Route index element={<Home />} /> */}
-					<Route index={true} element={<Moments />} />
-					<Route path='*' element={<NotFound />} />
-				</Routes>
-				{/* </DataLayout> */}
+				<DataLayout>
+					<Routes>
+						<Route path='/'>
+							{generateRoute(routesConfig)}
+						</Route>
+						{/* <Route index element={<Home />} /> */}
+						<Route index={true} element={<Moments />} />
+						<Route path='*' element={<NotFound />} />
+					</Routes>
+				</DataLayout>
 			</Layout>
 		</HashRouter>
 	);

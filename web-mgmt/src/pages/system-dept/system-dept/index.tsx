@@ -28,9 +28,8 @@ const DeptModal: FC<DeptModalType> = (props) => {
 
   const handleOk = () => {
     if (Object.keys(selectedWorker).length !== 0) {
-
-      modalSwitch(false);
       onClose && onClose(selectedWorker);
+      modalSwitch(false);
     } else {
       message.warning('请选择数据！');
     }

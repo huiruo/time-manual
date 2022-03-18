@@ -1,0 +1,10 @@
+.smart-layout-cantainer{
+  display: flex;
+  flex-direction: row;
+  background: #fafafa;
+  .smart-child-menu{
+    flex:1;
+    min-height: calc(100vh - 100px);
+    background: grey;
+  }
+}
